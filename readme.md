@@ -13,7 +13,6 @@
     <img alt="brage" src="https://img.shields.io/github/forks/Sanzro-Lee/HELPER_FACTION_official_weapp_customer" width="auto">
     <img alt="brage" src="https://img.shields.io/github/stars/Sanzro-Lee/HELPER_FACTION_official_weapp_customer" width="auto">
     <img alt="brage" src="https://img.shields.io/github/license/Sanzro-Lee/HELPER_FACTION_official_weapp_customer" width="auto">
-    <img alt="brage" src="https://img.shields.io/twitter/url?style=social" width="auto">
 </p>
 
 ## 简介
