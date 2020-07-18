@@ -1,0 +1,54 @@
+<template>
+  <view class="tabbar">
+    <view>
+		<van-tabbar
+      active="{{ active }}"
+      bind:change="onChage"
+      active-color="#4A7FD4"
+    >
+      <van-tabbar-item icon="wap-home-o">首页</van-tabbar-item>
+      <van-tabbar-item icon="newspaper-o">需求</van-tabbar-item>
+      <van-tabbar-item icon="chat-o" info="20">消息</van-tabbar-item>
+      <van-tabbar-item icon="contact">我的</van-tabbar-item>
+		</van-tabbar>
+    </view>
+  </view>
+</template>
+
+<script>
+  import { createComponent } from '@mpxjs/core'
+
+  createComponent({
+    data: {
+      active: 0,
+    },
+    options: {
+      
+    },
+    computed: {
+
+    },
+    attached () {
+      
+    },
+    methods: {
+      onChage(event) {
+        this.setData({ active: event.detail });
+      }
+    }
+  })
+</script>
+
+<style>
+	
+</style>
+
+<script type="application/json">
+  {
+    "component": true,
+    "usingComponents": {
+      "van-tabbar": "vant-weapp/dist/tabbar/index",
+      "van-tabbar-item": "vant-weapp/dist/tabbar-item/index"
+    }
+  }
+</script>

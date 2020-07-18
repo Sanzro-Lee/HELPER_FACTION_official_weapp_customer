@@ -1,0 +1,30 @@
+{
+	"compileType": "miniprogram",
+	"setting": {
+		"urlCheck": true,
+		"scopeDataCheck": false,
+		"coverView": true,
+		"es6": false,
+		"postcss": true,
+		"compileHotReLoad": false,
+		"preloadBackgroundData": false,
+		"minified": false,
+		"autoAudits": false,
+		"newFeature": true,
+		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true,
+		"checkSiteMap": true
+	},
+	"appid": "wx4835e4e9749f1502",
+	"projectname": "%E5%8F%AB%E5%88%B0%E5%B8%AE-%E5%AE%A2%E6%88%B7%E7%AB%AF",
+	"description": "A mpx project",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {}
+}

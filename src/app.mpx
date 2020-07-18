@@ -1,0 +1,25 @@
+<script type="application/json">
+  {
+    "pages": [
+      "./pages/index"
+    ],
+    "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "叫到帮",
+      "navigationBarTextStyle": "black"
+    }
+  }
+</script>
+
+<script type="application/json" mode="ali">
+  {
+    "pages": [
+      "./pages/index"
+    ],
+    "window": {
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "mpx备忘清单-ali"
+    }
+  }
+</script>

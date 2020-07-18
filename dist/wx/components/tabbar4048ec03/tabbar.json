@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-tabbar": "/components/vant-weapp61999bc9/tabbar/index",
+    "van-tabbar-item": "/components/vant-weapp61999bc9/tabbar-item/index"
+  }
+}

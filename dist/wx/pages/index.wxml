@@ -1,0 +1,1 @@
+<view class="body"><toptab mpxPageStatus="{{mpxPageStatus}}"></toptab> <tabbar mpxPageStatus="{{mpxPageStatus}}"></tabbar></view> 

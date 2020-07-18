@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-info": "/components/vant-weapp61999bc9/info/index"
+  }
+}

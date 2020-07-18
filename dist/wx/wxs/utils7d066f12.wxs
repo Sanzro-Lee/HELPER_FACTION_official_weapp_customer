@@ -1,0 +1,208 @@
+module.exports = 
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		// wxs连call都不支持我也是服气...
+/******/ 		modules[moduleId](module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/ 	// define harmony function exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		exports[name] = getter();
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		exports.__esModule = true;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module["default"]; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		getter.a = getter();
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	var entryExports = __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return entryExports && entryExports.__esModule? entryExports["default"] : entryExports;
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var bem = __webpack_require__(1).bem;
+var memoize = __webpack_require__(4).memoize;
+
+function isSrc(url) {
+  return url.indexOf('http') === 0 || url.indexOf('data:image') === 0 || url.indexOf('//') === 0;
+}
+
+module.exports = {
+  bem: memoize(bem),
+  isSrc: isSrc,
+  memoize: memoize
+};
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var array = __webpack_require__(2);
+var object = __webpack_require__(3);
+var PREFIX = 'van-';
+
+function join(name, mods) {
+  name = PREFIX + name;
+  mods = mods.map(function(mod) {
+    return name + '--' + mod;
+  });
+  mods.unshift(name);
+  return mods.join(' ');
+}
+
+function traversing(mods, conf) {
+  if (!conf) {
+    return;
+  }
+
+  if (typeof conf === 'string' || typeof conf === 'number') {
+    mods.push(conf);
+  } else if (array.isArray(conf)) {
+    conf.forEach(function(item) {
+      traversing(mods, item);
+    });
+  } else if (typeof conf === 'object') {
+    object.keys(conf).forEach(function(key) {
+      conf[key] && mods.push(key);
+    });
+  }
+}
+
+function bem(name, conf) {
+  var mods = [];
+  traversing(mods, conf);
+  return join(name, mods);
+}
+
+module.exports.bem = bem;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+function isArray(array) {
+  return array && array.constructor === 'Array';
+}
+
+module.exports.isArray = isArray;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/* eslint-disable */
+var REGEXP = getRegExp('{|}|"', 'g');
+
+function keys(obj) {
+  return JSON.stringify(obj)
+    .replace(REGEXP, '')
+    .split(',')
+    .map(function(item) {
+      return item.split(':')[0];
+    });
+}
+
+module.exports.keys = keys;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+/**
+ * Simple memoize
+ * wxs doesn't support fn.apply, so this memoize only support up to 2 args
+ */
+
+function isPrimitive(value) {
+  var type = typeof value;
+  return (
+    type === 'boolean' ||
+    type === 'number' ||
+    type === 'string' ||
+    type === 'undefined' ||
+    value === null
+  );
+}
+
+// mock simple fn.call in wxs
+function call(fn, args) {
+  if (args.length === 2) {
+    return fn(args[0], args[1]);
+  }
+
+  if (args.length === 1) {
+    return fn(args[0]);
+  }
+
+  return fn();
+}
+
+function serializer(args) {
+  if (args.length === 1 && isPrimitive(args[0])) {
+    return args[0];
+  }
+  var obj = {};
+  for (var i = 0; i < args.length; i++) {
+    obj['key' + i] = args[i];
+  }
+  return JSON.stringify(obj);
+}
+
+function memoize(fn) {
+  var cache = {};
+
+  return function() {
+    var key = serializer(arguments);
+    if (cache[key] === undefined) {
+      cache[key] = call(fn, arguments);
+    }
+
+    return cache[key];
+  };
+}
+
+module.exports.memoize = memoize;
+
+
+/***/ })
+/******/ ]);
