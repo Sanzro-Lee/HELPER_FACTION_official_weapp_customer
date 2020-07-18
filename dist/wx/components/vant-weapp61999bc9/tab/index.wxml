@@ -1,1 +1,0 @@
-<wxs src="../../../wxs/utils7d066f12.wxs" module="utils"/><view class="custom-class {{ utils.bem('tab__pane', { active, inactive: !active }) }}" style="{{ animated || active ? '' : 'display: none;' }} {{ width ? 'width:' + width + 'px;' : '' }}" wx:if="{{ animated || inited }}"><slot/></view> 

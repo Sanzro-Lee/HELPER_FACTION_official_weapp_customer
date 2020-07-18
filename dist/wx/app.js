@@ -9,8 +9,8 @@ window["webpackJsonp"] = require("./bundle.js");
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* mpx inject */ global.currentModuleId = "mc250e50e"
-global.currentResource = "/Volumes/Resources/Work Space/Develop/Demo Project/mpx-project/src/app.mpx"
+/* WEBPACK VAR INJECTION */(function(global) {/* mpx inject */ global.currentModuleId = "ma44b54be"
+global.currentResource = "/Volumes/Resources/Work Space/Develop/HELPER_FACTION/HELPER_FACTION_official_weapp_customer/src/app.mpx"
 global.currentCtor = App
 global.currentCtorType = "app"
 global.currentSrcMode = "wx"
@@ -22,7 +22,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createApp"])({})
 
 /* styles */
 /* json */
-__webpack_require__(215)
+__webpack_require__(203)
 
 /* template */
 
@@ -30,7 +30,7 @@ __webpack_require__(215)
 
 /***/ }),
 
-/***/ 215:
+/***/ 203:
 /***/ (function(module, exports) {
 
 // removed by extractor

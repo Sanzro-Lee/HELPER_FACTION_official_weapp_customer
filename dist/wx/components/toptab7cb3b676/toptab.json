@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-tab": "/components/vant-weapp61999bc9/tab/index",
-    "van-tabs": "/components/vant-weapp61999bc9/tabs/index",
-    "taskcard": "/components/taskcardfe29328c/taskcard"
-  }
-}

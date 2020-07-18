@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-icon": "/components/vant-weapp61999bc9/icon/index",
-    "van-info": "/components/vant-weapp61999bc9/info/index"
-  }
-}

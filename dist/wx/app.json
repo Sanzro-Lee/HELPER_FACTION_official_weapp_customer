@@ -7,6 +7,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "叫到帮",
     "navigationBarTextStyle": "black"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }

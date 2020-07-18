@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-card": "/components/vant-weapp61999bc9/card/index"
-  }
-}
