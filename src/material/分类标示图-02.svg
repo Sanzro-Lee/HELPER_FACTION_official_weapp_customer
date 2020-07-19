@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42.235" height="61.973" viewBox="0 0 42.235 61.973">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.174" y1="0.102" x2="0.887" y2="0.895" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5fd8a6"/>
+      <stop offset="1" stop-color="#a9dfa6"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <path id="矩形_336" data-name="矩形 336" d="M6.093,0H42.235a0,0,0,0,1,0,0V61.973a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,55.88V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(6791.887 2403.895)" fill="url(#linear-gradient)"/>
+    </clipPath>
+  </defs>
+  <g id="组_328" data-name="组 328" transform="translate(-10.887 -185.895)">
+    <path id="矩形_158" data-name="矩形 158" d="M6.093,0H42.235a0,0,0,0,1,0,0V61.973a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,55.88V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(10.887 185.895)" fill="url(#linear-gradient)"/>
+    <g id="蒙版组_2" data-name="蒙版组 2" transform="translate(-6781 -2218)" clip-path="url(#clip-path)">
+      <g id="组_298" data-name="组 298" transform="translate(-72.139 -12.611)">
+        <circle id="椭圆_78" data-name="椭圆 78" cx="12.5" cy="12.5" r="12.5" transform="translate(6894.139 2453.611)" fill="rgba(150,255,196,0.56)"/>
+        <circle id="椭圆_79" data-name="椭圆 79" cx="10" cy="10" r="10" transform="translate(6887.139 2443.611)" fill="rgba(150,255,196,0.56)"/>
+      </g>
+    </g>
+    <path id="路径_172" data-name="路径 172" d="M1389,3043.674l-1.118-1.118a.791.791,0,0,0-1.117,0l-.559.559-1.427-1.427a3.146,3.146,0,0,0-.808-3.043l-2.234-2.234a7.9,7.9,0,0,0-11.175,0l4.47,2.234v.926a3.161,3.161,0,0,0,.926,2.235l2.426,2.427a3.149,3.149,0,0,0,3.043.807l1.427,1.427-.558.559a.789.789,0,0,0,0,1.117l1.117,1.118a.79.79,0,0,0,1.118,0l4.47-4.47a.792.792,0,0,0,0-1.117Zm-14.16-.751a4.619,4.619,0,0,1-.486-.59l-12.6,11.762a3.054,3.054,0,1,0,4.317,4.317l11.76-12.6a4.818,4.818,0,0,1-.565-.465l-2.427-2.427Z" transform="translate(-1343 -2836)" fill="#fff"/>
+  </g>
+</svg>
