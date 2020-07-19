@@ -2,22 +2,37 @@
   <view class="toptab">
     <view>
        <van-tabs
+        sticky
         color="#F1E928"
         active="{{ active }}"
-        bind:change="onChange"
         animated="true"
-        sticky
+        tab-active-class="tabactivestyle"
       >
-          <van-tab title="全部" custom-class="liststyle">
+          <van-tab
+            title="全部"
+            custom-class="tabstyle"
+          >
             <view style="font-size: 24px; margin: 30px 0 20px 20px">需求列表</view>
             <view wx:for="{{list}}">
               <taskcard />
             </view>
           </van-tab>
-          <van-tab title="居家维修">内容 2</van-tab>
-          <van-tab title="家电维修">内容 3</van-tab>
-          <van-tab title="货物搬迁">内容 4</van-tab>
-          <van-tab title="其它">内容 5</van-tab>
+          <van-tab
+            title="居家维修"
+            custom-class="tabstyle"
+          >内容 2</van-tab>
+          <van-tab
+            title="家电维修"
+            custom-class="tabstyle"
+          >内容 3</van-tab>
+          <van-tab
+            title="货物搬迁"
+            custom-class="tabstyle"
+          >内容 4</van-tab>
+          <van-tab
+            title="其它"
+            custom-class="tabstyle"
+          >内容 5</van-tab>
        </van-tabs>
     </view>
   </view>
@@ -49,14 +64,18 @@
       
     },
     methods: {
-      
+
     }
   })
 </script>
 
 <style>
-  .liststyle {
-    padding-bottom: 50px;
+  .tabactivestyle {
+    font-size: 20px !important;
+  }
+
+  .tabstyle {
+    padding-bottom: 18vw;
   }
 </style>
 

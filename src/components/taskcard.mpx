@@ -1,11 +1,10 @@
 <template>
   <view class="taskcard">
       <van-card
-        num="2"
         price="2.00"
-        desc="描述信息"
-        title="商品标题"
-        thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+        title="家电维修"
+        desc="家里的变压器坏了，快来人啊！"
+        thumb="https://github.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/blob/master/src/material/分类表示图-01.png"
       />
   </view>
 </template>
