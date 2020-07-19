@@ -1,17 +1,21 @@
 <template>
   <view class="taskcard">
       <van-card
-        title="家电维修"
-        desc="家里的变压器坏了，快来人啊！"
-        custom-class="vancardstyle"
-        thumb-class="vancardthumbstyle"
-        title-class="vancardtitlestyle"
-        desc-class="vancarddescstyle"
-        thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/52bd66450e63e72c639b0c3cd0316291e5cb1f2b/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg"
+        title="{{title}}"
+        desc="{{dec}}"
+        custom-class="vancard"
+        thumb-class="vancardthumb"
+        title-class="vancardtitle"
+        desc-class="vancarddesc"
+        thumb="{{thumb}}"
       />
-      <text class="pricestyle">¥1000</text>
-      <text class="contact">联系人：林小姐 手机：13631487155</text>
+      <text class="price">¥{{price}}</text>
+      <text class="contact">联系人：{{name}} 手机：{{phone}}</text>
   </view>
+
+<!-- https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg -->
+
+<!-- https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg -->
 </template>
 
 <script>
@@ -19,7 +23,15 @@
 
   createComponent({
     data: {
-      
+
+    },
+    properties: {
+      title: {type: String},
+      dec: {type: String},
+      name: {type: String},
+      phone: {type: Number},
+      price: {type: Number},
+      thumb: {type: String}
     },
     options: {
       
@@ -31,13 +43,13 @@
       
     },
     methods: {
-      
+
     }
   })
 </script>
 
 <style>
-	.vancardstyle {
+	.vancard {
     width: 92%;
     background-color: #F2F2F2;
     margin-left: 16px;
@@ -45,40 +57,40 @@
     border-radius: 15px;
   }
 
-  .vancardthumbstyle {
+  .vancardthumb {
     height: 100px;
-    margin: -6px 0 0 -28px;
+    margin: -5px 0 0 -28px;
   }
 
-  .vancardtitlestyle {
+  .vancardtitle {
     font-size: 16px;
     color: #5E5E5E;
-    margin-left: -20px;
+    margin-left: -2rem;
     margin-top: 10px;
   }
 
-  .vancarddescstyle {
+  .vancarddesc {
     font-size: 15px;
     color: #5E5E5E;
-    margin-left: -20px;
+    margin-left: -2rem;
     margin-top: 10px;
     font-weight: 400;
   }
 
   .contact {
     position: absolute;
-    margin: -50px 0 30px 110px;
+    margin: -50px 0 30px 6.2rem;
     font-size: 15px;
     color: #5E5E5E;
     font-weight: 400;
   }
 
-  .pricestyle {
+  .price {
     position: absolute;
-    margin: -55px 0 30px 26px;
+    margin: -50px 0 30px 24px;
     color: #fff;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 400;
   }
 </style>
 

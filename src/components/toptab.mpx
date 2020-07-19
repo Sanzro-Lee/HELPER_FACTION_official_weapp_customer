@@ -1,40 +1,94 @@
 <template>
   <view class="toptab">
-    <view>
-       <van-tabs
+      <van-tabs
         sticky
         color="#F1E928"
         active="{{ active }}"
+        swipeable="true"
         animated="true"
-        tab-active-class="tabactivestyle"
+        custom-class="vantabs"
       >
-          <van-tab
-            title="全部"
-            custom-class="tabstyle"
-          >
-            <view style="font-size: 24px; margin: 30px 0 20px 20px; background-color: #fff; font-weight: 400;">需求列表</view>
-            <view wx:for="{{list}}">
-              <taskcard />
-            </view>
-          </van-tab>
-          <van-tab
-            title="居家维修"
-            custom-class="tabstyle"
-          >内容 2</van-tab>
-          <van-tab
-            title="家电维修"
-            custom-class="tabstyle"
-          >内容 3</van-tab>
-          <van-tab
-            title="货物搬迁"
-            custom-class="tabstyle"
-          >内容 4</van-tab>
-          <van-tab
-            title="其它"
-            custom-class="tabstyle"
-          >内容 5</van-tab>
-       </van-tabs>
-    </view>
+        <van-tab
+          title="全部"
+          custom-class="vantab"
+        >
+          <view class="demand">需求列表</view>
+          <view wx:for="{{list}}" wx:key="index">
+            <taskcard
+              title="{{item.title}}"
+              dec="{{item.dec}}"
+              name="{{item.name}}"
+              phone="{{item.phone}}"
+              price="{{item.price}}"
+              thumb="{{item.thumb}}"
+            />
+          </view>
+        </van-tab>
+        <van-tab
+          title="居家维修"
+          custom-class="vantab"
+        >
+          <view class="demand">需求列表</view>
+          <view wx:for="{{list2}}" wx:key="index">
+            <taskcard
+              title="{{item.title}}"
+              dec="{{item.dec}}"
+              name="{{item.name}}"
+              phone="{{item.phone}}"
+              price="{{item.price}}"
+              thumb="{{item.thumb}}"
+            />
+          </view>
+        </van-tab>
+        <van-tab
+          title="家电维修"
+          custom-class="vantab"
+        >
+          <view class="demand">需求列表</view>
+          <view wx:for="{{list3}}" wx:key="index">
+            <taskcard
+              title="{{item.title}}"
+              dec="{{item.dec}}"
+              name="{{item.name}}"
+              phone="{{item.phone}}"
+              price="{{item.price}}"
+              thumb="{{item.thumb}}"
+            />
+          </view>
+        </van-tab>
+        <van-tab
+          title="货物搬迁"
+          custom-class="vantab"
+        >
+          <view class="demand">需求列表</view>
+          <view wx:for="{{list4}}" wx:key="index">
+            <taskcard
+              title="{{item.title}}"
+              dec="{{item.dec}}"
+              name="{{item.name}}"
+              phone="{{item.phone}}"
+              price="{{item.price}}"
+              thumb="{{item.thumb}}"
+            />
+          </view>
+        </van-tab>
+        <van-tab
+          title="其它"
+          custom-class="vantab"
+        >
+          <view class="demand">需求列表</view>
+          <view wx:for="{{list5}}" wx:key="index">
+            <taskcard
+              title="{{item.title}}"
+              dec="{{item.dec}}"
+              name="{{item.name}}"
+              phone="{{item.phone}}"
+              price="{{item.price}}"
+              thumb="{{item.thumb}}"
+            />
+          </view>
+        </van-tab>
+      </van-tabs>
   </view>
 </template>
 
@@ -44,14 +98,78 @@
   createComponent({
     data: {
       list: [
-        {name: 'red'},
-        {name: 'blue'},
-        {name: 'black'},
-        {name: 'black'},
-        {name: 'black'},
-        {name: 'black'},
-        {name: 'black'},
-        {name: 'black'}
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          phone: 13631487155,
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
+        },
+        {
+          title: '居家维修',
+          dec: '想把发霉的墙推倒，重新砌起来。',
+          name: '刘先生',
+          phone: 13631487155,
+          price: 2000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg'
+        },
+        {
+          title: '货物搬迁',
+          dec: '刚找到新房子，要搬家了。',
+          name: '张先生',
+          phone: 13631487155,
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg'
+        },
+        {
+          title: '其它',
+          dec: '清洁房子。',
+          name: '王先生',
+          phone: 13631487155,
+          price: 500,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg'
+        },
+      ],
+      list2: [
+        {
+          title: '居家维修',
+          dec: '想把发霉的墙推倒，重新砌起来。',
+          name: '刘先生',
+          phone: 13631487155,
+          price: 2000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg'
+        }
+      ],
+      list3: [
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          phone: 13631487155,
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
+        }
+      ],
+      list4: [
+        {
+          title: '货物搬迁',
+          dec: '刚找到新房子，要搬家了。',
+          name: '张先生',
+          phone: 13631487155,
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg'
+        }
+      ],
+      list5: [
+        {
+          title: '其它',
+          dec: '清洁房子。',
+          name: '王先生',
+          phone: 13631487155,
+          price: 500,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg'
+        }
       ]
     },
     options: {
@@ -70,13 +188,20 @@
 </script>
 
 <style>
-  .tabactivestyle {
-    font-size: 20px !important;
+  .vantabs {
+    background-color: #fff !important;
   }
 
-  .tabstyle {
-    padding-bottom: 18vw;
+  .vantab {
+    padding-bottom: 5rem;
     background-color: #fff;
+  }
+
+  .demand {
+    font-size: 24px;
+    margin: 30px 0 20px 20px;
+    background-color: #fff;
+    font-weight: 400;
   }
 </style>
 
