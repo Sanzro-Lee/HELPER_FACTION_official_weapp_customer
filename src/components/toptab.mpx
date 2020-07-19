@@ -12,7 +12,7 @@
             title="全部"
             custom-class="tabstyle"
           >
-            <view style="font-size: 24px; margin: 30px 0 20px 20px">需求列表</view>
+            <view style="font-size: 24px; margin: 30px 0 20px 20px; background-color: #fff; font-weight: 400;">需求列表</view>
             <view wx:for="{{list}}">
               <taskcard />
             </view>
@@ -76,6 +76,7 @@
 
   .tabstyle {
     padding-bottom: 18vw;
+    background-color: #fff;
   }
 </style>
 
