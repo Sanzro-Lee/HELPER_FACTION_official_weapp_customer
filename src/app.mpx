@@ -1,13 +1,33 @@
 <script type="application/json">
   {
     "pages": [
-      "./pages/index"
+      "./pages/index",
+      "./pages/demand",
+      "./pages/message",
+      "./pages/mine"
     ],
     "window": {
       "backgroundTextStyle": "light",
       "navigationBarBackgroundColor": "#fff",
       "navigationBarTitleText": "叫到帮",
       "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+      "custom": true,
+      "list": [
+        {
+          "pagePath": "pages/index"
+        },
+        {
+          "pagePath": "pages/demand"
+        },
+        {
+          "pagePath": "pages/message"
+        },
+        {
+          "pagePath": "pages/mine"
+        }
+      ]
     }
   }
 </script>
@@ -19,7 +39,7 @@
     ],
     "window": {
       "navigationBarBackgroundColor": "#fff",
-      "navigationBarTitleText": "mpx备忘清单-ali"
+      "navigationBarTitleText": "叫到帮"
     }
   }
 </script>

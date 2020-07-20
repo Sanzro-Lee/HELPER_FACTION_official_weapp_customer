@@ -1,6 +1,6 @@
 <template>
   <view class="body">
-    <toptab></toptab>
+    <text>这是消息页面</text>
     <tabbar></tabbar>
   </view>
 </template>
@@ -29,7 +29,6 @@
 <script type="application/json">
   {
     "usingComponents": {
-      "toptab": "../components/toptab",
       "tabbar": "../custom-tab-bar/index"
     }
   }

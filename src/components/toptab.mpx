@@ -5,7 +5,6 @@
         color="#F1E928"
         active="{{ active }}"
         swipeable="true"
-        animated="true"
         custom-class="vantabs"
       >
         <van-tab
@@ -182,14 +181,14 @@
       
     },
     methods: {
-
+      
     }
   })
 </script>
 
 <style>
   .vantabs {
-    background-color: #fff !important;
+    background-color: #fff;
   }
 
   .vantab {

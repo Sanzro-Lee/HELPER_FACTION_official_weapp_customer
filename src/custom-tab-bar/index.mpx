@@ -1,0 +1,88 @@
+<template>
+  <view class="tabbar">
+		<van-tabbar
+      active="{{ active }}"
+      bind:change="onChage"
+      active-color="#4A7FD4"
+    >
+      <van-tabbar-item
+        icon="wap-home-o"
+        data-path="{{list[0].pagePath}}"
+        bindtap="switchTab"
+      >首页</van-tabbar-item>
+      <van-tabbar-item
+        icon="newspaper-o"
+        data-path="{{list[1].pagePath}}"
+        bindtap="switchTab"
+      >需求</van-tabbar-item>
+      <van-tabbar-item
+        icon="chat-o"
+        info="1"
+        data-path="{{list[2].pagePath}}"
+        bindtap="switchTab"
+      >消息</van-tabbar-item>
+      <van-tabbar-item 
+        icon="contact"
+        data-path="{{list[3].pagePath}}"
+        bindtap="switchTab"
+      >我的</van-tabbar-item>
+		</van-tabbar>
+  </view>
+</template>
+
+<script>
+  import { createComponent } from '@mpxjs/core'
+
+  createComponent({
+    data: {
+      active: 0,
+      list: [
+        {
+          "pagePath": "index"
+        },
+        {
+          "pagePath": "demand"
+        },
+        {
+          "pagePath": "message"
+        },
+        {
+          "pagePath": "mine"
+        }
+      ]
+    },
+    options: {
+      
+    },
+    computed: {
+
+    },
+    attached () {
+      
+    },
+    methods: {
+      onChage(event) {
+        this.setData({ active: event.detail });
+      },
+      switchTab(e) {
+        const data = e.currentTarget.dataset
+        const url = data.path
+        wx.switchTab({ url: url })
+      }
+    }
+  })
+</script>
+
+<style>
+	
+</style>
+
+<script type="application/json">
+  {
+    "component": true,
+    "usingComponents": {
+      "van-tabbar": "vant-weapp/dist/tabbar/index",
+      "van-tabbar-item": "vant-weapp/dist/tabbar-item/index"
+    }
+  }
+</script>

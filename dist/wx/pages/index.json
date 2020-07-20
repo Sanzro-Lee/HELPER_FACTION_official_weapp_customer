@@ -1,6 +1,6 @@
 {
   "usingComponents": {
     "toptab": "/components/toptab1d7de33a/toptab",
-    "tabbar": "/components/tabbar6fe3d5a1/tabbar"
+    "tabbar": "/custom-tab-bar/index"
   }
 }
