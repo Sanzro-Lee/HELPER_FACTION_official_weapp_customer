@@ -1,7 +1,7 @@
 <template>
   <view class="body">
     <view wx:for="{{list}}" wx:key="index">
-      <van-swipe-cell right-width="{{ 50 }}" custom-class="vanswipecell">
+      <van-swipe-cell right-width="{{ 50 }}">
         <messagecard
           title="{{item.title}}"
           desc="{{item.desc}}"
@@ -87,7 +87,7 @@
   }
 
   .van-swipe-cell {
-    overflow: unset !important;
+    height: 180rpx;
   }
 
   .vancellleft {
