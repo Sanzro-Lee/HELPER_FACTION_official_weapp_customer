@@ -6,7 +6,12 @@
 </template>
 
 <script>
-  Page({
+  import { createPage } from '@mpxjs/core'
+
+  createPage({
+    data: {
+
+    },
     onLoad () {}
   })
 </script>

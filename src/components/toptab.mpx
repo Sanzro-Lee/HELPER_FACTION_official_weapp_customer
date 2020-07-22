@@ -20,6 +20,8 @@
               dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
+              show="{{item.show}}"
+              statustagstyle="{{item.statustagstyle}}"
             />
           </view>
         </van-tab>
@@ -28,7 +30,7 @@
           custom-class="vantab"
         >
           <view class="demand">居家维修</view>
-          <view wx:for="{{list2}}" wx:key="index">
+          <view class="taskcardblock" wx:for="{{list2}}" wx:key="index">
             <taskcard
               title="{{item.title}}"
               dec="{{item.dec}}"
@@ -224,8 +226,8 @@
   }
 
   .vantab {
-    padding-bottom: 5rem;
-    background-color: #fff;
+    min-height: 200vw;
+    padding-bottom: 4rem;
   }
 
   .demand {

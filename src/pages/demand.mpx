@@ -1,12 +1,145 @@
 <template>
   <view class="body">
-    <text>这是需求页面</text>
+      <view class="vanaddicon">
+        <van-icon
+          name="add"
+          color="#356ECA"
+          size="2em"
+        />
+        <text class="vanaddtext">新增需求</text>
+      </view>
+      <view
+        wx:for="{{list}}"
+        wx:key="index"
+        class="bgcolor"
+      >
+       <van-swipe-cell right-width="{{ 100 }}" custom-class="vanswipecell">
+        <taskcard
+          title="{{item.title}}"
+          dec="{{item.dec}}"
+          name="{{item.name}}"
+          dist="{{item.dist}}"
+          price="{{item.price}}"
+          thumb="{{item.thumb}}"
+          show="{{item.show}}"
+          statustagstyle="{{item.statustagstyle}}"
+        />
+        <view slot="right" class="vancellleft cell01">
+          <van-icon size="2.4em" name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/editicon.svg" />
+        </view>
+        <view slot="right" class="vancellleft cell02">
+          <van-icon size="2.4em" name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg" />
+        </view>
+      </van-swipe-cell>
+    </view>
     <tabbar></tabbar>
   </view>
 </template>
 
 <script>
-  Page({
+  import { createPage } from '@mpxjs/core'
+
+  createPage({
+    data: {
+      list: [
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          dist: '1 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
+          }
+        },
+        {
+          title: '其它',
+          dec: '清洁房子。',
+          name: '王先生',
+          dist: '5 km',
+          price: 500,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #F8E255, #EBC354)'
+          }
+        },
+        {
+          title: '居家维修',
+          dec: '想把发霉的墙推倒，重新砌起来。',
+          name: '刘先生',
+          dist: '10 km',
+          price: 2000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
+          }
+        },
+        {
+          title: '货物搬迁',
+          dec: '刚找到新房子，要搬家了。',
+          name: '张先生',
+          dist: '4 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #D94650, #DD9BA2)'
+          }
+        },
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          dist: '3 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
+          }
+        },
+        {
+          title: '其它',
+          dec: '清洁房子。',
+          name: '王先生',
+          dist: '2 km',
+          price: 500,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #F8E255, #EBC354)'
+          }
+        },
+        {
+          title: '居家维修',
+          dec: '想把发霉的墙推倒，重新砌起来。',
+          name: '刘先生',
+          dist: '0.5 km',
+          price: 2000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
+          }
+        },
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          dist: '2.5 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
+          show: true,
+          statustagstyle: {
+            background: 'linear-gradient(to right, #D94650, #DD9BA2)'
+          }
+        }
+      ]
+    },
     onLoad () {}
   })
 </script>
@@ -15,21 +148,48 @@
   .body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
-    background: #f5f5f5;
     color: #4d4d4d;
     min-width: 230px;
     max-width: 550px;
     margin: 0 auto;
+    padding-bottom: 4rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 300;
+  }
+
+  .bgcolor {
+    background: #fff;
+  }
+
+  .vanaddicon {
+    margin: 0 0 10px 22rpx;
+  }
+
+  .vanaddtext {
+    position: absolute;
+    margin: 4px 0 0 8px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .vancellleft {
+    position: absolute;
+    margin-top: 2rem;
+  }
+
+  .cell02 {
+    margin-left: 2.8rem;
   }
 </style>
 
 <script type="application/json">
   {
     "usingComponents": {
-      "tabbar": "../custom-tab-bar/index"
+      "van-icon": "vant-weapp/dist/icon/index",
+      "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+      "tabbar": "../custom-tab-bar/index",
+      "taskcard": "../components/taskcard"
     }
   }
 </script>

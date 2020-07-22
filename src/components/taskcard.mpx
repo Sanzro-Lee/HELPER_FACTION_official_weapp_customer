@@ -15,6 +15,11 @@
         <van-icon name="location" color="#9f9f9f" />
         {{dist}}
       </view>
+      <view
+        class="statustag"
+        wx:if="{{show}}"
+        wx:style="{{statustagstyle}}"
+      ></view>
   </view>
 </template>
 
@@ -31,7 +36,9 @@
       name: {type: String},
       dist: {type: String},
       price: {type: Number},
-      thumb: {type: String}
+      thumb: {type: String},
+      show: {type: Boolean},
+      statustagstyle: {type: Object}
     },
     options: {
       
@@ -87,10 +94,18 @@
 
   .dist {
     position: absolute;
-    margin: -50px 0 0 18.8rem;
+    margin: -50px 0 0 620rpx;
     font-size: 11px;
     color: #6d6d6d;
     font-weight: 300;
+  }
+
+  .statustag {
+    position: absolute;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    margin: -110px 0 0 670rpx;
   }
 
   .price {
