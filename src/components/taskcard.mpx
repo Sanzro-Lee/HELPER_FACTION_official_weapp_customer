@@ -10,7 +10,11 @@
         thumb="{{thumb}}"
       />
       <text class="price">¥{{price}}</text>
-      <text class="contact">联系人：{{name}} 手机：{{phone}}</text>
+      <text class="contact">联系人：{{name}}</text>
+      <view class="dist">
+        <van-icon name="location" color="#9f9f9f" />
+        {{dist}}
+      </view>
   </view>
 </template>
 
@@ -25,7 +29,7 @@
       title: {type: String},
       dec: {type: String},
       name: {type: String},
-      phone: {type: Number},
+      dist: {type: String},
       price: {type: Number},
       thumb: {type: String}
     },
@@ -81,6 +85,14 @@
     font-weight: 400;
   }
 
+  .dist {
+    position: absolute;
+    margin: -50px 0 0 18.8rem;
+    font-size: 11px;
+    color: #6d6d6d;
+    font-weight: 300;
+  }
+
   .price {
     position: absolute;
     margin: -50px 0 30px 24px;
@@ -94,7 +106,8 @@
   {
     "component": true,
     "usingComponents": {
-	  "van-card": "vant-weapp/dist/card/index"
+      "van-icon": "vant-weapp/dist/icon/index",
+      "van-card": "vant-weapp/dist/card/index"
     }
   }
 </script>

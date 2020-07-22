@@ -17,7 +17,7 @@
               title="{{item.title}}"
               dec="{{item.dec}}"
               name="{{item.name}}"
-              phone="{{item.phone}}"
+              dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
             />
@@ -27,13 +27,13 @@
           title="居家维修"
           custom-class="vantab"
         >
-          <view class="demand">需求列表</view>
+          <view class="demand">居家维修</view>
           <view wx:for="{{list2}}" wx:key="index">
             <taskcard
               title="{{item.title}}"
               dec="{{item.dec}}"
               name="{{item.name}}"
-              phone="{{item.phone}}"
+              dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
             />
@@ -43,13 +43,13 @@
           title="家电维修"
           custom-class="vantab"
         >
-          <view class="demand">需求列表</view>
+          <view class="demand">家电维修</view>
           <view wx:for="{{list3}}" wx:key="index">
             <taskcard
               title="{{item.title}}"
               dec="{{item.dec}}"
               name="{{item.name}}"
-              phone="{{item.phone}}"
+              dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
             />
@@ -59,13 +59,13 @@
           title="货物搬迁"
           custom-class="vantab"
         >
-          <view class="demand">需求列表</view>
+          <view class="demand">货物搬迁</view>
           <view wx:for="{{list4}}" wx:key="index">
             <taskcard
               title="{{item.title}}"
               dec="{{item.dec}}"
               name="{{item.name}}"
-              phone="{{item.phone}}"
+              dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
             />
@@ -75,13 +75,13 @@
           title="其它"
           custom-class="vantab"
         >
-          <view class="demand">需求列表</view>
+          <view class="demand">其它</view>
           <view wx:for="{{list5}}" wx:key="index">
             <taskcard
               title="{{item.title}}"
               dec="{{item.dec}}"
               name="{{item.name}}"
-              phone="{{item.phone}}"
+              dist="{{item.dist}}"
               price="{{item.price}}"
               thumb="{{item.thumb}}"
             />
@@ -101,15 +101,23 @@
           title: '家电维修',
           dec: '家里变压器坏了，快来人啊！',
           name: '林小姐',
-          phone: 13631487155,
+          dist: '1 km',
           price: 1000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
+        },
+        {
+          title: '其它',
+          dec: '清洁房子。',
+          name: '王先生',
+          dist: '5 km',
+          price: 500,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg'
         },
         {
           title: '居家维修',
           dec: '想把发霉的墙推倒，重新砌起来。',
           name: '刘先生',
-          phone: 13631487155,
+          dist: '10 km',
           price: 2000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg'
         },
@@ -117,25 +125,49 @@
           title: '货物搬迁',
           dec: '刚找到新房子，要搬家了。',
           name: '张先生',
-          phone: 13631487155,
+          dist: '4 km',
           price: 1000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg'
+        },
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          dist: '3 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
         },
         {
           title: '其它',
           dec: '清洁房子。',
           name: '王先生',
-          phone: 13631487155,
+          dist: '2 km',
           price: 500,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg'
         },
+        {
+          title: '居家维修',
+          dec: '想把发霉的墙推倒，重新砌起来。',
+          name: '刘先生',
+          dist: '0.5 km',
+          price: 2000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg'
+        },
+        {
+          title: '家电维修',
+          dec: '家里变压器坏了，快来人啊！',
+          name: '林小姐',
+          dist: '2.5 km',
+          price: 1000,
+          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
+        }
       ],
       list2: [
         {
           title: '居家维修',
           dec: '想把发霉的墙推倒，重新砌起来。',
           name: '刘先生',
-          phone: 13631487155,
+          dist: '0.5 km',
           price: 2000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg'
         }
@@ -145,7 +177,7 @@
           title: '家电维修',
           dec: '家里变压器坏了，快来人啊！',
           name: '林小姐',
-          phone: 13631487155,
+          dist: '4 km',
           price: 1000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg'
         }
@@ -155,7 +187,7 @@
           title: '货物搬迁',
           dec: '刚找到新房子，要搬家了。',
           name: '张先生',
-          phone: 13631487155,
+          dist: '3 km',
           price: 1000,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg'
         }
@@ -165,7 +197,7 @@
           title: '其它',
           dec: '清洁房子。',
           name: '王先生',
-          phone: 13631487155,
+          dist: '2 km',
           price: 500,
           thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg'
         }
