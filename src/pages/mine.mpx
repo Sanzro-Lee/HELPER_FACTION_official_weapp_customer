@@ -1,13 +1,57 @@
 <template>
   <view class="body">
-    <text>这是我的页面</text>
+    <van-card
+      title="刘小姐"
+      thumb="{{'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg'}}"
+      custom-class="vancard"
+      title-class="vantitle"
+      thumb-class="vanthumb"
+    />
+    <text class="address">上海市同仁街59号209</text>
+    <text class="conact">13798158337</text>
+    <van-icon
+      name="setting"
+      size="2em"
+      custom-class="setting"
+    />
+    <van-action-sheet
+      show="{{ show }}"
+      actions="{{ actions }}"
+      bind:close="onClose"
+      bind:select="onSelect"
+      custom-class="vanactionsheet"
+    />
     <tabbar></tabbar>
   </view>
 </template>
 
 <script>
   Page({
-    onLoad () {}
+    onLoad () {},
+    data: {
+      show: false,
+      actions: [
+        {
+          name: '选项',
+        },
+        {
+          name: '选项',
+        },
+        {
+          name: '选项',
+          subname: '副文本',
+          openType: 'share',
+        },
+      ],
+    },
+
+    onClose() {
+      this.setData({ show: false });
+    },
+
+    onSelect(event) {
+      console.log(event.detail);
+    },
   })
 </script>
 
@@ -16,7 +60,7 @@
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     background: #f5f5f5;
-    color: #4d4d4d;
+    color: #fff;
     min-width: 230px;
     max-width: 550px;
     margin: 0 auto;
@@ -24,11 +68,61 @@
     -moz-osx-font-smoothing: grayscale;
     font-weight: 300;
   }
+
+  .vancard {
+    height: 300rpx;
+    background: linear-gradient(to bottom right, #356ECA, #61D1D1);
+  }
+
+  .vantitle{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400 !important;
+    margin: 80rpx 0 0 -20rpx;
+  }
+
+  .address{
+    position: absolute;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: -150rpx;
+    left: 210rpx;
+  }
+
+  .vanthumb{
+    width: 120rpx !important;
+    height: 120rpx !important;
+    margin-top: 80rpx;
+  }
+
+  .conact {
+    position: absolute;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: -100rpx;
+    left: 210rpx;
+  }
+
+  .setting {
+    position: absolute !important;
+    margin-top: -260rpx;
+    right: 40rpx;
+  }
+
+  .vanactionsheet {
+    position: absolute;
+    margin-top: 100rpx;
+  }
 </style>
 
 <script type="application/json">
   {
     "usingComponents": {
+      "van-icon": "vant-weapp/dist/icon/index",
+      "van-card": "vant-weapp/dist/card/index",
+      "van-action-sheet": "vant-weapp/dist/action-sheet/index",
       "tabbar": "../custom-tab-bar/index"
     }
   }

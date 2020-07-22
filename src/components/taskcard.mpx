@@ -2,7 +2,7 @@
   <view class="taskcard">
       <van-card
         title="{{title}}"
-        desc="{{dec}}"
+        desc="{{desc}}"
         custom-class="vancard"
         thumb-class="vancardthumb"
         title-class="vancardtitle"
@@ -32,7 +32,7 @@
     },
     properties: {
       title: {type: String},
-      dec: {type: String},
+      desc: {type: String},
       name: {type: String},
       dist: {type: String},
       price: {type: Number},
@@ -77,6 +77,9 @@
   }
 
   .vancarddesc {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 15px;
     color: #5E5E5E;
     margin-left: -2rem;
@@ -85,6 +88,10 @@
   }
 
   .contact {
+    max-width: 40%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     position: absolute;
     margin: -50px 0 30px 6.2rem;
     font-size: 15px;
@@ -93,6 +100,10 @@
   }
 
   .dist {
+    max-width: 13%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     position: absolute;
     margin: -50px 0 0 620rpx;
     font-size: 11px;

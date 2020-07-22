@@ -1,6 +1,18 @@
 <template>
   <view class="body">
-    <text>这是消息页面</text>
+    <view wx:for="{{list}}" wx:key="index">
+      <van-swipe-cell right-width="{{ 50 }}" custom-class="vanswipecell">
+        <messagecard
+          title="{{item.title}}"
+          desc="{{item.desc}}"
+          time="{{item.time}}"
+          count="{{item.count}}"
+        />
+        <view slot="right" class="vancellleft">
+          <van-icon size="2.4em" name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg" />
+        </view>
+      </van-swipe-cell>
+    </view>
     <tabbar></tabbar>
   </view>
 </template>
@@ -10,7 +22,50 @@
 
   createPage({
     data: {
-
+      list: [
+        {
+          title: "俞师傅",
+          desc: "如果油漆换成蓝色会不会好点？",
+          time: "6 / 18 14:23",
+          count: "10"
+        },
+        {
+          title: "黄师傅",
+          desc: "那个，我的变压器已经买好了，请问您什么时候过来呢？",
+          time: "昨天 13 : 30",
+          count: "5"
+        },
+        {
+          title: "俞师傅",
+          desc: "如果油漆换成蓝色会不会好点？",
+          time: "昨天 6 : 24",
+          count: "100"
+        },
+        {
+          title: "张师傅",
+          desc: "那边的师傅说我的家具晚上6点才到，请问您有空吗？还是说明天？",
+          time: "9 : 30",
+          count: "8"
+        },
+        {
+          title: "刘师傅",
+          desc: "师傅！ 太感谢你啦！ 简直就是再世鲁班！",
+          time: "6 / 18 14:23",
+          count: "23"
+        },
+        {
+          title: "林师傅",
+          desc: "师傅手艺真好！",
+          time: "9 : 30",
+          count: "1"
+        },
+        {
+          title: "俞师傅",
+          desc: "如果油漆换成蓝色会不会好点？",
+          time: "6 / 18 14:23",
+          count: "0"
+        },
+      ]
     },
     onLoad () {}
   })
@@ -20,7 +75,7 @@
   .body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
-    background: #f5f5f5;
+    background: #fff;
     color: #4d4d4d;
     min-width: 230px;
     max-width: 550px;
@@ -28,12 +83,25 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 300;
+    padding-bottom: 4rem;
+  }
+
+  .van-swipe-cell {
+    overflow: unset !important;
+  }
+
+  .vancellleft {
+    position: absolute;
+    margin-top: 1rem;
   }
 </style>
 
 <script type="application/json">
   {
     "usingComponents": {
+      "van-icon": "vant-weapp/dist/icon/index",
+      "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+      "messagecard": "../components/messagecard",
       "tabbar": "../custom-tab-bar/index"
     }
   }

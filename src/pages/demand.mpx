@@ -13,10 +13,10 @@
         wx:key="index"
         class="bgcolor"
       >
-       <van-swipe-cell right-width="{{ 100 }}" custom-class="vanswipecell">
+       <van-swipe-cell right-width="{{ 100 }}">
         <taskcard
           title="{{item.title}}"
-          dec="{{item.dec}}"
+          desc="{{item.desc}}"
           name="{{item.name}}"
           dist="{{item.dist}}"
           price="{{item.price}}"
@@ -44,7 +44,7 @@
       list: [
         {
           title: '家电维修',
-          dec: '家里变压器坏了，快来人啊！',
+          desc: '家里变压器坏了，快来人啊！',
           name: '林小姐',
           dist: '1 km',
           price: 1000,
@@ -56,7 +56,7 @@
         },
         {
           title: '其它',
-          dec: '清洁房子。',
+          desc: '清洁房子。',
           name: '王先生',
           dist: '5 km',
           price: 500,
@@ -68,7 +68,7 @@
         },
         {
           title: '居家维修',
-          dec: '想把发霉的墙推倒，重新砌起来。',
+          desc: '想把发霉的墙推倒，重新砌起来。',
           name: '刘先生',
           dist: '10 km',
           price: 2000,
@@ -80,7 +80,7 @@
         },
         {
           title: '货物搬迁',
-          dec: '刚找到新房子，要搬家了。',
+          desc: '刚找到新房子，要搬家了。',
           name: '张先生',
           dist: '4 km',
           price: 1000,
@@ -92,7 +92,7 @@
         },
         {
           title: '家电维修',
-          dec: '家里变压器坏了，快来人啊！',
+          desc: '家里变压器坏了，快来人啊！',
           name: '林小姐',
           dist: '3 km',
           price: 1000,
@@ -104,7 +104,7 @@
         },
         {
           title: '其它',
-          dec: '清洁房子。',
+          desc: '清洁房子。',
           name: '王先生',
           dist: '2 km',
           price: 500,
@@ -116,7 +116,7 @@
         },
         {
           title: '居家维修',
-          dec: '想把发霉的墙推倒，重新砌起来。',
+          desc: '想把发霉的墙推倒，重新砌起来。',
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
@@ -128,7 +128,7 @@
         },
         {
           title: '家电维修',
-          dec: '家里变压器坏了，快来人啊！',
+          desc: '家里变压器坏了，快来人啊！',
           name: '林小姐',
           dist: '2.5 km',
           price: 1000,
@@ -152,10 +152,10 @@
     min-width: 230px;
     max-width: 550px;
     margin: 0 auto;
-    padding-bottom: 4rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 300;
+    padding-bottom: 4rem;
   }
 
   .bgcolor {

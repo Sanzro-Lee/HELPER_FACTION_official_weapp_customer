@@ -17,7 +17,7 @@
       >需求</van-tabbar-item>
       <van-tabbar-item
         icon="chat-o"
-        info="1"
+        info="99+"
         data-path="{{list[2].pagePath}}"
         bindtap="switchTab"
       >消息</van-tabbar-item>
