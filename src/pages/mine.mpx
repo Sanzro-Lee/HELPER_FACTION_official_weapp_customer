@@ -20,7 +20,11 @@
       custom-class="vancell"
       bind:click="showPopup"
     />
-    <van-popup show="{{ show }}" bind:close="onClose">内容</van-popup>
+    <van-popup
+      show="{{ show }}"
+      custom-class="vanpopup"
+      bind:close="onClose"
+    >分享成功</van-popup>
     <tabbar />
   </view>
 </template>
@@ -34,9 +38,16 @@
       show: false,
     },
 
+    showPopup() {
+      this.setData({ show: true });
+    },
+
+    onClose() {
+      this.setData({ show: false });
+    },
+
     pageLifetimes: {
       show() {
-        console.log("111")
         if (typeof this.getTabBar === 'function' &&
           this.getTabBar()) {
           this.getTabBar().setData({
@@ -45,14 +56,6 @@
         }
       }
     },
-  
-    showPopup() {
-      this.setData({ show: true });
-    },
-
-    onClose() {
-      this.setData({ show: false });
-    }
   })
 </script>
 
@@ -122,6 +125,16 @@
     font-weight: 400;
     top: 30rpx;
     background: #f2f2f2af !important;
+  }
+
+  .vanpopup {
+    width: 300rpx;
+    height: 200rpx;
+    border-radius: 20px;
+    color: black;
+    font-size: 16px;
+    padding-top: 80rpx;
+    text-align: center;
   }
 </style>
 

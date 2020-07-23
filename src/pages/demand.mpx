@@ -4,7 +4,7 @@
         <van-icon
           name="add"
           color="#356ECA"
-          size="2em"
+          size="2.4em"
         />
         <text class="vanaddtext">新增需求</text>
       </view>
@@ -178,7 +178,7 @@
 
   .vanaddtext {
     position: absolute;
-    margin: 4px 0 0 8px;
+    margin: 6px 0 0 8px;
     font-size: 24px;
     font-weight: 400;
   }
