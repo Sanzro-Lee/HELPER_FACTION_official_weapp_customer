@@ -32,7 +32,7 @@
         </view>
       </van-swipe-cell>
     </view>
-    <tabbar></tabbar>
+    <tabbar />
   </view>
 </template>
 
@@ -140,7 +140,17 @@
         }
       ]
     },
-    onLoad () {}
+    onLoad () {},
+    pageLifetimes: {
+      show() {
+        if (typeof this.getTabBar === 'function' &&
+          this.getTabBar()) {
+          this.getTabBar().setData({
+            active: 1
+          })
+        }
+      }
+    }
   })
 </script>
 

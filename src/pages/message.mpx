@@ -21,6 +21,7 @@
   import { createPage } from '@mpxjs/core'
 
   createPage({
+    onLoad () {},
     data: {
       list: [
         {
@@ -67,7 +68,16 @@
         },
       ]
     },
-    onLoad () {}
+    pageLifetimes: {
+      show() {
+        if (typeof this.getTabBar === 'function' &&
+          this.getTabBar()) {
+          this.getTabBar().setData({
+            active: 2
+          })
+        }
+      }
+    }
   })
 </script>
 
@@ -83,7 +93,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 300;
-    padding-bottom: 4rem;
+    padding-bottom: 110rpx;
   }
 
   .van-swipe-cell {

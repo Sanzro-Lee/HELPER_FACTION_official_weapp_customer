@@ -5,6 +5,7 @@
         color="#F1E928"
         active="{{ active }}"
         swipeable="true"
+        animated="true"
         custom-class="vantabs"
       >
         <van-tab
@@ -226,7 +227,7 @@
   }
 
   .vantab {
-    min-height: 200vw;
+    min-height: 1000rpx;
     padding-bottom: 4rem;
   }
 

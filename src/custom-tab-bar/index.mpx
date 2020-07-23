@@ -2,7 +2,6 @@
   <view class="tabbar">
 		<van-tabbar
       active="{{ active }}"
-      bind:change="onChage"
       active-color="#4A7FD4"
     >
       <van-tabbar-item
@@ -38,16 +37,20 @@
       active: 0,
       list: [
         {
-          "pagePath": "index"
+          "pagePath": "index",
+          "active": 0
         },
         {
-          "pagePath": "demand"
+          "pagePath": "demand",
+          "active": 1
         },
         {
-          "pagePath": "message"
+          "pagePath": "message",
+          "active": 2
         },
         {
-          "pagePath": "mine"
+          "pagePath": "mine",
+          "active": 3
         }
       ]
     },
