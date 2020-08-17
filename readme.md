@@ -26,6 +26,9 @@
 ## 安装使用
 
 ```bash
+# 安装mpx脚手架工具
+npm i -g @mpxjs/cli
+
 # 进入项目
 cd HELPER_FACTION_official_weapp_customer
 
