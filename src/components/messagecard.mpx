@@ -20,26 +20,11 @@
   import { createComponent } from '@mpxjs/core'
 
   createComponent({
-    data: {
-      
-    },
     properties: {
       title: {type: String},
       desc: {type: String},
       time: {type: String},
       count: {type: Number}
-    },
-    options: {
-      
-    },
-    computed: {
-
-    },
-    attached () {
-      
-    },
-    methods: {
-      
     }
   })
 </script>

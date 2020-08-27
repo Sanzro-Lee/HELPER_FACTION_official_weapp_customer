@@ -1,3 +1,8 @@
+<script type="text/jsavascript">
+  import mockSetup from "./mock/index"
+  process.env.NODE_ENV === "development" && mockSetup()
+</script>
+
 <script type="application/json">
   {
     "pages": [
@@ -15,18 +20,10 @@
     "tabBar": {
       "custom": true,
       "list": [
-        {
-          "pagePath": "pages/index"
-        },
-        {
-          "pagePath": "pages/demand"
-        },
-        {
-          "pagePath": "pages/message"
-        },
-        {
-          "pagePath": "pages/mine"
-        }
+        { "pagePath": "pages/index" },
+        { "pagePath": "pages/demand" },
+        { "pagePath": "pages/message" },
+        { "pagePath": "pages/mine" }
       ]
     }
   }

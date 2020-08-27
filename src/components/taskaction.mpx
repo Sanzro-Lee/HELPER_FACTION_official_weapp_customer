@@ -39,18 +39,6 @@
   import { createComponent } from '@mpxjs/core'
 
   createComponent({
-    data: {
-      
-    },
-    options: {
-      
-    },
-    computed: {
-
-    },
-    attached () {
-      
-    },
     methods: {
       onClickIcon() {
         console.log('点击图标')

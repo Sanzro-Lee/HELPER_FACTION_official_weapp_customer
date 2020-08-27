@@ -37,110 +37,23 @@
 </template>
 
 <script>
+  import mpx from "@mpxjs/core"
   import { createPage } from '@mpxjs/core'
+  import mpxFetch from "@mpxjs/fetch"
 
   createPage({
     data: {
-      list: [
-        {
-          title: '家电维修',
-          desc: '家里变压器坏了，快来人啊！',
-          name: '林小姐',
-          dist: '1 km',
-          price: 1000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
-          }
-        },
-        {
-          title: '其它',
-          desc: '清洁房子。',
-          name: '王先生',
-          dist: '5 km',
-          price: 500,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #F8E255, #EBC354)'
-          }
-        },
-        {
-          title: '居家维修',
-          desc: '想把发霉的墙推倒，重新砌起来。',
-          name: '刘先生',
-          dist: '10 km',
-          price: 2000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
-          }
-        },
-        {
-          title: '货物搬迁',
-          desc: '刚找到新房子，要搬家了。',
-          name: '张先生',
-          dist: '4 km',
-          price: 1000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-03.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #D94650, #DD9BA2)'
-          }
-        },
-        {
-          title: '家电维修',
-          desc: '家里变压器坏了，快来人啊！',
-          name: '林小姐',
-          dist: '3 km',
-          price: 1000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
-          }
-        },
-        {
-          title: '其它',
-          desc: '清洁房子。',
-          name: '王先生',
-          dist: '2 km',
-          price: 500,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #F8E255, #EBC354)'
-          }
-        },
-        {
-          title: '居家维修',
-          desc: '想把发霉的墙推倒，重新砌起来。',
-          name: '刘先生',
-          dist: '0.5 km',
-          price: 2000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-02.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)'
-          }
-        },
-        {
-          title: '家电维修',
-          desc: '家里变压器坏了，快来人啊！',
-          name: '林小姐',
-          dist: '2.5 km',
-          price: 1000,
-          thumb: 'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-01.svg',
-          show: true,
-          statustagstyle: {
-            background: 'linear-gradient(to right, #D94650, #DD9BA2)'
-          }
-        }
-      ]
+      list: []
     },
-    onLoad () {},
+    onLoad () {
+      mpx.use(mpxFetch)
+
+      mpx.xfetch.fetch({
+        url: "http://helperfaction.com/demand/list"
+      }).then(res => {
+        this.list = res.data.list
+      })
+    },
     pageLifetimes: {
       show() {
         if (typeof this.getTabBar === 'function' &&

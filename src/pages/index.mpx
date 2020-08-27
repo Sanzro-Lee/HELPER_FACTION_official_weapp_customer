@@ -6,8 +6,9 @@
 </template>
 
 <script>
-  Page({
-    onLoad () {},
+  import { createPage } from "@mpxjs/core"
+
+  createPage({
     pageLifetimes: {
       showtab() {
         if (typeof this.getTabBar === 'function' &&

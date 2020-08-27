@@ -23,11 +23,13 @@
   "license": "ISC",
   "dependencies": {
     "@mpxjs/api-proxy": "^2.5.10",
-    "vue": "^2.6.10",
-    "vue-i18n": "^8.15.3",
     "@mpxjs/core": "^2.5.11",
+    "@mpxjs/fetch": "^2.5.32",
+    "@mpxjs/mock": "^2.5.30",
     "iview-weapp": "^2.0.0",
-    "vant-weapp": "^0.5.28"
+    "vant-weapp": "^0.5.28",
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.15.3"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.3",

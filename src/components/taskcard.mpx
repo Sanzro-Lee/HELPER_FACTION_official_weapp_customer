@@ -27,9 +27,6 @@
   import { createComponent } from '@mpxjs/core'
 
   createComponent({
-    data: {
-
-    },
     properties: {
       title: {type: String},
       desc: {type: String},
@@ -39,18 +36,6 @@
       thumb: {type: String},
       show: {type: Boolean},
       statustagstyle: {type: Object}
-    },
-    options: {
-      
-    },
-    computed: {
-
-    },
-    attached () {
-      
-    },
-    methods: {
-
     }
   })
 </script>
