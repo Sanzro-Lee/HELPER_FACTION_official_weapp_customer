@@ -1,0 +1,21 @@
+<template>
+  <view class="body">
+    <text>page example template</text>
+  </view>
+</template>
+
+<script>
+import mpx, { createPage } from "@mpxjs/core";
+
+createPage({
+  pageLifetimes: {}
+});
+</script>
+
+<style></style>
+
+<script type="application/json">
+{
+  "usingComponents": {}
+}
+</script>

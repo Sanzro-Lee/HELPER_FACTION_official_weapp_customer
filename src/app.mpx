@@ -7,9 +7,11 @@
   {
     "pages": [
       "./pages/index",
-      "./pages/demand",
+      "./pages/order",
       "./pages/message",
-      "./pages/mine"
+			"./pages/mine",
+			"./pages/taskcardinfo",
+			"./pages/addorder"
     ],
     "window": {
       "backgroundTextStyle": "light",
@@ -21,7 +23,7 @@
       "custom": true,
       "list": [
         { "pagePath": "pages/index" },
-        { "pagePath": "pages/demand" },
+        { "pagePath": "pages/order" },
         { "pagePath": "pages/message" },
         { "pagePath": "pages/mine" }
       ]

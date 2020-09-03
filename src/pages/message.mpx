@@ -9,7 +9,10 @@
           count="{{item.count}}"
         />
         <view slot="right" class="vancellleft">
-          <van-icon size="2.4em" name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg" />
+          <van-icon
+            size="2.4em"
+            name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg"
+          />
         </view>
       </van-swipe-cell>
     </view>
@@ -18,69 +21,73 @@
 </template>
 
 <script>
-  import mpx from "@mpxjs/core"
-  import { createPage } from '@mpxjs/core'
-  import mpxFetch from "@mpxjs/fetch"
+import mpx from '@mpxjs/core';
+import { createPage } from '@mpxjs/core';
+import mpxFetch from '@mpxjs/fetch';
 
-  createPage({
-    onLoad () {},
-    data: {
-      list: []
-    },
-    onLoad () {
-      mpx.use(mpxFetch)
+createPage({
+  data: {
+    list: [],
+	},
+  onLoad() {
+		wx.setNavigationBarTitle({
+      title: '消息',
+		});
 
-      mpx.xfetch.fetch({
-        url: "http://helperfaction.com/message/list"
-      }).then(res => {
-        this.list = res.data.list
+    mpx.use(mpxFetch);
+
+    mpx.xfetch
+      .fetch({
+        url: 'http://helperfaction.com/message/list',
       })
-    },
-    pageLifetimes: {
-      show() {
-        if (typeof this.getTabBar === 'function' &&
-          this.getTabBar()) {
-          this.getTabBar().setData({
-            active: 2
-          })
-        }
+      .then(res => {
+        this.list = res.data.list;
+      });
+  },
+  pageLifetimes: {
+    show() {
+      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+        this.getTabBar().setData({
+          active: 2,
+        });
       }
-    }
-  })
+    },
+  },
+});
 </script>
 
 <style>
-  .body {
-    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.4em;
-    background: #fff;
-    color: #4d4d4d;
-    min-width: 230px;
-    max-width: 550px;
-    margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 300;
-    padding-bottom: 110rpx;
-  }
+.body {
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  background: #fff;
+  color: #4d4d4d;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
+  padding-bottom: 110rpx;
+}
 
-  .van-swipe-cell {
-    height: 180rpx;
-  }
+.van-swipe-cell {
+  height: 180rpx;
+}
 
-  .vancellleft {
-    position: absolute;
-    margin-top: 1rem;
-  }
+.vancellleft {
+  position: absolute;
+  margin-top: 1rem;
+}
 </style>
 
 <script type="application/json">
-  {
-    "usingComponents": {
-      "van-icon": "vant-weapp/dist/icon/index",
-      "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
-      "messagecard": "../components/messagecard",
-      "tabbar": "../custom-tab-bar/index"
-    }
+{
+  "usingComponents": {
+    "van-icon": "vant-weapp/dist/icon/index",
+    "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+    "messagecard": "../components/messagecard",
+    "tabbar": "../custom-tab-bar/index"
   }
+}
 </script>

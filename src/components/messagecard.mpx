@@ -10,73 +10,73 @@
         desc-class="vandesc"
         thumb-class="vanthumb"
       />
-      <text class="messagetime">{{time}}</text>
+      <text class="messagetime">{{ time }}</text>
       <i-badge i-class="ibadge" count="{{count}}" overflow-count="99" />
     </view>
   </view>
 </template>
 
 <script>
-  import { createComponent } from '@mpxjs/core'
+import { createComponent } from '@mpxjs/core';
 
-  createComponent({
-    properties: {
-      title: {type: String},
-      desc: {type: String},
-      time: {type: String},
-      count: {type: Number}
-    }
-  })
+createComponent({
+  properties: {
+    title: { type: String },
+    desc: { type: String },
+    time: { type: String },
+    count: { type: Number },
+  },
+});
 </script>
 
 <style>
-	.vancard {
-    width: 92%;
-    height: 140rpx;
-    margin: 20px 0 20px 1rem;
-    background: #F2F2F2;
-    border-radius: 30rpx;
-  }
+.vancard {
+  width: 92%;
+  height: 140rpx;
+  margin: 20px 0 20px 1rem;
+  background: #f2f2f2;
+  border-radius: 30rpx;
+}
 
-  .vantitle {
-    font-size: 16px;
-    color: #4C4C4C;
-    margin: 26rpx 0 0 -60rpx;
-  }
+.vantitle {
+  font-size: 16px;
+  color: #4c4c4c;
+  margin: 26rpx 0 0 -60rpx;
+}
 
-  .vandesc {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #4C4C4C;
-    margin: 10rpx 0 0 -60rpx;
-  }
+.vandesc {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #4c4c4c;
+  margin: 10rpx 0 0 -60rpx;
+}
 
-  .vanthumb {
-    width: 100rpx;
-    margin-top: -30rpx;
-  }
+.vanthumb {
+  width: 100rpx;
+  margin-top: -30rpx;
+}
 
-  .messagetime {
-    text-align: right;
-    position: absolute;
-    margin-top: -160rpx;
-    right: 60rpx;
-  }
+.messagetime {
+  text-align: right;
+  position: absolute;
+  margin-top: -160rpx;
+  right: 60rpx;
+}
 
-  .ibadge {
-    position: absolute;
-    margin-top: -180rpx;
-    right: 44rpx;
-  }
+.ibadge {
+  position: absolute;
+  margin-top: -180rpx;
+  right: 44rpx;
+}
 </style>
 
 <script type="application/json">
-  {
-    "component": true,
-    "usingComponents": {
-      "i-badge": "iview-weapp/dist/badge/index",
-      "van-card": "vant-weapp/dist/card/index"
-    }
+{
+  "component": true,
+  "usingComponents": {
+    "i-badge": "iview-weapp/dist/badge/index",
+    "van-card": "vant-weapp/dist/card/index"
   }
+}
 </script>

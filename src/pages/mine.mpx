@@ -13,6 +13,7 @@
       name="setting"
       size="2em"
       custom-class="setting"
+      bindtap="clickSetting()"
     />
     <van-cell
       title="分享 叫到帮"
@@ -20,132 +21,136 @@
       custom-class="vancell"
       bind:click="showPopup"
     />
-    <van-popup
-      show="{{ show }}"
-      custom-class="vanpopup"
-      bind:close="onClose"
-    >分享成功</van-popup>
+    <van-popup show="{{ show }}" custom-class="vanpopup" bind:close="onClose"
+      >分享成功</van-popup
+    >
     <tabbar />
   </view>
 </template>
 
 <script>
-  import { createPage } from '@mpxjs/core'
+import { createPage } from "@mpxjs/core";
 
-  createPage({
-    onLoad () {},
-    data: {
-      show: false,
-    },
-
-    showPopup() {
-      this.setData({ show: true });
-    },
-
-    onClose() {
-      this.setData({ show: false });
-    },
-
-    pageLifetimes: {
-      show() {
-        if (typeof this.getTabBar === 'function' &&
-          this.getTabBar()) {
-          this.getTabBar().setData({
-            active: 3
-          })
-        }
+createPage({
+  data: {
+    show: false
+  },
+  onLoad() {
+    wx.setNavigationBarTitle({
+      title: "我的"
+    });
+  },
+  showPopup() {
+    this.setData({ show: true });
+  },
+  onClose() {
+    this.setData({ show: false });
+  },
+  pageLifetimes: {
+    show() {
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
+        this.getTabBar().setData({
+          active: 3
+        });
       }
-    },
-  })
+    }
+	},
+	methods: {
+		clickSetting() {
+			// 修改的时候请不要再使用这个页面
+			wx.navigateTo({url: 'addorder'})
+		}
+	}
+});
 </script>
 
 <style>
-  .body {
-    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.4em;
-    background: #fff;
-    color: #fff;
-    min-width: 230px;
-    max-width: 550px;
-    margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 300;
-  }
+.body {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  background: #fff;
+  color: #fff;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
+}
 
-  .vancard {
-    height: 300rpx;
-    background: linear-gradient(to bottom right, #356ECA, #61D1D1);
-  }
+.vancard {
+  height: 300rpx;
+  background: linear-gradient(to bottom right, #356eca, #61d1d1);
+}
 
-  .vantitle{
-    color: #fff;
-    font-size: 24px;
-    font-weight: 400 !important;
-    margin: 80rpx 0 0 -20rpx;
-  }
+.vantitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400 !important;
+  margin: 80rpx 0 0 -20rpx;
+}
 
-  .address{
-    position: absolute;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: -150rpx;
-    left: 210rpx;
-  }
+.address {
+  position: absolute;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: -150rpx;
+  left: 210rpx;
+}
 
-  .vanthumb{
-    width: 120rpx !important;
-    height: 120rpx !important;
-    margin-top: 80rpx;
-  }
+.vanthumb {
+  width: 120rpx !important;
+  height: 120rpx !important;
+  margin-top: 80rpx;
+}
 
-  .conact {
-    position: absolute;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: -100rpx;
-    left: 210rpx;
-  }
+.conact {
+  position: absolute;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: -100rpx;
+  left: 210rpx;
+}
 
-  .setting {
-    position: absolute !important;
-    margin-top: -260rpx;
-    right: 40rpx;
-  }
+.setting {
+  position: absolute !important;
+  margin-top: -260rpx;
+  right: 40rpx;
+}
 
-  .vanactionsheet {
-    position: absolute;
-    margin-top: 40rpx;
-  }
+.vanactionsheet {
+  position: absolute;
+  margin-top: 40rpx;
+}
 
-  .vancell {
-    font-size: 20px;
-    font-weight: 400;
-    top: 30rpx;
-    background: #f2f2f2af !important;
-  }
+.vancell {
+  font-size: 20px;
+  font-weight: 400;
+  top: 30rpx;
+  background: #f2f2f2af !important;
+}
 
-  .vanpopup {
-    width: 300rpx;
-    height: 200rpx;
-    border-radius: 20px;
-    color: black;
-    font-size: 16px;
-    padding-top: 80rpx;
-    text-align: center;
-  }
+.vanpopup {
+  width: 300rpx;
+  height: 200rpx;
+  border-radius: 20px;
+  color: black;
+  font-size: 16px;
+  padding-top: 80rpx;
+  text-align: center;
+}
 </style>
 
 <script type="application/json">
-  {
-    "usingComponents": {
-      "van-icon": "vant-weapp/dist/icon/index",
-      "van-card": "vant-weapp/dist/card/index",
-      "van-cell": "vant-weapp/dist/cell/index",
-      "van-popup": "vant-weapp/dist/popup/index",
-      "tabbar": "../custom-tab-bar/index"
-    }
+{
+  "usingComponents": {
+    "van-icon": "vant-weapp/dist/icon/index",
+    "van-card": "vant-weapp/dist/card/index",
+    "van-cell": "vant-weapp/dist/cell/index",
+    "van-popup": "vant-weapp/dist/popup/index",
+    "tabbar": "../custom-tab-bar/index"
   }
+}
 </script>

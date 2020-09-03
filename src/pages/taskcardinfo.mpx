@@ -1,0 +1,29 @@
+<template>
+  <view class="body">
+			<orderinfo />
+  </view>
+</template>
+
+<script>
+import mpx, { createPage } from '@mpxjs/core';
+
+createPage({
+  ready() {
+    wx.setNavigationBarTitle({
+      title: '订单详情',
+    });
+  },
+});
+</script>
+
+<style>
+
+</style>
+
+<script type="application/json">
+{
+  "usingComponents": {
+    "orderinfo": "../components/orderinfo"
+  }
+}
+</script>
