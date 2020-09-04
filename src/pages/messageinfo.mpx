@@ -1,0 +1,112 @@
+<template lang="wxml">
+  <view class="body">
+		<view class="opposite">
+			<image class="oppositechathead" src="../material/chathead.svg" />
+			<text class="oppositechatcontent">假装发了条信息</text>
+		</view>
+		<view class="self">
+			<text class="selfchatcontent">假装发了条信息</text>
+			<image class="selfchathead" src="../material/chathead.svg" />
+		</view>
+		<view class="chatfunarea">
+			<view class="chatinput">
+				<input />
+			</view>
+			<van-icon class="selectpic" name="photo" color="#CCCCCC" />
+			<van-button class="sendbtn" round color="#cccccc">发送</van-button>
+		</view>
+  </view>
+</template>
+
+<script>
+import mpx, { createPage } from "@mpxjs/core";
+
+createPage({
+  data: {},
+  onLoad() {
+    wx.setNavigationBarTitle({
+      title: "余师傅",
+    });
+  },
+});
+</script>
+
+<style>
+.opposite {
+	height: 100px;
+  margin: 4vw 0 0 4vw;
+}
+
+.oppositechathead {
+  width: 50px;
+  height: 50px;
+}
+
+.oppositechatcontent {
+	padding: 12px;
+  background: #356eca;
+  color: #ffffff;
+	border-radius: 10px;
+	width: 115px;
+	display: block;
+	margin: -52px 0 0 60px;
+}
+
+.selfchathead {
+  width: 50px;
+  height: 50px;
+	position: absolute;
+	right: 4vw;
+}
+
+.selfchatcontent {
+	padding: 12px;
+  background: #F2F2F2;
+  color: #717171;
+	border-radius: 10px;
+	width: 115px;
+	display: block;
+	margin: 0 0 -52px 160px;
+}
+
+.chatfunarea {
+	width: 92%;
+	height: 18vw;
+	position: absolute;
+	margin-left: 12px;
+	background: #F2F2F2;
+	border-radius: 10px;
+	bottom: 20px;
+}
+
+.chatinput {
+	width: 182px;
+	height: 18px;
+	padding: 8px;
+	background: white;
+	border-radius: 50px;
+	margin: 16px 0 0 8px;
+}
+
+.selectpic {
+	font-size: 50px;
+	position: absolute;
+	top: 6px;
+	right: 80px;
+}
+
+.sendbtn {
+	position: absolute;
+	top: 12px;
+	right: 14px;
+}
+</style>
+
+<script type="application/json">
+{
+  "usingComponents": {
+		"van-icon": "vant-weapp/dist/icon/index",
+		"van-button": "vant-weapp/dist/button/index"
+  }
+}
+</script>

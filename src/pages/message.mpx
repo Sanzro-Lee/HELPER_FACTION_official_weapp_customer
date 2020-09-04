@@ -7,6 +7,7 @@
           desc="{{item.desc}}"
           time="{{item.time}}"
           count="{{item.count}}"
+					bindtap="viewmessageinfo()"
         />
         <view slot="right" class="vancellleft">
           <van-icon
@@ -52,7 +53,12 @@ createPage({
         });
       }
     },
-  },
+	},
+	methods: {
+		viewmessageinfo() {
+			wx.navigateTo({url: 'messageinfo'})
+		},
+	}
 });
 </script>
 

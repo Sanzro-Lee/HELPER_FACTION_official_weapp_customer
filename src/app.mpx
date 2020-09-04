@@ -11,6 +11,7 @@
       "./pages/message",
 			"./pages/mine",
 			"./pages/taskcardinfo",
+			"./pages/messageinfo",
 			"./pages/addorder"
     ],
     "window": {

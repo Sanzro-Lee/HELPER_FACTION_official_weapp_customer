@@ -16,7 +16,7 @@
           show="{{item.show}}"
           statustagstyle="{{item.statustagstyle}}"
         />
-        <view slot="right" class="vancellleft cell01">
+        <view slot="right" class="vancellleft cell01" bindtap="editorder()">
           <van-icon
             size="2.4em"
             name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/editicon.svg"
@@ -69,6 +69,9 @@ createPage({
 	methods: {
 		addorderfun() {
 			wx.navigateTo({url: 'addorder'})
+		},
+		editorder() {
+			wx.navigateTo({url: 'addorder'})
 		}
 	}
 });
@@ -93,12 +96,12 @@ createPage({
 }
 
 .vanaddicon {
-  margin: 0 0 10px 22rpx;
+  margin: 10px 0 10px 22rpx;
 }
 
 .vanaddtext {
   position: absolute;
-  margin: 6px 0 0 8px;
+  margin: 7px 0 0 8px;
   font-size: 24px;
   font-weight: 400;
 }

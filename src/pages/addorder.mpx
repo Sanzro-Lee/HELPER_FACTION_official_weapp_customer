@@ -36,7 +36,7 @@ createPage({
   data: {},
   onLoad() {
     wx.setNavigationBarTitle({
-      title: "添加订单"
+      title: "新增订单"
     });
 
     wx.setNavigationBarColor({
