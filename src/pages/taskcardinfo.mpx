@@ -31,7 +31,12 @@ createPage({
     statustagstyle: {
       background: "linear-gradient(to right, #F8E255, #EBC354)"
     }
-  }
+	},
+	ready() {
+		wx.setNavigationBarTitle({
+      title: '订单详情',
+    });
+	},
 });
 </script>
 

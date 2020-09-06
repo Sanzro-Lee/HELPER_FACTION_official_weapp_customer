@@ -27,11 +27,6 @@
 import mpx, { createComponent } from '@mpxjs/core';
 
 createComponent({
-	ready() {
-		wx.setNavigationBarTitle({
-      title: '订单详情',
-    });
-	},
   properties: {
     title: { type: String },
     desc: { type: String },
