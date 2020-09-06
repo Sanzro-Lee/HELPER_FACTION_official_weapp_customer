@@ -1,13 +1,14 @@
 <template>
   <view class="body">
     <view class="headericonview">
-      <image class="headericon" src="../material/repair.svg" />
+      <image class="headericon" src="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg" />
+			<i-icon class="editicon" type="brush_fill" size="28" color="#356eca" />
     </view>
-    <input class="testinput" placeholder="选择服务类型" />
-    <input class="testinput" placeholder="具体维修内容" />
+    <input class="testinput" placeholder="修改昵称" />
+    <input class="testinput" placeholder="修改地址" />
     <input class="testinput" placeholder="修改手机号码" />
-    <input class="testinput" placeholder="请输入价格" />
-    <input class="testinput" placeholder="请设定预约时间" />
+    <input class="testinput" placeholder="收到的验证码" />
+    <!-- <input class="testinput" placeholder="具体维修内容" /> -->
     <view class="vanbtn">
       <van-button
         custom-class="confirmbtn"
@@ -36,7 +37,7 @@ createPage({
   data: {},
   onLoad() {
     wx.setNavigationBarTitle({
-      title: "新增订单"
+      title: "修改资料"
     });
 
     wx.setNavigationBarColor({
@@ -74,6 +75,15 @@ page {
   width: 30vw;
   height: 30vw;
   margin: auto;
+}
+
+.editicon {
+	padding: 4px;
+	background: white;
+	border-radius: 50px;
+	position: absolute;
+	top: 100px;
+	left: 200px;
 }
 
 /* 下次需要修改class name. */
@@ -118,7 +128,8 @@ page {
 <script type="application/json">
 {
   "usingComponents": {
-    "van-button": "vant-weapp/dist/button/index"
+		"van-button": "vant-weapp/dist/button/index",
+		"i-icon": "iview-weapp/dist/icon/index"
   }
 }
 </script>

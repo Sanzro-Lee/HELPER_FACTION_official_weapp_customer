@@ -57,8 +57,7 @@ createPage({
 	},
 	methods: {
 		clickSetting() {
-			// 修改的时候请不要再使用这个页面
-			wx.navigateTo({url: 'addorder'})
+			wx.navigateTo({url: 'setprofile'})
 		}
 	}
 });

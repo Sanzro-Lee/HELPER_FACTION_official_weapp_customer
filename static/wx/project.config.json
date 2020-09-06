@@ -2,11 +2,11 @@
   "compileType": "miniprogram",
   "setting": {
     "newFeature": true,
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "postcss": true,
     "minified": false,
-    "checkSiteMap": true,
+    "checkSiteMap": false,
     "autoAudits": false
   },
   "appid": "wx4835e4e9749f1502",

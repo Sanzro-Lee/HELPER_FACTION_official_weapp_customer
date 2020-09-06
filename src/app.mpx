@@ -12,7 +12,8 @@
 			"./pages/mine",
 			"./pages/taskcardinfo",
 			"./pages/messageinfo",
-			"./pages/addorder"
+			"./pages/addorder",
+			"./pages/setprofile"
     ],
     "window": {
       "backgroundTextStyle": "light",

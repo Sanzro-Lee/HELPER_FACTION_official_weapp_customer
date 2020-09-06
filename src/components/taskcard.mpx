@@ -1,5 +1,5 @@
 <template>
-  <view class="taskcard" bindtap="handletap()">
+  <view class="body" bindtap="handletap()">
     <van-card
       title="{{title}}"
       desc="{{desc}}"
@@ -11,7 +11,7 @@
     />
     <text class="price">¥{{ price }}</text>
     <text class="contact">联系人：{{ name }}</text>
-    <view class="dist">
+    <view class="distance">
       <van-icon name="location" color="#9f9f9f" />
       {{ dist }}
     </view>
@@ -27,6 +27,11 @@
 import mpx, { createComponent } from '@mpxjs/core';
 
 createComponent({
+	ready() {
+		wx.setNavigationBarTitle({
+      title: '订单详情',
+    });
+	},
   properties: {
     title: { type: String },
     desc: { type: String },
@@ -39,7 +44,12 @@ createComponent({
   },
   methods: {
     handletap() {
-      wx.navigateTo({ url: 'taskcardinfo' });
+			let pages = getCurrentPages()
+			let currentPage = pages[pages.length - 1]
+			const url = `/${currentPage.route}`
+			if (url != '/pages/taskcardinfo') {
+				wx.navigateTo({ url: 'taskcardinfo' });
+			}
     },
   },
 });
@@ -89,7 +99,7 @@ createComponent({
   font-weight: 400;
 }
 
-.dist {
+.distance {
   max-width: 13%;
   overflow: hidden;
   white-space: nowrap;

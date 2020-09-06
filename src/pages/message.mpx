@@ -7,7 +7,7 @@
           desc="{{item.desc}}"
           time="{{item.time}}"
           count="{{item.count}}"
-					bindtap="viewmessageinfo()"
+          bindtap="viewmessageinfo()"
         />
         <view slot="right" class="vancellleft">
           <van-icon
@@ -15,6 +15,7 @@
             name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg"
           />
         </view>
+				<!-- <van-dialog id="van-dialog" /> -->
       </van-swipe-cell>
     </view>
     <tabbar></tabbar>
@@ -22,49 +23,52 @@
 </template>
 
 <script>
-import mpx from '@mpxjs/core';
-import { createPage } from '@mpxjs/core';
-import mpxFetch from '@mpxjs/fetch';
+import mpx from "@mpxjs/core";
+import { createPage } from "@mpxjs/core";
+import mpxFetch from "@mpxjs/fetch";
+
+// const Dialog = require('../../node_modules/vant-weapp/dist/dialog/dialog');
+// import Dialog from '../../node_modules/vant-weapp/dist/dialog/dialog'
 
 createPage({
   data: {
     list: [],
-	},
+  },
   onLoad() {
-		wx.setNavigationBarTitle({
-      title: '消息',
-		});
+    wx.setNavigationBarTitle({
+      title: "消息",
+    });
 
     mpx.use(mpxFetch);
 
     mpx.xfetch
       .fetch({
-        url: 'http://helperfaction.com/message/list',
+        url: "http://helperfaction.com/message/list",
       })
-      .then(res => {
+      .then((res) => {
         this.list = res.data.list;
       });
   },
   pageLifetimes: {
     show() {
-      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
         this.getTabBar().setData({
           active: 2,
         });
       }
     },
-	},
-	methods: {
-		viewmessageinfo() {
-			wx.navigateTo({url: 'messageinfo'})
-		},
-	}
+  },
+  methods: {
+    viewmessageinfo() {
+      wx.navigateTo({ url: "messageinfo" });
+    },
+  },
 });
 </script>
 
 <style>
 .body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   background: #fff;
   color: #4d4d4d;
@@ -91,7 +95,8 @@ createPage({
 {
   "usingComponents": {
     "van-icon": "vant-weapp/dist/icon/index",
-    "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+		"van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+		// "van-dialog": "vant-weapp/dist/dialog/index",
     "messagecard": "../components/messagecard",
     "tabbar": "../custom-tab-bar/index"
   }
