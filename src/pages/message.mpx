@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <view class="message">
     <view wx:for="{{list}}" wx:key="index">
       <van-swipe-cell right-width="{{ 50 }}">
         <messagecard
@@ -7,17 +7,17 @@
           desc="{{item.desc}}"
           time="{{item.time}}"
           count="{{item.count}}"
-          bindtap="viewmessageinfo()"
+          bindtap="viewmessageinfo"
         />
-        <view slot="right" class="vancellleft">
+        <view slot="right" class="vancellleft" bindtap="clickDialog">
           <van-icon
             size="2.4em"
             name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg"
           />
         </view>
-				<!-- <van-dialog id="van-dialog" /> -->
       </van-swipe-cell>
     </view>
+		<van-dialog id="van-dialog" />
     <tabbar></tabbar>
   </view>
 </template>
@@ -26,14 +26,12 @@
 import mpx from "@mpxjs/core";
 import { createPage } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
-
-// const Dialog = require('../../node_modules/vant-weapp/dist/dialog/dialog');
-// import Dialog from '../../node_modules/vant-weapp/dist/dialog/dialog'
+import Dialog from 'vant-weapp/dist/dialog/dialog.js'
 
 createPage({
   data: {
-    list: [],
-  },
+		list: [],
+	},
   onLoad() {
     wx.setNavigationBarTitle({
       title: "消息",
@@ -61,13 +59,25 @@ createPage({
   methods: {
     viewmessageinfo() {
       wx.navigateTo({ url: "messageinfo" });
-    },
-  },
+		},
+		clickDialog() {
+			Dialog.confirm({
+				message: '确定要删除？！',
+				theme: 'round-button',
+			})
+				.then(() => {
+					// on confirm
+				})
+				.catch(() => {
+					// on cancel
+				});
+		}
+	},
 });
 </script>
 
 <style>
-.body {
+.message {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   background: #fff;
@@ -96,7 +106,7 @@ createPage({
   "usingComponents": {
     "van-icon": "vant-weapp/dist/icon/index",
 		"van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
-		// "van-dialog": "vant-weapp/dist/dialog/index",
+		"van-dialog": "vant-weapp/dist/dialog/index",
     "messagecard": "../components/messagecard",
     "tabbar": "../custom-tab-bar/index"
   }

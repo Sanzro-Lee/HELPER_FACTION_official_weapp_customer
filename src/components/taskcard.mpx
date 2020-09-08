@@ -1,5 +1,5 @@
 <template>
-  <view class="body" bindtap="handletap()">
+  <view class="taskcard" bindtap="handletap()">
     <van-card
       title="{{title}}"
       desc="{{desc}}"

@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <view class="customtabbar">
     <van-tabbar active="{{ active }}" active-color="#4A7FD4">
       <van-tabbar-item icon="wap-home-o" data-path="{{list[0].pagePath}}" bindtap="switchTab">首页</van-tabbar-item>
       <van-tabbar-item icon="newspaper-o" data-path="{{list[1].pagePath}}" bindtap="switchTab">订单</van-tabbar-item>

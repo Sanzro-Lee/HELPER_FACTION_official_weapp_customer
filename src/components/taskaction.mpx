@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <view class="taskaction">
       <van-goods-action custom-class="actiongroup" safe-area-inset-bottom="{{false}}">
         <view class="phoneview" bindtap="onClickIcon">
           <van-icon custom-class="phoneicon" name="phone" size="3rem" />
@@ -41,7 +41,7 @@ createComponent({
 </script>
 
 <style>
-.body {
+.taskaction {
 	height: 300rpx;
 }
 

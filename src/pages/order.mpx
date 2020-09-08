@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <view class="order">
     <view class="vanaddicon" bindtap="addorderfun()">
       <van-icon name="add" color="#356ECA" size="2.4em" />
       <text class="vanaddtext">新增订单</text>
@@ -16,13 +16,13 @@
           show="{{item.show}}"
           statustagstyle="{{item.statustagstyle}}"
         />
-        <view slot="right" class="vancellleft cell01" bindtap="editorder()">
+        <view slot="right" class="vancellleft cell01" bindtap="editorder">
           <van-icon
             size="2.4em"
             name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/editicon.svg"
           />
         </view>
-        <view slot="right" class="vancellleft cell02">
+        <view slot="right" class="vancellleft cell02" bindtap="clickDialog">
           <van-icon
             size="2.4em"
             name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg"
@@ -30,6 +30,7 @@
         </view>
       </van-swipe-cell>
     </view>
+		<van-dialog id="van-dialog" />
     <tabbar />
   </view>
 </template>
@@ -37,6 +38,7 @@
 <script>
 import mpx, { createPage } from '@mpxjs/core';
 import mpxFetch from '@mpxjs/fetch';
+import Dialog from "vant-weapp/dist/dialog/dialog.js";
 
 createPage({
   data: {
@@ -72,13 +74,21 @@ createPage({
 		},
 		editorder() {
 			wx.navigateTo({url: 'addorder'})
+		},
+		clickDialog() {
+			Dialog.confirm({
+				message: '确定删除该订单？！',
+				theme: 'round-button',
+			}).then(() => {
+				// on close
+			});
 		}
 	}
 });
 </script>
 
 <style>
-.body {
+.order {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   color: #4d4d4d;
@@ -120,7 +130,8 @@ createPage({
 {
   "usingComponents": {
     "van-icon": "vant-weapp/dist/icon/index",
-    "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+		"van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+		"van-dialog": "vant-weapp/dist/dialog/index",
     "tabbar": "../custom-tab-bar/index",
 		"taskcard": "../components/taskcard"
   }

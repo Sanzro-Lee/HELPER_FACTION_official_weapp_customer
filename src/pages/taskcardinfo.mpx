@@ -1,24 +1,56 @@
-<template lang="wxml">
-  <view class="body">
-			<view class="ordernumber">订单号：EF0719883RD34YR0</view>
-			<taskcard
-				title="其它"
-				desc="清洁房子。"
-				name="王先生"
-				dist="5 km"
-				price="500"
-				thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg"
-				show="{{show}}"
-				statustagstyle="{{statustagstyle}}"
-			/>
-			<view class="ordertitlestyle">图片描述</view>
-			<view class="testpic"></view>
-			<i-page i-class="pagedot" current="{{ current }}" total="5" mode="pointer" bind:change="handleChange"></i-page>
-			<view class="ordertitlestyle martop">详细地址</view>
-			<view class="testmap"></view>
-			<view class="ordertitlestyle martop">预约时间</view>
-			<view class="appointimetext">2019 - 03 - 01 08 : 00 至 2019 - 03 - 31 18 : 00</view>
-			<taskaction />
+<template>
+  <view class="taskcardinfo">
+    <view class="ordernumber">订单号：EF0719883RD34YR0</view>
+    <taskcard
+      title="其它"
+      desc="清洁房子。"
+      name="王先生"
+      dist="5 km"
+      price="500"
+      thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg"
+      show="{{show}}"
+      statustagstyle="{{statustagstyle}}"
+    />
+    <view class="ordertitlestyle">图片描述</view>
+    <swiper
+      class="swiperstyle"
+      indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}"
+      interval="{{interval}}"
+      duration="{{duration}}"
+      changeAutoplay="{{changeAutoplay}}"
+    >
+      <block wx:for="{{background}}" wx:key="*this">
+        <swiper-item style="border-radius: 10px;">
+          <view class="swiper-item {{item}}">
+            <image
+              style="width: 100%;"
+              src="https://img95.699pic.com/photo/50076/2052.jpg_wh300.jpg"
+            />
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="ordertitlestyle martop">详细地址</view>
+    <view class="locationstyle">
+      <map
+        id="map"
+        longitude="113.324520"
+        latitude="23.099994"
+        scale="14"
+        controls="{{controls}}"
+        bindcontroltap="controltap"
+        markers="{{markers}}"
+        bindmarkertap="markertap"
+        polyline="{{polyline}}"
+        bindregionchange="regionchange"
+        show-location
+        style="width: 100%; height: 100%;"
+      ></map>
+    </view>
+    <view class="ordertitlestyle martop">预约时间</view>
+    <view class="appointimetext">2019 - 03 - 01 08 : 00 至 2019 - 03 - 31 18 : 00</view>
+    <taskaction />
   </view>
 </template>
 
@@ -29,14 +61,77 @@ createPage({
   data: {
     show: true,
     statustagstyle: {
-      background: "linear-gradient(to right, #F8E255, #EBC354)"
-    }
-	},
-	ready() {
-		wx.setNavigationBarTitle({
-      title: '订单详情',
+      background: "linear-gradient(to right, #F8E255, #EBC354)",
+    },
+    // swiper data
+    background: ["demo-text-1", "demo-text-2", "demo-text-3"],
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    interval: 2000,
+    duration: 500,
+    // map data
+    markers: [
+      {
+        iconPath: "/resources/others.png",
+        id: 0,
+        latitude: 23.099994,
+        longitude: 113.32452,
+        width: 50,
+        height: 50,
+      },
+    ],
+  },
+  ready() {
+    wx.setNavigationBarTitle({
+      title: "订单详情",
     });
-	},
+  },
+  onShareAppMessage() {
+    return {
+      title: "swiper",
+      path: "page/component/pages/swiper/swiper",
+    };
+  },
+  polyline: [
+    {
+      points: [
+        {
+          longitude: 113.3245211,
+          latitude: 23.10229,
+        },
+        {
+          longitude: 113.32452,
+          latitude: 23.21229,
+        },
+      ],
+      color: "#FF0000DD",
+      width: 2,
+      dottedLine: true,
+    },
+  ],
+  controls: [
+    {
+      id: 1,
+      iconPath: "/resources/location.png",
+      position: {
+        left: 0,
+        top: 300 - 50,
+        width: 50,
+        height: 50,
+      },
+      clickable: true,
+    },
+  ],
+  regionchange(e) {
+    console.log(e.type);
+  },
+  markertap(e) {
+    console.log(e.detail.markerId);
+  },
+  controltap(e) {
+    console.log(e.detail.controlId);
+  },
 });
 </script>
 
@@ -53,17 +148,17 @@ createPage({
 
 .ordertitlestyle {
   font-size: 26px;
-	font-weight: 300;
+  font-weight: 300;
   margin-left: 14px;
   color: #404040;
 }
 
-.testpic {
+.swiperstyle {
   margin-left: 14px;
   width: 92%;
   height: 60vw;
   background: #f9f9f9;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .pagedot {
@@ -71,12 +166,12 @@ createPage({
   margin-top: -46px;
 }
 
-.testmap {
+.locationstyle {
   margin-left: 14px;
   width: 92%;
   height: 60vw;
   background: #f9f9f9;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .appointimetext {
@@ -87,8 +182,12 @@ createPage({
   border-radius: 30px;
   font-size: 14px;
   color: #5e5e5e;
-	text-align: center;
+  text-align: center;
   line-height: 2rem;
+}
+
+.scroll-view_H {
+  white-space: nowrap;
 }
 </style>
 
@@ -98,8 +197,9 @@ createPage({
     "van-icon": "vant-weapp/dist/icon/index",
     "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
     "i-page": "iview-weapp/dist/page/index",
-		"taskcard": "../components/taskcard",
-		"taskaction": "../components/taskaction"
+    "i-icon": "iview-weapp/dist/icon/index",
+    "taskcard": "../components/taskcard",
+    "taskaction": "../components/taskaction"
   }
 }
 </script>

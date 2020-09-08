@@ -1,14 +1,18 @@
 <template>
-  <view class="body">
+  <view class="setprofile">
     <view class="headericonview">
       <image class="headericon" src="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg" />
 			<i-icon class="editicon" type="brush_fill" size="28" color="#356eca" />
     </view>
-    <input class="testinput" placeholder="修改昵称" />
-    <input class="testinput" placeholder="修改地址" />
-    <input class="testinput" placeholder="修改手机号码" />
-    <input class="testinput" placeholder="收到的验证码" />
-    <!-- <input class="testinput" placeholder="具体维修内容" /> -->
+		<text class="inputtitle">修改昵称：</text>
+    <input class="mineinput" placeholder="请输入你的昵称" />
+		<text class="inputtitle">修改地址：</text>
+    <input class="mineinput" placeholder="请输入你的地址" />
+		<text class="inputtitle">修改手机号码：</text>
+    <input class="mineinput" placeholder="请输入你的手机号码" />
+		<text class="inputtitle">收到的验证码：</text>
+    <input class="mineinput" placeholder="请输入验证码" />
+    <!-- <input class="mineinput" placeholder="具体维修内容" /> -->
     <view class="vanbtn">
       <van-button
         custom-class="confirmbtn"
@@ -61,7 +65,12 @@ createPage({
 
 <style>
 page {
-  background: linear-gradient(to bottom, #356eca, #61d1d1);
+  background: #61d1d1 !important;
+}
+
+.setprofile {
+	height: 100%;
+	background: linear-gradient(to bottom, #356eca, #61d1d1);
 }
 
 .headericonview {
@@ -86,12 +95,17 @@ page {
 	left: 200px;
 }
 
-/* 下次需要修改class name. */
-.testinput {
+.inputtitle {
+	display: block;
+	color: #F2F2F2;
+	margin: 8px 0 10px 4vw;
+}
+
+.mineinput {
   width: 92%;
   height: 12vw;
   display: inline-block;
-  margin: 6vw 0 0 4vw;
+  margin: 0 0 0 4vw;
   background: white;
   border-radius: 50px;
   text-align: center;
@@ -104,12 +118,11 @@ page {
   height: 100%;
   display: flex-block;
   align-content: center;
-  margin-top: 8vw;
+  margin: 8vw 0 8vw 0;
 }
 
 .confirmbtn {
   width: 40vw;
-  float: left;
   left: 4vw;
   color: #356eca !important;
 	font-size: 16px !important;
@@ -118,7 +131,7 @@ page {
 
 .cancelbtn {
   width: 40vw;
-  float: right;
+	float: right;
   right: 4vw;
 	font-size: 16px !important;
 	font-weight: 300;

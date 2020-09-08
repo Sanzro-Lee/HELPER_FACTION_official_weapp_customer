@@ -1,5 +1,5 @@
 <template>
-  <view class="body">
+  <view class="mine">
     <van-card
       title="刘小姐"
       thumb="{{'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg'}}"
@@ -13,7 +13,7 @@
       name="setting"
       size="2em"
       custom-class="setting"
-      bindtap="clickSetting()"
+      bindtap="clickSetting"
     />
     <van-cell
       title="分享 叫到帮"
@@ -64,7 +64,7 @@ createPage({
 </script>
 
 <style>
-.body {
+.mime {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   background: #fff;
@@ -114,6 +114,7 @@ createPage({
 }
 
 .setting {
+	color: white;
   position: absolute !important;
   margin-top: -260rpx;
   right: 40rpx;

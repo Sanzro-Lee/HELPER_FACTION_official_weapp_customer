@@ -1,5 +1,5 @@
 <template lang="wxml">
-  <view class="body">
+  <view class="messageinfo">
 		<view class="opposite">
 			<image class="oppositechathead" src="../material/chathead.svg" />
 			<text class="oppositechatcontent">假装发了条信息</text>
