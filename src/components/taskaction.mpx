@@ -1,6 +1,6 @@
 <template>
-  <view class="taskaction">
-      <van-goods-action custom-class="actiongroup" safe-area-inset-bottom="{{false}}">
+  <view wx:show="{{ taskStatus == 1 }}" class="taskaction">
+      <van-goods-action custom-class="actiongroup" safe-area-inset-bottom="{{ false }}">
         <view class="phoneview" bindtap="onClickIcon">
           <van-icon custom-class="phoneicon" name="phone" size="3rem" />
           <view>呼叫</view>
@@ -23,12 +23,22 @@
         </view>
       </van-goods-action>
   </view>
+	<view
+		wx:show="{{ taskStatus == 0 }}"
+		style="height: 30px;"
+	></view>
 </template>
 
 <script>
 import { createComponent } from "@mpxjs/core";
 
 createComponent({
+	properties: {
+    taskStatus: { type: Number },
+	},
+	onLoad() {
+		console.log(this.taskStatus)
+	},
   methods: {
     onClickIcon() {
       console.log("点击图标");

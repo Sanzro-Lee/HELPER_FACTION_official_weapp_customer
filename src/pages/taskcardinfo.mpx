@@ -8,8 +8,8 @@
       dist="5 km"
       price="500"
       thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/05f0a55cfcb143435e535c4f1d2ea7185029e060/src/material/%E5%88%86%E7%B1%BB%E6%A0%87%E7%A4%BA%E5%9B%BE-04.svg"
-      show="{{show}}"
-      statustagstyle="{{statustagstyle}}"
+      show="{{ show }}"
+      statustagstyle="{{ statustagstyle }}"
     />
     <view class="ordertitlestyle">图片描述</view>
     <swiper
@@ -21,10 +21,10 @@
       changeAutoplay="{{changeAutoplay}}"
     >
       <block wx:for="{{background}}" wx:key="*this">
-        <swiper-item style="border-radius: 10px;">
+        <swiper-item style="border-radius: 10px">
           <view class="swiper-item {{item}}">
             <image
-              style="width: 100%;"
+              style="width: 100%"
               src="https://img95.699pic.com/photo/50076/2052.jpg_wh300.jpg"
             />
           </view>
@@ -38,19 +38,22 @@
         longitude="113.324520"
         latitude="23.099994"
         scale="14"
-        controls="{{controls}}"
+        controls="{{ controls }}"
         bindcontroltap="controltap"
-        markers="{{markers}}"
+        markers="{{ markers }}"
         bindmarkertap="markertap"
-        polyline="{{polyline}}"
+        polyline="{{ polyline }}"
         bindregionchange="regionchange"
         show-location
-        style="width: 100%; height: 100%;"
+        style="width: 100%; height: 100%; z-index: 0;"
       ></map>
+      <text style="margin: 8px;">上海市穆北区葵园街88号508</text>
     </view>
-    <view class="ordertitlestyle martop">预约时间</view>
-    <view class="appointimetext">2019 - 03 - 01 08 : 00 至 2019 - 03 - 31 18 : 00</view>
-    <taskaction />
+    <view class="ordertitlestyle" style="margin-top: 40px">预约时间</view>
+    <view class="appointimetext"
+      >2019 - 03 - 01 08 : 00 至 2019 - 03 - 31 18 : 00</view
+    >
+    <taskaction style="z-index: 1" taskStatus="{{ taskStatus }}" />
   </view>
 </template>
 
@@ -59,18 +62,18 @@ import mpx, { createPage } from "@mpxjs/core";
 
 createPage({
   data: {
-    show: true,
+		show: true,
     statustagstyle: {
-      background: "linear-gradient(to right, #F8E255, #EBC354)",
+			background: "linear-gradient(to right, #F8E255, #EBC354)",
     },
-    // swiper data
+    // 滑动图片数据
     background: ["demo-text-1", "demo-text-2", "demo-text-3"],
     indicatorDots: true,
     vertical: false,
     autoplay: true,
-    interval: 2000,
+    interval: 5000,
     duration: 500,
-    // map data
+    // 地图组件数据
     markers: [
       {
         iconPath: "/resources/others.png",
@@ -80,7 +83,9 @@ createPage({
         width: 50,
         height: 50,
       },
-    ],
+		],
+		// taskaction 显示与否，当需求被师傅接上时，taskStatus: 1显示组件，否则，taskStatus: 0，不显示组件
+		taskStatus: 1
   },
   ready() {
     wx.setNavigationBarTitle({
@@ -169,9 +174,11 @@ createPage({
 .locationstyle {
   margin-left: 14px;
   width: 92%;
-  height: 60vw;
-  background: #f9f9f9;
+	height: 100%;
   border-radius: 10px;
+	background: #f2f2f2;
+	color: #5e5e5e;
+	padding-bottom: 4px;
 }
 
 .appointimetext {

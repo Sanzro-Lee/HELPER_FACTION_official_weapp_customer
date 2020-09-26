@@ -4,9 +4,9 @@
       <image class="headericon" src="{{ typepic }}" />
     </view>
     <text class="inputtitle">选择类型：</text>
-    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">{{
-      typetext
-    }}</text>
+    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">
+      {{ typetext }}
+    </text>
     <i-modal
       title="请选择类型"
       visible="{{ visible }}"
@@ -22,8 +22,11 @@
     <text class="inputtitle">输入价格：</text>
     <input class="orderinput" placeholder="请输入你能承担的服务费" />
     <text class="inputtitle">设定预约时间：</text>
+    <!-- 开始时间 -->
     <text class="timetext" bindtap="startShowPopup">{{ startDate }}</text>
+    <!-- 结束时间 -->
     <text class="timetext" bindtap="endShowPopup">{{ endDate }}</text>
+    <!-- 开始时间选择器弹出层 -->
     <van-popup
       show="{{ startShow }}"
       position="bottom"
@@ -40,6 +43,7 @@
         :filter="filter"
       />
     </van-popup>
+    <!-- 结束时间选择器弹出层 -->
     <van-popup
       show="{{ endShow }}"
       position="bottom"
@@ -57,6 +61,7 @@
       />
     </van-popup>
     <text class="inputtitle">上传描述图：</text>
+    <!-- 上传图片 -->
     <van-uploader
       file-list="{{ fileList }}"
       max-count="3"
@@ -138,11 +143,6 @@ createPage({
     this.endDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
   },
   methods: {
-    btnclick() {
-      wx.navigateBack({
-        delta: 2,
-      });
-    },
     // 打开选择类型弹窗
     handleOpen() {
       this.setData({ visible: true });
@@ -183,7 +183,7 @@ createPage({
     },
     // 开始时间设置
     onStartInput(event) {
-			console.log(event.detail)
+      console.log(event.detail);
       let time = formatTimeTwo(event.detail, "Y/M/D h:m");
       this.setData({ startDate: time });
       console.log("startData" + this.startDate);
@@ -221,6 +221,11 @@ createPage({
       const { fileList } = this.data;
       fileList.splice(delIndex, 1);
       this.setData({ fileList });
+    },
+    btnclick() {
+      wx.navigateBack({
+        delta: 2,
+      });
     },
   },
 });
@@ -268,7 +273,7 @@ page {
 }
 
 .timetext {
-	width: 44%;
+  width: 44%;
   height: 30px;
   margin: 0 0 0 4vw;
   background: white;
