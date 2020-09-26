@@ -1,83 +1,246 @@
 <template>
   <view class="addorder">
     <view class="headericonview">
-      <image class="headericon" src="../material/repair.svg" />
+      <image class="headericon" src="{{ typepic }}" />
     </view>
-		<text class="inputtitle">选择类型：</text>
-    <input class="orderinput" placeholder="选择服务类型" />
-		<text class="inputtitle">具体内容：</text>
-    <input class="orderinput" placeholder="请输入具体的信息" />
-		<text class="inputtitle">修改手机号码：</text>
-    <input class="orderinput" placeholder="方便接师傅的手机号码" />
-		<text class="inputtitle">输入价格：</text>
+    <text class="inputtitle">选择类型：</text>
+    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">{{
+      typetext
+    }}</text>
+    <i-modal
+      title="请选择类型"
+      visible="{{ visible }}"
+      actions="{{ actions }}"
+      action-mode="{{ vertical }}"
+      bind:click="handleClick"
+    >
+    </i-modal>
+    <text class="inputtitle">具体内容：</text>
+    <input class="orderinput" placeholder="请输入具体维护内容" />
+    <text class="inputtitle">修改手机号码：</text>
+    <input class="orderinput" placeholder="方便联系师傅的手机号码" />
+    <text class="inputtitle">输入价格：</text>
     <input class="orderinput" placeholder="请输入你能承担的服务费" />
-		<text class="inputtitle">设定预约时间：</text>
-    <input class="orderinput" placeholder="师傅将在此段时间上门" />
+    <text class="inputtitle">设定预约时间：</text>
+    <text class="timetext" bindtap="startShowPopup">{{ startDate }}</text>
+    <text class="timetext" bindtap="endShowPopup">{{ endDate }}</text>
+    <van-popup
+      show="{{ startShow }}"
+      position="bottom"
+      bind:close="onStartClose"
+      round
+    >
+      <van-datetime-picker
+        type="datetime"
+        value="{{ currentDate }}"
+        min-date="{{ minDate }}"
+        max-data="{{ maxDate }}"
+        bind:input="onStartInput"
+        :formatter="formatter"
+        :filter="filter"
+      />
+    </van-popup>
+    <van-popup
+      show="{{ endShow }}"
+      position="bottom"
+      bind:close="onEndClose"
+      round
+    >
+      <van-datetime-picker
+        type="datetime"
+        value="{{ currentDate }}"
+        min-date="{{ minDate }}"
+        max-data="{{ maxDate }}"
+        bind:input="onEndInput"
+        :formatter="formatter"
+        :filter="filter"
+      />
+    </van-popup>
+    <text class="inputtitle">上传描述图：</text>
+    <van-uploader
+      file-list="{{ fileList }}"
+      max-count="3"
+      bind:before-read="beforeRead"
+      bind:after-read="afterRead"
+      bind:delete="deletePic"
+      style="margin-left: 4vw"
+    />
     <view class="vanbtn">
       <van-button
         custom-class="confirmbtn"
         type="default"
         round="true"
         bindtap="btnclick()"
+        >确定</van-button
       >
-        确定
-      </van-button>
       <van-button
         custom-class="cancelbtn"
         type="default"
         round="true"
         bindtap="btnclick()"
+        >取消</van-button
       >
-        取消
-      </van-button>
     </view>
   </view>
 </template>
 
 <script>
 import { createPage } from "@mpxjs/core";
+// 维护类型图片
+import repairSvg from "../material/repair.svg";
+import electrepairSvg from "../material/electrepair.svg";
+import moveSvg from "../material/move.svg";
+import othersSvg from "../material/others.svg";
+// 时间戳格式化
+import formatTimeTwo from "../utils/dateFilter.js";
 
 createPage({
-  data: {},
+  data: {
+    fileList: [],
+    visible: false,
+    typetext: "居家维修",
+    typepic: repairSvg,
+    startShow: false,
+    endShow: false,
+    minDate: new Date(2020, 1, 1).getTime(),
+    maxDate: new Date(2030, 1, 1).getTime(),
+    currentDate: new Date().getTime(),
+    startDate: "",
+    endDate: "",
+    actions: [
+      {
+        name: "居家维修",
+        color: "#A9DFA6",
+      },
+      {
+        name: "家电维修",
+        color: "#41C5E9",
+      },
+      {
+        name: "货物搬迁",
+        color: "#FC6481",
+      },
+      {
+        name: "其它",
+        color: "#EA705C",
+      },
+    ],
+  },
   onLoad() {
     wx.setNavigationBarTitle({
-      title: "新增订单"
+      title: "新增订单",
     });
-
     wx.setNavigationBarColor({
       frontColor: "#ffffff",
-      backgroundColor: "#356eca"
+      backgroundColor: "#356eca",
     });
+    this.startDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
+    this.endDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
   },
-  pageLifetimes: {},
   methods: {
-    onChange(event) {
-      console.log(event.detail);
-    },
     btnclick() {
       wx.navigateBack({
-        delta: 2
+        delta: 2,
       });
-    }
-  }
+    },
+    // 打开选择类型弹窗
+    handleOpen() {
+      this.setData({ visible: true });
+    },
+    // 点击类型
+    handleClick({ detail }) {
+      const index = detail.index;
+      if (index == 0) {
+        this.typetext = "居家维修";
+        this.typepic = repairSvg;
+      } else if (index == 1) {
+        this.typetext = "家电维修";
+        this.typepic = electrepairSvg;
+      } else if (index == 2) {
+        this.typetext = "货物搬迁";
+        this.typepic = moveSvg;
+      } else if (index == 3) {
+        this.typetext = "其它";
+        this.typepic = othersSvg;
+      }
+      this.setData({ visible: false });
+    },
+    // 点击预约时间按钮，弹出 开始时间选择器
+    startShowPopup() {
+      this.setData({ startShow: true });
+    },
+    // 关闭 开始时间选择器 弹出层
+    onStartClose() {
+      this.setData({ startShow: false });
+    },
+    // 点击预约时间按钮，弹出 结束时间选择器
+    endShowPopup() {
+      this.setData({ endShow: true });
+    },
+    // 关闭 结束时间选择器 弹出层
+    onEndClose() {
+      this.setData({ endShow: false });
+    },
+    // 开始时间设置
+    onStartInput(event) {
+			console.log(event.detail)
+      let time = formatTimeTwo(event.detail, "Y/M/D h:m");
+      this.setData({ startDate: time });
+      console.log("startData" + this.startDate);
+    },
+    // 结束时间设置
+    onEndInput(event) {
+      let time = formatTimeTwo(event.detail, "Y/M/D h:m");
+      this.setData({ endDate: time });
+    },
+    // 验证文件是否为图片
+    beforeRead(event) {
+      const { file, callback } = event.detail;
+      callback(file.type === "image");
+    },
+    // 读取图片数据并发送到后端
+    afterRead(event) {
+      const { file } = event.detail;
+      console.log({ file });
+      // wx.uploadFile({
+      //   url: 'https://img.yzcdn.cn/vant/leaf.jpg',
+      //   filePath: file.path,
+      //   name: "file",
+      //   formData: { user: "test" },
+      //   success(res) {
+      const { fileList = [] } = this.data;
+      // fileList.push({ ...file, url: res.data });
+      fileList.push({ ...file });
+      this.setData({ fileList });
+      // },
+      // });
+    },
+    // 删除图片
+    deletePic(event) {
+      const delIndex = event.detail.index;
+      const { fileList } = this.data;
+      fileList.splice(delIndex, 1);
+      this.setData({ fileList });
+    },
+  },
 });
 </script>
 
 <style>
 page {
-	background: #61d1d1 !important;
+  background: #61d1d1 !important;
 }
 
 .addorder {
-	height: 100%;
-	background: linear-gradient(to bottom, #356eca, #61d1d1);
+  height: 100%;
+  background: linear-gradient(to bottom, #356eca, #61d1d1);
 }
 
 .headericonview {
   width: 100%;
   display: inline-flex;
   align-self: center;
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .headericon {
@@ -87,9 +250,9 @@ page {
 }
 
 .inputtitle {
-	display: block;
-	color: #F2F2F2;
-	margin: 8px 0 10px 4vw;
+  display: block;
+  color: #f2f2f2;
+  margin: 8px 0 10px 4vw;
 }
 
 .orderinput {
@@ -101,7 +264,20 @@ page {
   border-radius: 50px;
   text-align: center;
   font-size: 18px;
-	font-weight: 300;
+  font-weight: 300;
+}
+
+.timetext {
+	width: 44%;
+  height: 30px;
+  margin: 0 0 0 4vw;
+  background: white;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  display: inline-block;
+  line-height: 30px;
+  border-radius: 50px;
 }
 
 .vanbtn {
@@ -115,23 +291,27 @@ page {
   width: 40vw;
   left: 4vw;
   color: #356eca !important;
-	font-size: 16px !important;
-	font-weight: 300;
+  font-size: 16px !important;
+  font-weight: 300;
 }
 
 .cancelbtn {
   width: 40vw;
-	float: right;
+  float: right;
   right: 4vw;
-	font-size: 16px !important;
-	font-weight: 300;
+  font-size: 16px !important;
+  font-weight: 300;
 }
 </style>
 
 <script type="application/json">
 {
   "usingComponents": {
-    "van-button": "vant-weapp/dist/button/index"
+		"van-button": "vant-weapp/dist/button/index",
+		"i-modal": "iview-weapp/dist/modal/index",
+		"van-popup": "@vant/weapp/dist/popup/index",
+		"van-datetime-picker": "@vant/weapp/dist/datetime-picker/index",
+		"van-uploader": "@vant/weapp/dist/uploader/index"
   }
 }
 </script>

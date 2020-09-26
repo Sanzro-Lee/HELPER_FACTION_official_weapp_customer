@@ -30,66 +30,73 @@
         </view>
       </van-swipe-cell>
     </view>
-		<van-dialog id="van-dialog" />
+    <van-dialog id="van-dialog" />
     <tabbar />
   </view>
 </template>
 
 <script>
-import mpx, { createPage } from '@mpxjs/core';
-import mpxFetch from '@mpxjs/fetch';
+import mpx, { createPage } from "@mpxjs/core";
+import mpxFetch from "@mpxjs/fetch";
 import Dialog from "vant-weapp/dist/dialog/dialog.js";
 
 createPage({
   data: {
     list: [],
+    confirmcolor: "red",
   },
   onLoad() {
-		wx.setNavigationBarTitle({
-      title: '订单',
-		});
+    wx.setNavigationBarTitle({
+      title: "订单",
+    });
 
     mpx.use(mpxFetch);
-
     mpx.xfetch
       .fetch({
-        url: 'http://helperfaction.com/demand/list',
+        url: "http://helperfaction.com/demand/list",
       })
-      .then(res => {
+      .then((res) => {
         this.list = res.data.list;
       });
   },
   pageLifetimes: {
     show() {
-      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
         this.getTabBar().setData({
           active: 1,
         });
       }
     },
-	},
-	methods: {
-		addorderfun() {
-			wx.navigateTo({url: 'addorder'})
-		},
-		editorder() {
-			wx.navigateTo({url: 'addorder'})
-		},
-		clickDialog() {
-			Dialog.confirm({
-				message: '确定删除该订单？！',
-				theme: 'round-button',
-			}).then(() => {
-				// on close
-			});
-		}
-	}
+  },
+  methods: {
+    addorderfun() {
+      wx.navigateTo({ url: "addorder" });
+    },
+    editorder() {
+      wx.navigateTo({ url: "addorder" });
+    },
+    clickDialog() {
+      Dialog.confirm({
+        message: "确定删除该订单？！",
+      })
+        .then(() => {
+          // 点击确认按钮执行
+          console.log("confirm");
+          Dialog.close();
+        })
+        .catch(() => {
+          // 点击取消按钮执行
+          console.log("cannel");
+          Dialog.close();
+        });
+    },
+  },
 });
 </script>
 
 <style>
 .order {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   color: #4d4d4d;
   min-width: 230px;
@@ -123,6 +130,10 @@ createPage({
 
 .cell02 {
   margin-left: 2.8rem;
+}
+
+.dialog-index--van-dialog__confirm .van-button__text {
+  color: red;
 }
 </style>
 
