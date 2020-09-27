@@ -45,15 +45,15 @@
         polyline="{{ polyline }}"
         bindregionchange="regionchange"
         show-location
-        style="width: 100%; height: 100%; z-index: 0;"
+        style="width: 100%; height: 55vw;"
       ></map>
-      <text style="margin: 8px;">上海市穆北区葵园街88号508</text>
+      <text style="margin: 8px">上海市穆北区葵园街88号508</text>
     </view>
-    <view class="ordertitlestyle" style="margin-top: 40px">预约时间</view>
+    <view class="ordertitlestyle martop">预约时间</view>
     <view class="appointimetext"
       >2019 - 03 - 01 08 : 00 至 2019 - 03 - 31 18 : 00</view
     >
-    <taskaction style="z-index: 1" taskStatus="{{ taskStatus }}" />
+    <taskaction taskStatus="{{ taskStatus }}" />
   </view>
 </template>
 
@@ -62,9 +62,9 @@ import mpx, { createPage } from "@mpxjs/core";
 
 createPage({
   data: {
-		show: true,
+    show: true,
     statustagstyle: {
-			background: "linear-gradient(to right, #F8E255, #EBC354)",
+      background: "linear-gradient(to right, #F8E255, #EBC354)",
     },
     // 滑动图片数据
     background: ["demo-text-1", "demo-text-2", "demo-text-3"],
@@ -83,9 +83,9 @@ createPage({
         width: 50,
         height: 50,
       },
-		],
-		// taskaction 显示与否，当需求被师傅接上时，taskStatus: 1显示组件，否则，taskStatus: 0，不显示组件
-		taskStatus: 1
+    ],
+    // taskaction 显示与否，当需求被师傅接上时，taskStatus: 1显示组件，否则，taskStatus: 0，不显示组件
+    taskStatus: 1,
   },
   ready() {
     wx.setNavigationBarTitle({
@@ -174,11 +174,11 @@ createPage({
 .locationstyle {
   margin-left: 14px;
   width: 92%;
-	height: 100%;
+  height: 60vw;
   border-radius: 10px;
-	background: #f2f2f2;
-	color: #5e5e5e;
-	padding-bottom: 4px;
+  background: #f2f2f2;
+  color: #5e5e5e;
+  padding-bottom: 4px;
 }
 
 .appointimetext {

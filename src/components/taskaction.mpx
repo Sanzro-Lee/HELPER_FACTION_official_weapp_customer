@@ -1,58 +1,58 @@
 <template>
   <view wx:show="{{ taskStatus == 1 }}" class="taskaction">
-      <van-goods-action custom-class="actiongroup" safe-area-inset-bottom="{{ false }}">
-        <view class="phoneview" bindtap="onClickIcon">
-          <van-icon custom-class="phoneicon" name="phone" size="3rem" />
-          <view>呼叫</view>
-        </view>
-        <view class="chatview" bindtap="onClickIcon">
-          <van-icon custom-class="chaticon" name="chat" size="3rem" />
-          <view>短信</view>
-        </view>
-        <view class="buttongroup">
-          <van-goods-action-button
-            text="已完成"
-            bindtap="onClickButton"
-            custom-class="shopcartbutton"
-          />
-          <van-goods-action-button
-            text="未完成"
-            bindtap="onClickButton"
-            custom-class="buybutton"
-          />
-        </view>
-      </van-goods-action>
+    <van-goods-action
+      custom-class="actiongroup"
+      safe-area-inset-bottom="{{ false }}"
+    >
+      <view class="phoneview" bindtap="onClickIcon">
+        <van-icon custom-class="phoneicon" name="phone" size="3rem" />
+        <view>呼叫</view>
+      </view>
+      <view class="chatview" bindtap="onClickIcon">
+        <van-icon custom-class="chaticon" name="chat" size="3rem" />
+        <view>短信</view>
+      </view>
+      <view class="buttongroup">
+        <van-goods-action-button
+          text="已完成"
+          bindtap="onClickButton"
+          custom-class="shopcartbutton"
+        />
+        <van-goods-action-button
+          text="未完成"
+          bindtap="onClickButton"
+          custom-class="buybutton"
+        />
+      </view>
+    </van-goods-action>
   </view>
-	<view
-		wx:show="{{ taskStatus == 0 }}"
-		style="height: 30px;"
-	></view>
+  <view wx:show="{{ taskStatus == 0 }}" style="height: 30px"></view>
 </template>
 
 <script>
 import { createComponent } from "@mpxjs/core";
 
 createComponent({
-	properties: {
+  properties: {
     taskStatus: { type: Number },
-	},
-	onLoad() {
-		console.log(this.taskStatus)
-	},
+  },
+  onLoad() {
+    console.log(this.taskStatus);
+  },
   methods: {
     onClickIcon() {
       console.log("点击图标");
     },
     onClickButton() {
       console.log("点击按钮");
-    }
-  }
+    },
+  },
 });
 </script>
 
 <style>
 .taskaction {
-	height: 300rpx;
+  height: 300rpx;
 }
 
 .actiongroup {
@@ -68,13 +68,13 @@ createComponent({
 .phoneview {
   margin-left: 4vw;
   text-align: center;
-	color: #356ECA;
+  color: #356eca;
 }
 
 .chatview {
   margin-left: 10px;
   text-align: center;
-	color: #356ECA;
+  color: #356eca;
 }
 
 .buttongroup {
@@ -88,7 +88,7 @@ createComponent({
   border-radius: 50px;
   font-size: 18px;
   color: #fff;
-	background: linear-gradient(to right, #5FD8A6, #A9DFA6);
+  background: linear-gradient(to right, #5fd8a6, #a9dfa6);
   margin-left: 10px;
 }
 
@@ -98,7 +98,7 @@ createComponent({
   border-radius: 50px;
   font-size: 18px;
   color: #fff;
-  background: linear-gradient(to right, #D94650, #DD9BA2);
+  background: linear-gradient(to right, #d94650, #dd9ba2);
   margin-left: 10px;
 }
 </style>

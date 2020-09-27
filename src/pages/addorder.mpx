@@ -4,9 +4,9 @@
       <image class="headericon" src="{{ typepic }}" />
     </view>
     <text class="inputtitle">选择类型：</text>
-    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">
-      {{ typetext }}
-    </text>
+    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">{{
+      typetext
+    }}</text>
     <i-modal
       title="请选择类型"
       visible="{{ visible }}"
@@ -183,10 +183,8 @@ createPage({
     },
     // 开始时间设置
     onStartInput(event) {
-      console.log(event.detail);
       let time = formatTimeTwo(event.detail, "Y/M/D h:m");
       this.setData({ startDate: time });
-      console.log("startData" + this.startDate);
     },
     // 结束时间设置
     onEndInput(event) {

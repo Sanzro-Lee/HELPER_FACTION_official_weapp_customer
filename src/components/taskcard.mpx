@@ -12,7 +12,7 @@
     <text class="price">¥{{ price }}</text>
     <text class="contact">联系人：{{ name }}</text>
     <view class="distance">
-      <van-icon name="location" color="#9f9f9f" />
+    	<van-icon name="location" color="#9f9f9f" />
       {{ dist }}
     </view>
     <view
@@ -88,7 +88,7 @@ createComponent({
   white-space: nowrap;
   text-overflow: ellipsis;
   position: absolute;
-  margin: -50px 0 30px 6.2rem;
+  margin: -60px 0 30px 6.2rem;
   font-size: 15px;
   color: #5e5e5e;
   font-weight: 400;
