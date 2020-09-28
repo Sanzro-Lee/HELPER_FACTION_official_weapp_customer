@@ -2,7 +2,7 @@
   <view class="setprofile">
     <view class="headericonview">
       <image class="headericon" src="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg" />
-			<i-icon class="editicon" type="brush_fill" size="28" color="#356eca" />
+			<!-- <i-icon class="editicon" type="brush_fill" size="28" color="#356eca" /> -->
     </view>
 		<text class="inputtitle">修改昵称：</text>
     <input class="mineinput" placeholder="请输入你的昵称" />

@@ -1,8 +1,8 @@
 <template>
   <view class="order">
-    <view class="vanaddicon" bindtap="addorderfun()">
+    <view class="vanaddicon" bindtap="addorderfun">
       <van-icon name="add" color="#356ECA" size="2.4em" />
-      <text class="vanaddtext">新增订单</text>
+      <text class="vanaddtext">新增需求</text>
     </view>
     <view wx:for="{{list}}" wx:key="index" class="bgcolor">
       <van-swipe-cell right-width="{{ 100 }}">
@@ -47,7 +47,7 @@ createPage({
   },
   onLoad() {
     wx.setNavigationBarTitle({
-      title: "订单",
+      title: "需求",
     });
 
     mpx.use(mpxFetch);

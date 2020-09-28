@@ -21,6 +21,30 @@
     <input class="orderinput" placeholder="方便联系师傅的手机号码" />
     <text class="inputtitle">输入价格：</text>
     <input class="orderinput" placeholder="请输入你能承担的服务费" />
+    <text class="inputtitle">输入地址：</text>
+    <text
+      class="orderinput"
+      bindtap="inputAddress"
+      style="
+        position: absolute;
+        line-height: 45px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      "
+      >{{ addresstext }}</text
+    >
+    <!-- 占位元素 -->
+    <text
+      style="
+        width: 92%;
+        height: 12vw;
+        display: inline-block;
+        margin: 0 0 0 4vw;
+        line-height: 45px;
+      "
+    />
+    <!-- 占位元素 -->
     <text class="inputtitle">设定预约时间：</text>
     <!-- 开始时间 -->
     <text class="timetext" bindtap="startShowPopup">{{ startDate }}</text>
@@ -103,8 +127,14 @@ createPage({
   data: {
     fileList: [],
     visible: false,
-    typetext: "居家维修",
+    // 选择类型
     typepic: repairSvg,
+    typetext: "居家维修",
+    // 位置变量
+    addresstext: "请点击此处以输入你的位置",
+    selfLatitude: 0,
+    selfLongitude: 0,
+    // 日期时间变量
     startShow: false,
     endShow: false,
     minDate: new Date(2020, 1, 1).getTime(),
@@ -112,6 +142,7 @@ createPage({
     currentDate: new Date().getTime(),
     startDate: "",
     endDate: "",
+    // 类型文字 & 颜色
     actions: [
       {
         name: "居家维修",
@@ -139,6 +170,7 @@ createPage({
       frontColor: "#ffffff",
       backgroundColor: "#356eca",
     });
+    // 设置初始化日期时间
     this.startDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
     this.endDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
   },
@@ -164,6 +196,27 @@ createPage({
         this.typepic = othersSvg;
       }
       this.setData({ visible: false });
+    },
+    // 设置地址
+    inputAddress() {
+      let _this = this;
+      wx.getLocation({
+        type: "gcj02",
+        success(res) {
+          const latitude = res.latitude;
+          const longitude = res.longitude;
+          wx.chooseLocation({
+            latitude,
+            longitude,
+            scale: 18,
+            success(res) {
+              _this.addresstext = res.address;
+              _this.selfLatitude = res.latitude;
+              _this.selfLongitude = res.longitude;
+            },
+          });
+        },
+      });
     },
     // 点击预约时间按钮，弹出 开始时间选择器
     startShowPopup() {

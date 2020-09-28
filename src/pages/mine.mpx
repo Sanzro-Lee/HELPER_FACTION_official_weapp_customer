@@ -2,7 +2,7 @@
   <view class="mine">
     <van-card
       title="刘小姐"
-      thumb="{{'https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg'}}"
+      thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg"
       custom-class="vancard"
       title-class="vantitle"
       thumb-class="vanthumb"
@@ -50,7 +50,7 @@ createPage({
     show() {
       if (typeof this.getTabBar === "function" && this.getTabBar()) {
         this.getTabBar().setData({
-          active: 3
+          active: 2
         });
       }
     }

@@ -8,13 +8,18 @@
     "pages": [
       "./pages/index",
       "./pages/order",
-      "./pages/message",
+      // "./pages/message",
 			"./pages/mine",
 			"./pages/taskcardinfo",
-			"./pages/messageinfo",
 			"./pages/addorder",
+			// "./pages/messageinfo",
 			"./pages/setprofile"
-    ],
+		],
+		"permission": {
+			"scope.userLocation": {
+				"desc": "你的位置信息将用于小程序位置接口的效果展示"
+			}
+		},
     "window": {
       "backgroundTextStyle": "light",
       "navigationBarBackgroundColor": "#fff",
@@ -26,7 +31,7 @@
       "list": [
         { "pagePath": "pages/index" },
         { "pagePath": "pages/order" },
-        { "pagePath": "pages/message" },
+        // { "pagePath": "pages/message" },
         { "pagePath": "pages/mine" }
       ]
     }
