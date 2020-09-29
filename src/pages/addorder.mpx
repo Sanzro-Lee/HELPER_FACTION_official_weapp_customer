@@ -59,6 +59,7 @@
     >
       <van-datetime-picker
         type="datetime"
+				show-toolbar="{{ false }}"
         value="{{ currentDate }}"
         min-date="{{ minDate }}"
         max-data="{{ maxDate }}"
@@ -76,6 +77,7 @@
     >
       <van-datetime-picker
         type="datetime"
+				show-toolbar="{{ false }}"
         value="{{ currentDate }}"
         min-date="{{ minDate }}"
         max-data="{{ maxDate }}"
@@ -179,7 +181,7 @@ createPage({
     handleOpen() {
       this.setData({ visible: true });
     },
-    // 点击类型
+    // 点击选择类型文本框
     handleClick({ detail }) {
       const index = detail.index;
       if (index == 0) {
@@ -199,17 +201,20 @@ createPage({
     },
     // 设置地址
     inputAddress() {
-      let _this = this;
+			let _this = this;
+			// 获取用户位置
       wx.getLocation({
         type: "gcj02",
         success(res) {
           const latitude = res.latitude;
-          const longitude = res.longitude;
+					const longitude = res.longitude;
+					// 让用户选择临近位置
           wx.chooseLocation({
             latitude,
             longitude,
             scale: 18,
             success(res) {
+							// 设置 this 里面的变量值
               _this.addresstext = res.address;
               _this.selfLatitude = res.latitude;
               _this.selfLongitude = res.longitude;
@@ -243,7 +248,7 @@ createPage({
     onEndInput(event) {
       let time = formatTimeTwo(event.detail, "Y/M/D h:m");
       this.setData({ endDate: time });
-    },
+		},
     // 验证文件是否为图片
     beforeRead(event) {
       const { file, callback } = event.detail;
@@ -272,8 +277,10 @@ createPage({
       const { fileList } = this.data;
       fileList.splice(delIndex, 1);
       this.setData({ fileList });
-    },
+		},
+		// 待修改，目前 确定 & 取消 按钮都是这个方法
     btnclick() {
+			// 返回到上一层
       wx.navigateBack({
         delta: 2,
       });
