@@ -1,21 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42.235" height="62.471" viewBox="0 0 42.235 62.471">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="62.471" viewBox="0 0 50 62.471">
   <defs>
     <linearGradient id="linear-gradient" x1="0.211" y1="0.117" x2="0.853" y2="0.887" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="#fc6481"/>
       <stop offset="1" stop-color="#cdb1dd"/>
     </linearGradient>
     <clipPath id="clip-path">
-      <path id="矩形_338" data-name="矩形 338" d="M6.093,0H42.235a0,0,0,0,1,0,0V62.472a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,56.379V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(6771.887 2459.289)" fill="url(#linear-gradient)"/>
+      <path id="矩形_338" data-name="矩形 338" d="M6.093,0H43.235a0,0,0,0,1,0,0V62.472a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,56.379V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(6771.887 2459.289)" fill="url(#linear-gradient)"/>
     </clipPath>
+    <filter id="路径_173" x="0" y="3.527" width="50" height="46" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#ad1b42"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
   </defs>
-  <g id="组_329" data-name="组 329" transform="translate(-9.887 -268.289)">
-    <path id="矩形_160" data-name="矩形 160" d="M6.093,0H42.235a0,0,0,0,1,0,0V62.472a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,56.379V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(9.887 268.289)" fill="url(#linear-gradient)"/>
-    <g id="蒙版组_3" data-name="蒙版组 3" transform="translate(-6762 -2191)" clip-path="url(#clip-path)">
+  <g id="组_334" data-name="组 334" transform="translate(-254.692 -417.289)">
+    <path id="矩形_160" data-name="矩形 160" d="M6.093,0H43.235a0,0,0,0,1,0,0V62.472a0,0,0,0,1,0,0H6.093A6.093,6.093,0,0,1,0,56.379V6.093A6.093,6.093,0,0,1,6.093,0Z" transform="translate(259 417.289)" fill="url(#linear-gradient)"/>
+    <g id="蒙版组_3" data-name="蒙版组 3" transform="translate(-6512.887 -2042)" clip-path="url(#clip-path)">
       <g id="矩形_337" data-name="矩形 337" transform="translate(6792 2491)" fill="none" stroke="rgba(255,170,211,0.46)" stroke-width="4">
         <rect width="28" height="30" rx="7" stroke="none"/>
         <rect x="2" y="2" width="24" height="26" rx="5" fill="none"/>
       </g>
     </g>
-    <path id="路径_173" data-name="路径 173" d="M1392.682,3131.441l-6.038-2.262V3122.4a2.25,2.25,0,0,0-1.463-2.106l-6.25-2.344a2.223,2.223,0,0,0-1.582,0l-6.25,2.344a2.25,2.25,0,0,0-1.463,2.106v6.781l-6.038,2.262a2.253,2.253,0,0,0-1.455,2.106v6.88a2.252,2.252,0,0,0,1.243,2.013l6.251,3.124a2.241,2.241,0,0,0,2.013,0l6.493-3.249,6.494,3.249a2.239,2.239,0,0,0,2.012,0l6.251-3.124a2.253,2.253,0,0,0,1.244-2.013v-6.88A2.25,2.25,0,0,0,1392.682,3131.441Zm-8.162-2.213-5.313,1.994v-4.262l5.313-2.313Zm-12.751-6.918,6.376-2.387,6.375,2.387v.037l-6.375,2.588-6.376-2.588Zm5.25,18.192-5.313,2.656v-4.944l5.313-2.424Zm0-7-6.374,2.588-6.375-2.588v-.037l6.375-2.387,6.374,2.387Zm15,7-5.313,2.656v-4.944l5.313-2.424Zm0-7-6.375,2.588-6.374-2.588v-.037l6.374-2.387,6.375,2.387Z" transform="translate(-1347.565 -2839.987)" fill="#fff"/>
+    <g transform="matrix(1, 0, 0, 1, 254.69, 417.29)" filter="url(#路径_173)">
+      <path id="路径_173-2" data-name="路径 173" d="M1392.682,3131.441l-6.038-2.262V3122.4a2.25,2.25,0,0,0-1.463-2.106l-6.25-2.344a2.223,2.223,0,0,0-1.582,0l-6.25,2.344a2.25,2.25,0,0,0-1.463,2.106v6.781l-6.038,2.262a2.253,2.253,0,0,0-1.455,2.106v6.88a2.252,2.252,0,0,0,1.243,2.013l6.251,3.124a2.241,2.241,0,0,0,2.013,0l6.493-3.249,6.494,3.249a2.239,2.239,0,0,0,2.012,0l6.251-3.124a2.253,2.253,0,0,0,1.244-2.013v-6.88A2.25,2.25,0,0,0,1392.682,3131.441Zm-8.162-2.213-5.313,1.994v-4.262l5.313-2.313Zm-12.751-6.918,6.376-2.387,6.375,2.387v.037l-6.375,2.588-6.376-2.588Zm5.25,18.192-5.313,2.656v-4.944l5.313-2.424Zm0-7-6.374,2.588-6.375-2.588v-.037l6.375-2.387,6.374,2.387Zm15,7-5.313,2.656v-4.944l5.313-2.424Zm0-7-6.375,2.588-6.374-2.588v-.037l6.374-2.387,6.375,2.387Z" transform="translate(-1353.14 -3108.28)" fill="#fff"/>
+    </g>
   </g>
 </svg>

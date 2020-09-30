@@ -6,7 +6,8 @@
 <script type="application/json">
   {
     "pages": [
-      "./pages/index",
+			"./pages/index",
+			"./pages/author",
       "./pages/order",
       // "./pages/message",
 			"./pages/mine",

@@ -4,6 +4,17 @@
       <van-icon name="add" color="#356ECA" size="2.4em" />
       <text class="vanaddtext">新增需求</text>
     </view>
+    <!-- vant-weapp 骨架图模块源代码以被sanzro修改 -->
+    <van-skeleton
+      row="6"
+      animate="{{true}}"
+      row-height="100px"
+      loading="{{loading}}"
+    />
+    <van-empty
+      description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+      style="display: {{emptyShow}}"
+    />
     <view wx:for="{{list}}" wx:key="index" class="bgcolor">
       <van-swipe-cell right-width="{{ 100 }}">
         <taskcard
@@ -44,6 +55,8 @@ createPage({
   data: {
     list: [],
     confirmcolor: "red",
+    loading: true,
+    emptyShow: "none",
   },
   onLoad() {
     wx.setNavigationBarTitle({
@@ -57,6 +70,15 @@ createPage({
       })
       .then((res) => {
         this.list = res.data.list;
+      })
+      .then(() => {
+        // 取消显示骨架图
+        this.setData({ loading: false });
+      })
+      .catch((err) => {
+				console.log(err);
+				this.setData({ loading: false });
+        this.setData({ emptyShow: "block" });
       });
   },
   pageLifetimes: {
@@ -143,6 +165,8 @@ createPage({
     "van-icon": "vant-weapp/dist/icon/index",
 		"van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
 		"van-dialog": "vant-weapp/dist/dialog/index",
+		"van-skeleton": "@vant/weapp/dist/skeleton/index",
+		"van-empty": "@vant/weapp/dist/empty/index",
     "tabbar": "../custom-tab-bar/index",
 		"taskcard": "../components/taskcard"
   }

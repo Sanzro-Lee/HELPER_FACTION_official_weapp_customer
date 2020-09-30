@@ -99,9 +99,9 @@ createPage({
 }
 
 .vanthumb {
-  width: 120rpx !important;
-  height: 120rpx !important;
-  margin-top: 80rpx;
+  width: 150rpx !important;
+  height: 150rpx !important;
+  margin-top: 70rpx;
 }
 
 .conact {
