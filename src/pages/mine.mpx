@@ -2,7 +2,7 @@
   <view class="mine">
     <van-card
       title="刘小姐"
-      thumb="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/mineuserhead.svg"
+      thumb="some"
       custom-class="vancard"
       title-class="vantitle"
       thumb-class="vanthumb"
@@ -99,8 +99,8 @@ createPage({
 }
 
 .vanthumb {
-  width: 150rpx !important;
-  height: 150rpx !important;
+	background: url('../material/mineuserhead.svg') no-repeat;
+	background-size: 150rpx;
   margin-top: 70rpx;
 }
 

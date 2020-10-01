@@ -134,7 +134,7 @@ createComponent({
 		OemptyShow: "none",
   },
   ready() {
-    mpx.use(mpxFetch);
+		mpx.use(mpxFetch);
 
     mpx.xfetch
       .fetch({
@@ -220,7 +220,7 @@ createComponent({
 				this.setData({ loading: false });
 				this.setData({ OemptyShow: 'block' })
 			})
-	}
+	},
 });
 </script>
 
