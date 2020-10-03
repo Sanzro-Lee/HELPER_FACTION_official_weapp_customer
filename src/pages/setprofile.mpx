@@ -4,8 +4,8 @@
       <image class="headericon" src="{{userHead}}" />
 			<!-- <i-icon class="editicon" type="brush_fill" size="28" color="#356eca" /> -->
     </view>
-		<text class="inputtitle">修改昵称：</text>
-    <input class="mineinput" placeholder="请输入你的昵称" />
+		<text class="inputtitle">修改称呼：</text>
+    <input class="mineinput" placeholder="请输入你的称呼" />
 		<text class="inputtitle">修改地址：</text>
     <input class="mineinput" placeholder="请输入你的地址" />
 		<text class="inputtitle">修改手机号码：</text>

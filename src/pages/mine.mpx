@@ -38,6 +38,12 @@ createPage({
   onLoad() {
     wx.setNavigationBarTitle({
       title: "我的"
+		});
+		// 获取用户内容，设置用户地区
+    wx.getUserInfo({
+      success: (res) => {
+        console.log(res);
+      }
     });
   },
   showPopup() {
@@ -96,6 +102,10 @@ createPage({
   font-weight: 400;
   margin-top: -150rpx;
   left: 210rpx;
+	width: 240px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .vanthumb {

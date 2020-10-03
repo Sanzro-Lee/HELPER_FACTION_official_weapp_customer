@@ -14,7 +14,7 @@
 			"./pages/taskcardinfo",
 			"./pages/addorder",
 			// "./pages/messageinfo",
-			"./pages/setprofile"
+			"./pages/setprofile",
 		],
 		"permission": {
 			"scope.userLocation": {

@@ -11,7 +11,7 @@
       show="{{ show }}"
       statustagstyle="{{ statustagstyle }}"
     />
-    <view class="ordertitlestyle">图片描述</view>
+    <view class="ordertitlestyle">需求图片描述</view>
     <swiper
       class="swiperstyle"
       indicator-dots="{{indicatorDots}}"
@@ -28,7 +28,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <view class="ordertitlestyle martop">详细地址</view>
+    <view class="ordertitlestyle martop">需求地址</view>
     <view class="locationstyle">
       <map
         id="map"

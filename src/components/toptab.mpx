@@ -1,5 +1,6 @@
 <template>
   <view class="toptab">
+		<text class="district">{{ district }}</text>
     <van-tabs
       sticky
       color="#F1E928"
@@ -10,14 +11,18 @@
     >
       <van-tab title="全部" custom-class="vantab">
         <view class="demand">需求列表</view>
-        <!-- vant-weapp 骨架图模块源代码以被sanzro修改 -->
+        <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
         <van-skeleton
           row="6"
           animate="{{true}}"
           row-height="100px"
           loading="{{loading}}"
         />
-				<van-empty description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅" style="display: {{AllemptyShow}}"/>
+        <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
+        <van-empty
+          description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+          style="display: {{AllemptyShow}}"
+        />
         <view wx:for="{{all}}" wx:key="index">
           <taskcard
             title="{{item.title}}"
@@ -39,7 +44,10 @@
           row-height="100px"
           loading="{{loading}}"
         />
-				<van-empty description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅" style="display: {{HRemptyShow}}"/>
+        <van-empty
+          description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+          style="display: {{HRemptyShow}}"
+        />
         <view class="taskcardblock" wx:for="{{homerepair}}" wx:key="index">
           <taskcard
             title="{{item.title}}"
@@ -59,7 +67,10 @@
           row-height="100px"
           loading="{{loading}}"
         />
-				<van-empty description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅" style="display: {{ARemptyShow}}"/>
+        <van-empty
+          description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+          style="display: {{ARemptyShow}}"
+        />
         <view wx:for="{{appliancerepair}}" wx:key="index">
           <taskcard
             title="{{item.title}}"
@@ -79,7 +90,10 @@
           row-height="100px"
           loading="{{loading}}"
         />
-				<van-empty description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅" style="display: {{GMemptyShow}}"/>
+        <van-empty
+          description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+          style="display: {{GMemptyShow}}"
+        />
         <view wx:for="{{goodsmove}}" wx:key="index">
           <taskcard
             title="{{item.title}}"
@@ -99,7 +113,10 @@
           row-height="100px"
           loading="{{loading}}"
         />
-				<van-empty description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅" style="display: {{OemptyShow}}"/>
+        <van-empty
+          description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
+          style="display: {{OemptyShow}}"
+        />
         <view wx:for="{{others}}" wx:key="index">
           <taskcard
             title="{{item.title}}"
@@ -121,20 +138,28 @@ import mpxFetch from "@mpxjs/fetch";
 
 createComponent({
   data: {
+    district: "未设置",
     all: [],
     homerepair: [],
     appliancerepair: [],
     goodsmove: [],
     others: [],
-		loading: true,
-		AllemptyShow: "none",
-		HRemptyShow: "none",
-		ARemptyShow: "none",
-		GMemptyShow: "none",
-		OemptyShow: "none",
+    loading: true,
+    AllemptyShow: "none",
+    HRemptyShow: "none",
+    ARemptyShow: "none",
+    GMemptyShow: "none",
+    OemptyShow: "none",
   },
   ready() {
-		mpx.use(mpxFetch);
+    let _this = this;
+    wx.getStorage({
+      key: "district",
+      success(res) {
+        _this.district = res.data;
+      },
+    });
+    mpx.use(mpxFetch);
 
     mpx.xfetch
       .fetch({
@@ -142,16 +167,16 @@ createComponent({
       })
       .then((res) => {
         this.all = res.data.all;
-			})
-			.then(() => {
+      })
+      .then(() => {
         // 取消显示骨架图
         this.setData({ loading: false });
-			})
-			.catch(err => {
-				console.log(err)
-				this.setData({ loading: false });
-				this.setData({ AllemptyShow: 'block' })
-			})
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setData({ loading: false });
+        this.setData({ AllemptyShow: "block" });
+      });
 
     mpx.xfetch
       .fetch({
@@ -159,16 +184,16 @@ createComponent({
       })
       .then((res) => {
         this.homerepair = res.data.homerepair;
-			})
-			.then(() => {
+      })
+      .then(() => {
         // 取消显示骨架图
         this.setData({ loading: false });
-			})
-			.catch(err => {
-				console.log(err)
-				this.setData({ loading: false });
-				this.setData({ HRemptyShow: 'block' })
-			})
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setData({ loading: false });
+        this.setData({ HRemptyShow: "block" });
+      });
 
     mpx.xfetch
       .fetch({
@@ -176,16 +201,16 @@ createComponent({
       })
       .then((res) => {
         this.appliancerepair = res.data.appliancerepair;
-			})
-			.then(() => {
+      })
+      .then(() => {
         // 取消显示骨架图
         this.setData({ loading: false });
-			})
-			.catch(err => {
-				console.log(err)
-				this.setData({ loading: false });
-				this.setData({ ARemptyShow: 'block' })
-			})
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setData({ loading: false });
+        this.setData({ ARemptyShow: "block" });
+      });
 
     mpx.xfetch
       .fetch({
@@ -193,16 +218,16 @@ createComponent({
       })
       .then((res) => {
         this.goodsmove = res.data.goodsmove;
-			})
-			.then(() => {
+      })
+      .then(() => {
         // 取消显示骨架图
         this.setData({ loading: false });
-			})
-			.catch(err => {
-				console.log(err)
-				this.setData({ loading: false });
-				this.setData({ GMemptyShow: 'block' })
-			})
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setData({ loading: false });
+        this.setData({ GMemptyShow: "block" });
+      });
 
     mpx.xfetch
       .fetch({
@@ -214,19 +239,27 @@ createComponent({
       .then(() => {
         // 取消显示骨架图
         this.setData({ loading: false });
-			})
-			.catch(err => {
-				console.log(err)
-				this.setData({ loading: false });
-				this.setData({ OemptyShow: 'block' })
-			})
-	},
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setData({ loading: false });
+        this.setData({ OemptyShow: "block" });
+      });
+  },
 });
 </script>
 
 <style>
 .vantabs {
   background-color: #fff;
+}
+
+.district {
+	z-index: 1;
+  position: absolute;
+  font-size: 22px;
+  font-weight: 300;
+	margin: 150rpx 0 0 590rpx;
 }
 
 .vantab {
@@ -249,7 +282,6 @@ createComponent({
 
 <script type="application/json">
 {
-  "componets": true,
   "usingComponents": {
     "van-tab": "vant-weapp/dist/tab/index",
 		"van-tabs": "vant-weapp/dist/tabs/index",
