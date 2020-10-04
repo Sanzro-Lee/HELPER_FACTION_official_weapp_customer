@@ -1,6 +1,5 @@
 <template>
   <view class="toptab">
-		<text class="district">{{ district }}</text>
     <van-tabs
       sticky
       color="#F1E928"
@@ -8,15 +7,17 @@
       swipeable="true"
       animated="true"
       custom-class="vantabs"
+      bind:change="onChange"
     >
       <van-tab title="全部" custom-class="vantab">
         <view class="demand">需求列表</view>
+        <text class="district">{{ district }}</text>
         <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
         <van-skeleton
           row="6"
           animate="{{true}}"
           row-height="100px"
-          loading="{{loading}}"
+          loading="{{allLoading}}"
         />
         <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
         <van-empty
@@ -38,11 +39,12 @@
       </van-tab>
       <van-tab title="居家维修" custom-class="vantab">
         <view class="demand">居家维修</view>
+        <text class="district">{{ district }}</text>
         <van-skeleton
-          row="5"
+          row="6"
           animate="{{true}}"
           row-height="100px"
-          loading="{{loading}}"
+          loading="{{hrLoading}}"
         />
         <van-empty
           description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
@@ -61,11 +63,12 @@
       </van-tab>
       <van-tab title="家电维修" custom-class="vantab">
         <view class="demand">家电维修</view>
+        <text class="district">{{ district }}</text>
         <van-skeleton
-          row="5"
+          row="6"
           animate="{{true}}"
           row-height="100px"
-          loading="{{loading}}"
+          loading="{{arLoading}}"
         />
         <van-empty
           description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
@@ -84,11 +87,12 @@
       </van-tab>
       <van-tab title="货物搬迁" custom-class="vantab">
         <view class="demand">货物搬迁</view>
+        <text class="district">{{ district }}</text>
         <van-skeleton
-          row="5"
+          row="6"
           animate="{{true}}"
           row-height="100px"
-          loading="{{loading}}"
+          loading="{{gmLoading}}"
         />
         <van-empty
           description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
@@ -107,11 +111,12 @@
       </van-tab>
       <van-tab title="其它" custom-class="vantab">
         <view class="demand">其它</view>
+        <text class="district">{{ district }}</text>
         <van-skeleton
-          row="5"
+          row="6"
           animate="{{true}}"
           row-height="100px"
-          loading="{{loading}}"
+          loading="{{otLoading}}"
         />
         <van-empty
           description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
@@ -135,16 +140,25 @@
 <script>
 import mpx, { createComponent } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
+import { getUserDistrict } from "../utils/authorFun.js";
 
 createComponent({
   data: {
+    // 右上角地区
     district: "未设置",
+    // data list
     all: [],
     homerepair: [],
     appliancerepair: [],
     goodsmove: [],
     others: [],
-    loading: true,
+    // 骨架图所需的参数
+    allLoading: true,
+    hrLoading: true,
+    arLoading: true,
+    gmLoading: true,
+    otLoading: true,
+    // 数据为时显示所需的参数
     AllemptyShow: "none",
     HRemptyShow: "none",
     ARemptyShow: "none",
@@ -152,99 +166,81 @@ createComponent({
     OemptyShow: "none",
   },
   ready() {
+    // 设置右上角地区
     let _this = this;
-    wx.getStorage({
-      key: "district",
-      success(res) {
-        _this.district = res.data;
-      },
-    });
+    getUserDistrict(_this);
+    // 初始化首页 全部 的
     mpx.use(mpxFetch);
-
-    mpx.xfetch
-      .fetch({
-        url: "http://helperfaction.com/toptab/all",
-      })
-      .then((res) => {
-        this.all = res.data.all;
-      })
-      .then(() => {
-        // 取消显示骨架图
-        this.setData({ loading: false });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setData({ loading: false });
-        this.setData({ AllemptyShow: "block" });
-      });
-
-    mpx.xfetch
-      .fetch({
-        url: "http://helperfaction.com/toptab/homerepair",
-      })
-      .then((res) => {
-        this.homerepair = res.data.homerepair;
-      })
-      .then(() => {
-        // 取消显示骨架图
-        this.setData({ loading: false });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setData({ loading: false });
-        this.setData({ HRemptyShow: "block" });
-      });
-
-    mpx.xfetch
-      .fetch({
-        url: "http://helperfaction.com/toptab/appliancerepair",
-      })
-      .then((res) => {
-        this.appliancerepair = res.data.appliancerepair;
-      })
-      .then(() => {
-        // 取消显示骨架图
-        this.setData({ loading: false });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setData({ loading: false });
-        this.setData({ ARemptyShow: "block" });
-      });
-
-    mpx.xfetch
-      .fetch({
-        url: "http://helperfaction.com/toptab/goodsmove",
-      })
-      .then((res) => {
-        this.goodsmove = res.data.goodsmove;
-      })
-      .then(() => {
-        // 取消显示骨架图
-        this.setData({ loading: false });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setData({ loading: false });
-        this.setData({ GMemptyShow: "block" });
-      });
-
-    mpx.xfetch
-      .fetch({
-        url: "http://helperfaction.com/toptab/others",
-      })
-      .then((res) => {
-        this.others = res.data.others;
-      })
-      .then(() => {
-        // 取消显示骨架图
-        this.setData({ loading: false });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setData({ loading: false });
-        this.setData({ OemptyShow: "block" });
-      });
+    this.fetchFun("http://helperfaction.com/toptab/all", "all");
+  },
+  methods: {
+    // 切换不同的顶部类型
+    onChange(event) {
+      let index = event.detail.index;
+      if (index == 0) {
+        this.fetchFun("http://helperfaction.com/toptab/all", "all");
+      } else if (index == 1) {
+        this.fetchFun("http://helperfaction.com/toptab/homerepair", "HR");
+      } else if (index == 2) {
+        this.fetchFun("http://helperfaction.com/toptab/appliancerepair", "AR");
+      } else if (index == 3) {
+        this.fetchFun("http://helperfaction.com/toptab/goodsmove", "GM");
+      } else if (index == 4) {
+        this.fetchFun("http://helperfaction.com/toptab/others", "OT");
+      }
+    },
+    // 整合了不同页面的骨架图、数据获取、数据出错的方法
+    fetchFun(url, type) {
+      mpx.use(mpxFetch);
+      mpx.xfetch
+        // url 为调用方法时配置，获取数据
+        .fetch({
+          url: url,
+        })
+        // Push 数据到 this 里面的变量
+        .then((res) => {
+          if (type == "all") {
+            this.all = res.data.all;
+          } else if (type == "HR") {
+            this.homerepair = res.data.homerepair;
+          } else if (type == "AR") {
+            this.appliancerepair = res.data.appliancerepair;
+          } else if (type == "GM") {
+            this.goodsmove = res.data.goodsmove;
+          } else if (type == "OT") {
+            this.others = res.data.others;
+          }
+        })
+        // 骨架图取消显示
+        .then(() => {
+          if (type == "all") {
+            this.setData({ allLoading: false });
+          } else if (type == "HR") {
+            this.setData({ hrLoading: false });
+          } else if (type == "AR") {
+            this.setData({ arLoading: false });
+          } else if (type == "GM") {
+            this.setData({ gmLoading: false });
+          } else if (type == "OT") {
+            this.setData({ otLoading: false });
+          }
+        })
+        // 不同页面数据获取出错
+        .catch((err) => {
+          console.log(err);
+          if (type == "all") {
+            this.setData({ AllemptyShow: "block", allLoading: false });
+          } else if (type == "HR") {
+            this.setData({ HRemptyShow: "block", hrLoading: false });
+          } else if (type == "AR") {
+            this.setData({ ARemptyShow: "block", arLoading: false });
+          } else if (type == "GM") {
+            this.setData({ GMemptyShow: "block", gmLoading: false });
+          } else if (type == "OT") {
+            this.setData({ OemptyShow: "block", otLoading: false });
+          }
+        });
+    },
   },
 });
 </script>
@@ -255,11 +251,11 @@ createComponent({
 }
 
 .district {
-	z-index: 1;
+  z-index: 1;
   position: absolute;
   font-size: 22px;
   font-weight: 300;
-	margin: 150rpx 0 0 590rpx;
+  margin: -80rpx 0 0 590rpx;
 }
 
 .vantab {

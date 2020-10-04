@@ -17,7 +17,7 @@
 
 <script>
 import mpx, { createPage } from "@mpxjs/core";
-import { authorCheck } from "../utils/authorFun.js";
+// import { authorCheck } from "../utils/authorFun.js";
 import authorbgiconsvg from "../material/authorbgicon.svg";
 import logosvg from "../material/header_logo.svg";
 
@@ -35,12 +35,12 @@ createPage({
       backgroundColor: "#5ED8A6",
 		});
 		// 检测是否有授权
-    authorCheck(this)
+    // authorCheck(this)
   },
   methods: {
     bindGetUserInfo() {
 			// 获取授权
-			authorCheck(this)
+			// authorCheck(this)
 		},
   },
 });

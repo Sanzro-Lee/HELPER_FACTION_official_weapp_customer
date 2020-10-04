@@ -2,6 +2,7 @@
   <view class="indexpage">
     <toptab></toptab>
     <tabbar></tabbar>
+		<van-dialog id="van-dialog" />
   </view>
 </template>
 
@@ -10,9 +11,17 @@ import mpx, { createPage } from "@mpxjs/core";
 
 createPage({
   onLoad() {
+		wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "首页",
 		});
+	},
+	onPullDownRefresh () {
+    var that = this;
+    that.setData({
+      currentTab: 0 //当前页的一些初始数据，视业务需求而定
+    })
+    this.onLoad(); //重新加载onLoad()
   },
   pageLifetimes: {
     showtab() {
@@ -45,7 +54,8 @@ createPage({
 {
   "usingComponents": {
     "toptab": "../components/toptab",
-    "tabbar": "../custom-tab-bar/index"
+		"tabbar": "../custom-tab-bar/index",
+		"van-dialog": "vant-weapp/dist/dialog/index"
   }
 }
 </script>

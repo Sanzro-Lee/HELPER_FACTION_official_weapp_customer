@@ -6,11 +6,11 @@
 <script type="application/json">
   {
     "pages": [
-			"./pages/author",
 			"./pages/index",
       "./pages/order",
       // "./pages/message",
 			"./pages/mine",
+			"./pages/author",
 			"./pages/taskcardinfo",
 			"./pages/addorder",
 			// "./pages/messageinfo",
@@ -25,7 +25,8 @@
       "backgroundTextStyle": "light",
       "navigationBarBackgroundColor": "#fff",
       "navigationBarTitleText": "叫到帮",
-      "navigationBarTextStyle": "black"
+			"navigationBarTextStyle": "black",
+			"enablePullDownRefresh": true
     },
     "tabBar": {
       "custom": true,
