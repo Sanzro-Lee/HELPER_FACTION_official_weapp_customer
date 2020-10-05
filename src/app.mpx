@@ -22,7 +22,7 @@
 			}
 		},
     "window": {
-      "backgroundTextStyle": "light",
+      "backgroundTextStyle": "dark",
       "navigationBarBackgroundColor": "#fff",
       "navigationBarTitleText": "叫到帮",
 			"navigationBarTextStyle": "black",

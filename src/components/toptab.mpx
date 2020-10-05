@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import mpx, { createComponent } from "@mpxjs/core";
+import mpx, { createComponent, watch } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
 import { getUserDistrict } from "../utils/authorFun.js";
 
@@ -165,15 +165,46 @@ createComponent({
     GMemptyShow: "none",
     OemptyShow: "none",
   },
-  ready() {
-    // 设置右上角地区
-    let _this = this;
-    getUserDistrict(_this);
-    // 初始化首页 全部 的
-    mpx.use(mpxFetch);
-    this.fetchFun("http://helperfaction.com/toptab/all", "all");
+  properties: {
+    // index 传递的变量
+    refresh: { type: Boolean },
+    request: { type: Boolean },
+  },
+  watch: {
+    // 在 index 下拉刷新时执行
+    refresh() {
+      if (this.refresh) {
+        this.setData({ refresh: false });
+        this.init();
+      }
+    },
+    // 在 index 触底时执行
+    request() {
+      if (this.request) {
+        console.log("request");
+        this.setData({ request: false });
+        this.onBottom();
+      }
+    },
+  },
+  // 页面初始化执行
+  attached() {
+    this.init();
   },
   methods: {
+    init() {
+      // 设置右上角地区
+      let _this = this;
+      getUserDistrict(_this);
+      // 初始化首页 全部 的
+      mpx.use(mpxFetch);
+      this.fetchFun("http://helperfaction.com/toptab/all", "all");
+    },
+    // 触底，获取新数据
+    onBottom() {
+      mpx.use(mpxFetch);
+      this.fetchFun("http://helperfaction.com/toptab/all?" + 5, "all");
+    },
     // 切换不同的顶部类型
     onChange(event) {
       let index = event.detail.index;
@@ -252,10 +283,10 @@ createComponent({
 
 .district {
   z-index: 1;
-  position: absolute;
+  float: right;
   font-size: 22px;
   font-weight: 300;
-  margin: -80rpx 0 0 590rpx;
+  margin: -80rpx 30rpx 0 0;
 }
 
 .vantab {

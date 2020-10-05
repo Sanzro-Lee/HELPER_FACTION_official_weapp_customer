@@ -1,8 +1,8 @@
 <template>
   <view class="indexpage">
-    <toptab></toptab>
+    <toptab refresh="{{refresh}}" request="{{request}}"></toptab>
     <tabbar></tabbar>
-		<van-dialog id="van-dialog" />
+    <van-dialog id="van-dialog" />
   </view>
 </template>
 
@@ -10,18 +10,24 @@
 import mpx, { createPage } from "@mpxjs/core";
 
 createPage({
+  data: {
+    refresh: false,
+    request: false,
+  },
   onLoad() {
-		wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
+    wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "首页",
-		});
-	},
-	onPullDownRefresh () {
-    var that = this;
-    that.setData({
-      currentTab: 0 //当前页的一些初始数据，视业务需求而定
-    })
+    });
+  },
+  // 触顶刷新
+  onPullDownRefresh() {
+    this.setData({ refresh: true });
     this.onLoad(); //重新加载onLoad()
+  },
+  // 触底 lazy load
+  onReachBottom() {
+    this.setData({ request: true });
   },
   pageLifetimes: {
     showtab() {
