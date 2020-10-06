@@ -1,6 +1,6 @@
 <template>
   <view class="indexpage">
-    <toptab refresh="{{refresh}}" request="{{request}}"></toptab>
+    <toptab refresh="{{refresh}}" status="{{status}}"></toptab>
     <tabbar></tabbar>
     <van-dialog id="van-dialog" />
   </view>
@@ -12,7 +12,7 @@ import mpx, { createPage } from "@mpxjs/core";
 createPage({
   data: {
     refresh: false,
-    request: false,
+    status: false,
   },
   onLoad() {
     wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
@@ -27,7 +27,7 @@ createPage({
   },
   // 触底 lazy load
   onReachBottom() {
-    this.setData({ request: true });
+    this.setData({ status: true });
   },
   pageLifetimes: {
     showtab() {

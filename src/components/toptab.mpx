@@ -15,27 +15,32 @@
         <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
         <van-skeleton
           row="6"
-          animate="{{true}}"
+          animate="{{ true }}"
           row-height="100px"
-          loading="{{allLoading}}"
+          loading="{{ allLoading }}"
         />
         <!-- vant-weapp 骨架图模块 源代码以被sanzro修改 -->
         <van-empty
           description="发生网络错误，请稍后刷新此页面，为您带来不便请见谅"
-          style="display: {{AllemptyShow}}"
+          style="display: {{ AllemptyShow }}"
         />
-        <view wx:for="{{all}}" wx:key="index">
+        <view wx:for="{{ all }}" wx:key="index">
           <taskcard
-            title="{{item.title}}"
-            desc="{{item. desc}}"
-            name="{{item.name}}"
-            dist="{{item.dist}}"
-            price="{{item.price}}"
-            thumb="{{item.thumb}}"
-            show="{{item.show}}"
-            statustagstyle="{{item.statustagstyle}}"
+            title="{{ item.title }}"
+            desc="{{ item. desc }}"
+            name="{{ item.name }}"
+            dist="{{ item.dist }}"
+            price="{{ item.price }}"
+            thumb="{{ item.thumb }}"
+            show="{{ item.show }}"
+            statustagstyle="{{ item.statustagstyle }}"
           />
         </view>
+        <i-load-more
+          tip="{{ allLoadMoreTip }}"
+          loading="{{ allLoadMore }}"
+          i-class="loadMore"
+        />
       </van-tab>
       <van-tab title="居家维修" custom-class="vantab">
         <view class="demand">居家维修</view>
@@ -60,6 +65,11 @@
             thumb="{{item.thumb}}"
           />
         </view>
+        <i-load-more
+          tip="{{ hrLoadMoreTip }}"
+          loading="{{ hrLoadMore }}"
+          i-class="loadMore"
+        />
       </van-tab>
       <van-tab title="家电维修" custom-class="vantab">
         <view class="demand">家电维修</view>
@@ -84,6 +94,11 @@
             thumb="{{item.thumb}}"
           />
         </view>
+        <i-load-more
+          tip="{{ arLoadMoreTip }}"
+          loading="{{ arLoadMore }}"
+          i-class="loadMore"
+        />
       </van-tab>
       <van-tab title="货物搬迁" custom-class="vantab">
         <view class="demand">货物搬迁</view>
@@ -108,6 +123,11 @@
             thumb="{{item.thumb}}"
           />
         </view>
+        <i-load-more
+          tip="{{ gmLoadMoreTip }}"
+          loading="{{ gmLoadMore }}"
+          i-class="loadMore"
+        />
       </van-tab>
       <van-tab title="其它" custom-class="vantab">
         <view class="demand">其它</view>
@@ -132,6 +152,11 @@
             thumb="{{item.thumb}}"
           />
         </view>
+        <i-load-more
+          tip="{{ otLoadMoreTip }}"
+          loading="{{ otLoadMore }}"
+          i-class="loadMore"
+        />
       </van-tab>
     </van-tabs>
   </view>
@@ -146,7 +171,7 @@ createComponent({
   data: {
     // 右上角地区
     district: "未设置",
-    // data list
+    // 需求 data list
     all: [],
     homerepair: [],
     appliancerepair: [],
@@ -164,11 +189,24 @@ createComponent({
     ARemptyShow: "none",
     GMemptyShow: "none",
     OemptyShow: "none",
+    // 顶部条，active
+    tabsIndex: 0,
+    // 页底加载状态 & tips
+    allLoadMore: false,
+    allLoadMoreTip: "到底了",
+    hrLoadMore: false,
+    hrLoadMoreTip: "到底了",
+    arLoadMore: false,
+    arLoadMoreTip: "到底了",
+    gmLoadMore: false,
+    gmLoadMoreTip: "到底了",
+    otLoadMore: false,
+    otLoadMoreTip: "到底了",
   },
   properties: {
     // index 传递的变量
     refresh: { type: Boolean },
-    request: { type: Boolean },
+    status: { type: Boolean },
   },
   watch: {
     // 在 index 下拉刷新时执行
@@ -179,10 +217,8 @@ createComponent({
       }
     },
     // 在 index 触底时执行
-    request() {
-      if (this.request) {
-        console.log("request");
-        this.setData({ request: false });
+    status() {
+      if (this.status) {
         this.onBottom();
       }
     },
@@ -202,12 +238,130 @@ createComponent({
     },
     // 触底，获取新数据
     onBottom() {
+      // 根据不同的 tabsIndex 发送不同的 request url
+      let fetchUrl = "";
+      if (this.tabsIndex == 0) {
+        // 更改页底 load more 状态 & 设置下拉状态为 false
+        this.setData({
+          allLoadMore: true,
+          allLoadMoreTip: "加载中",
+          status: false,
+        });
+        fetchUrl = "http://helperfaction.com/toptab/all?" + 5;
+      } else if (this.tabsIndex == 1) {
+        this.setData({
+          hrLoadMore: true,
+          hrLoadMoreTip: "加载中",
+          status: false,
+        });
+        fetchUrl = "http://helperfaction.com/toptab/homerepair?" + 5;
+      } else if (this.tabsIndex == 2) {
+        this.setData({
+          arLoadMore: true,
+          arLoadMoreTip: "加载中",
+          status: false,
+        });
+        fetchUrl = "http://helperfaction.com/toptab/appliancerepair?" + 5;
+      } else if (this.tabsIndex == 3) {
+        this.setData({
+          gmLoadMore: true,
+          gmLoadMoreTip: "加载中",
+          status: false,
+        });
+        fetchUrl = "http://helperfaction.com/toptab/goodsmove?" + 5;
+      } else if (this.tabsIndex == 4) {
+        this.setData({
+          otLoadMore: true,
+          otLoadMoreTip: "加载中",
+          status: false,
+        });
+        fetchUrl = "http://helperfaction.com/toptab/others?" + 5;
+      }
       mpx.use(mpxFetch);
-      this.fetchFun("http://helperfaction.com/toptab/all?" + 5, "all");
+
+      mpx.xfetch
+        .fetch({
+          url: fetchUrl,
+        })
+        .then((res) => {
+          // 此处有 bug
+          this.all = res.data.all; // 将新数据推进旧数组里
+          // 此处有 bug
+          setTimeout(() => {
+            // 模拟数据返回需要时间
+            if (this.tabsIndex == 0) {
+              // 更改页底 load more 状态 & 设置下拉状态为 false
+              this.setData({
+                allLoadMore: false,
+                allLoadMoreTip: "到底了",
+                status: false,
+              });
+            } else if (this.tabsIndex == 1) {
+              this.setData({
+                hrLoadMore: false,
+                hrLoadMoreTip: "到底了",
+                status: false,
+              });
+            } else if (this.tabsIndex == 2) {
+              this.setData({
+                arLoadMore: false,
+                arLoadMoreTip: "到底了",
+                status: false,
+              });
+            } else if (this.tabsIndex == 3) {
+              this.setData({
+                gmLoadMore: false,
+                gmLoadMoreTip: "到底了",
+                status: false,
+              });
+            } else if (this.tabsIndex == 4) {
+              this.setData({
+                otLoadMore: false,
+                otLoadMoreTip: "到底了",
+                status: false,
+              });
+            }
+          }, 3000);
+        })
+        .catch(() => {
+          if (this.tabsIndex == 0) {
+            // 更改页底 load more 状态 & 设置下拉状态为 false
+            this.setData({
+              allLoadMore: false,
+              allLoadMoreTip: "到底了",
+              status: false,
+            });
+          } else if (this.tabsIndex == 1) {
+            this.setData({
+              hrLoadMore: false,
+              hrLoadMoreTip: "到底了",
+              status: false,
+            });
+          } else if (this.tabsIndex == 2) {
+            this.setData({
+              arLoadMore: false,
+              arLoadMoreTip: "到底了",
+              status: false,
+            });
+          } else if (this.tabsIndex == 3) {
+            this.setData({
+              gmLoadMore: false,
+              gmLoadMoreTip: "到底了",
+              status: false,
+            });
+          } else if (this.tabsIndex == 4) {
+            this.setData({
+              otLoadMore: false,
+              otLoadMoreTip: "到底了",
+              status: false,
+            });
+          }
+        });
     },
     // 切换不同的顶部类型
     onChange(event) {
       let index = event.detail.index;
+      this.setData({ tabsIndex: index });
       if (index == 0) {
         this.fetchFun("http://helperfaction.com/toptab/all", "all");
       } else if (index == 1) {
@@ -301,9 +455,9 @@ createComponent({
   font-weight: 400;
 }
 
-.loadmore {
-  margin-top: -50px;
-  margin-bottom: 50px;
+.loadMore {
+  margin-top: 30px;
+  margin-bottom: -10px;
 }
 </style>
 
@@ -314,6 +468,7 @@ createComponent({
 		"van-tabs": "vant-weapp/dist/tabs/index",
 		"van-skeleton": "@vant/weapp/dist/skeleton/index",
 		"van-empty": "@vant/weapp/dist/empty/index",
+		"i-load-more": "iview-weapp/dist/load-more/index",
     "taskcard": "./taskcard"
   }
 }

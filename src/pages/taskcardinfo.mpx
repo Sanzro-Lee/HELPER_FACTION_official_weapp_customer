@@ -87,10 +87,15 @@ createPage({
     // taskaction 显示与否，当需求被师傅接上时，taskStatus: 1显示组件，否则，taskStatus: 0，不显示组件
     taskStatus: 1,
   },
-  ready() {
+  onLoad() {
+		wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "需求详情",
     });
+	},
+	// 触顶刷新
+  onPullDownRefresh() {
+    this.onLoad(); //重新加载onLoad()
   },
   onShareAppMessage() {
     return {

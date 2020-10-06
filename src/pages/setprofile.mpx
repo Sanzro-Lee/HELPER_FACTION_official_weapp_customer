@@ -43,6 +43,7 @@ createPage({
 		userHead: impUserHead
 	},
   onLoad() {
+		wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "修改资料"
     });
@@ -51,8 +52,11 @@ createPage({
       frontColor: "#ffffff",
       backgroundColor: "#356eca"
     });
+	},
+	// 触顶刷新
+  onPullDownRefresh() {
+    this.onLoad(); //重新加载onLoad()
   },
-  pageLifetimes: {},
   methods: {
     onChange(event) {
       console.log(event.detail);

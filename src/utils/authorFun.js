@@ -34,8 +34,8 @@ function getUserDistrict(val) {
         },
         sig: "AY2W9KYUZtqHzoiEzLRs70lnqVrA3IWl",
         success: (res) => {
-					let myDistrict = res.result.address_component.district
-					val.district = myDistrict
+          let myDistrict = res.result.address_component.district
+          val.district = myDistrict
         },
         fail: (error) => {
           // console.log(error)
@@ -45,7 +45,7 @@ function getUserDistrict(val) {
     fail: (error) => {
       console.log("用户已拒绝");
       Dialog.alert({
-        message: "你已拒绝开放定位功能，我们将无法为你服务。请点击右上角三个点的图标 - 设置 以开放定位功能，并重新进入此小程序，我们将更好地服务你！",
+        message: "你已拒绝开放定位功能。请点击右上角 三个点的图标 - 设置 - 位置信息 以开放定位功能，并下拉刷新此小程序，我们将更好地服务你！",
         theme: "round-button",
       }).then(() => {
         // on confirm
@@ -54,16 +54,15 @@ function getUserDistrict(val) {
   });
 }
 
-
 // mine 需要此方法跳转到 author 获取用户信息
 function getUserInfo() {
   console.log("getUserInfo")
   // 已经授权，可以直接调用 getUserInfo 获取用户信息
   wx.getUserInfo({
     success: (res) => {
-			wx.switchTab({
-				url: "mine"
-			});
+      wx.switchTab({
+        url: "mine"
+      });
     },
     fail: (error) => {
       console.log("用户拒绝开放用户信息");
@@ -73,6 +72,6 @@ function getUserInfo() {
 
 export {
   authorCheck,
-	getUserDistrict,
-	getUserInfo
+  getUserDistrict,
+  getUserInfo
 }

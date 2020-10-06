@@ -41,6 +41,11 @@
         </view>
       </van-swipe-cell>
     </view>
+    <i-load-more
+      tip="{{ loadMoreTip }}"
+      loading="{{ loadMore }}"
+      i-class="loadMore"
+    />
     <van-dialog id="van-dialog" />
     <tabbar />
   </view>
@@ -57,8 +62,11 @@ createPage({
     confirmcolor: "red",
     loading: true,
     emptyShow: "none",
+    loadMore: false,
+    loadMoreTip: "到底了",
   },
   onLoad() {
+    wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "需求",
     });
@@ -76,9 +84,47 @@ createPage({
         this.setData({ loading: false });
       })
       .catch((err) => {
-				console.log(err);
-				this.setData({ loading: false });
+        console.log(err);
+        this.setData({ loading: false });
         this.setData({ emptyShow: "block" });
+      });
+  },
+  // 触顶刷新
+  onPullDownRefresh() {
+    this.onLoad(); //重新加载onLoad()
+  },
+  // 触底 lazy load
+  onReachBottom() {
+    this.setData({
+      loadMore: true,
+      loadMoreTip: "加载中",
+    });
+    mpx.use(mpxFetch);
+    mpx.xfetch
+      .fetch({
+        url: "http://helperfaction.com/demand/list" + 5,
+      })
+      .then((res) => {
+        // 将新获取的数据推进原有数组有 bug，暂时注释
+        // this.list = res.data.list;
+        // 将新获取的数据推进原有数组有 bug，暂时注释
+        setTimeout(() => {
+          // 模拟返回数据所需时间
+          this.setData({
+            loadMore: false,
+            loadMoreTip: "到底了",
+          });
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setTimeout(() => {
+          // 模拟返回数据所需时间
+          this.setData({
+            loadMore: false,
+            loadMoreTip: "到底了",
+          });
+        }, 3000);
       });
   },
   pageLifetimes: {
@@ -157,6 +203,10 @@ createPage({
 .dialog-index--van-dialog__confirm .van-button__text {
   color: red;
 }
+
+.loadMore {
+  margin-bottom: -10px !important;
+}
 </style>
 
 <script type="application/json">
@@ -167,6 +217,7 @@ createPage({
 		"van-dialog": "vant-weapp/dist/dialog/index",
 		"van-skeleton": "@vant/weapp/dist/skeleton/index",
 		"van-empty": "@vant/weapp/dist/empty/index",
+		"i-load-more": "iview-weapp/dist/load-more/index",
     "tabbar": "../custom-tab-bar/index",
 		"taskcard": "../components/taskcard"
   }

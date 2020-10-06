@@ -165,6 +165,7 @@ createPage({
     ],
   },
   onLoad() {
+		wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "新增订单",
     });
@@ -175,6 +176,10 @@ createPage({
     // 设置初始化日期时间
     this.startDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
     this.endDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
+	},
+	// 触顶刷新
+  onPullDownRefresh() {
+    this.onLoad(); //重新加载onLoad()
   },
   methods: {
     // 打开选择类型弹窗
