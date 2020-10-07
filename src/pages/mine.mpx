@@ -1,19 +1,34 @@
 <template>
   <view class="mine">
     <van-card
-      title="刘小姐"
+      title="{{usernameText}}"
       thumb="some"
       custom-class="vancard"
       title-class="vantitle"
       thumb-class="vanthumb"
     />
-    <text class="address">上海市同仁街59号209</text>
-    <text class="conact">13798158337</text>
+    <text class="address">{{ addressText }}</text>
+    <text class="conact">{{ pnoneNumText }}</text>
+    <button
+      wx:if="{{ loginShow }}"
+      class="loginBtn"
+      open-type="getUserInfo"
+      bind:getuserinfo="bindGetUserInfo"
+    >
+      请点击此处登录
+    </button>
     <van-icon
       name="setting"
       size="2em"
       custom-class="setting"
       bindtap="clickSetting"
+    />
+		 <van-cell
+      title="设置手机号码"
+      is-link
+      custom-class="vancell"
+			open-type="getPhoneNumber"
+			bind:click="getPhoneNumber"
     />
     <van-cell
       title="分享 叫到帮"
@@ -30,24 +45,23 @@
 
 <script>
 import { createPage } from "@mpxjs/core";
+import { authorCheck } from "../utils/authorFun.js";
 
 createPage({
   data: {
-    show: false
+    show: false,
+    usernameText: "",
+    addressText: "",
+    phoneNumText: "",
+    loginShow: true,
   },
   onLoad() {
-		wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
+    wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
-      title: "我的"
+      title: "我的",
 		});
-		// 获取用户内容，设置用户地区
-    wx.getUserInfo({
-      success: (res) => {
-        console.log(res);
-      }
-    });
-	},
-	// 触顶刷新
+  },
+  // 触顶刷新
   onPullDownRefresh() {
     this.onLoad(); //重新加载onLoad()
   },
@@ -61,16 +75,24 @@ createPage({
     show() {
       if (typeof this.getTabBar === "function" && this.getTabBar()) {
         this.getTabBar().setData({
-          active: 2
+          active: 2,
         });
       }
-    }
-	},
-	methods: {
-		clickSetting() {
-			wx.navigateTo({url: 'setprofile'})
+    },
+  },
+  methods: {
+    clickSetting() {
+      wx.navigateTo({ url: "setprofile" });
+    },
+    bindGetUserInfo() {
+      // 获取授权
+			authorCheck(this);
+		},
+		getPhoneNumber(e) {
+			console.log("setPhoneNum")
+			console.log(e)
 		}
-	}
+  },
 });
 </script>
 
@@ -107,15 +129,15 @@ createPage({
   font-weight: 400;
   margin-top: -150rpx;
   left: 210rpx;
-	width: 240px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .vanthumb {
-	background: url('../material/mineuserhead.svg') no-repeat;
-	background-size: 150rpx;
+  background: url("../material/mineuserhead.svg") no-repeat;
+  background-size: 150rpx;
   margin-top: 70rpx;
 }
 
@@ -128,8 +150,18 @@ createPage({
   left: 210rpx;
 }
 
+.loginBtn {
+  position: absolute;
+	margin-top: -200rpx;
+	color: rgb(40, 40, 40);
+  font-size: 22px;
+  left: 210rpx;
+	border-radius: 50px;
+	background: linear-gradient(to right, #fff,#cdfafa);
+}
+
 .setting {
-	color: white;
+  color: white;
   position: absolute !important;
   margin-top: -260rpx;
   right: 40rpx;

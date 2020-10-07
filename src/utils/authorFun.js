@@ -6,15 +6,41 @@ let qqmapsdk = new QQMapWX({
 })
 
 // 授权页的 授权检测
-function authorCheck() {
+function authorCheck(val) {
   wx.getSetting({
     success: (res) => {
       // 查看是否授权
       if (res.authSetting["scope.userInfo"]) {
-        getUserInfo()
+        // 已经授权，可以直接调用 getUserInfo 获取用户信息
+        wx.getUserInfo({
+          success: (res) => {
+						console.log(res)
+						wx.getLocation({
+							type: "gcj02",
+							success(res) {
+								// 获取的信息后，设置首页用户所在的区域
+								qqmapsdk.reverseGeocoder({
+									location: {
+										latitude: res.latitude,
+										longitude: res.longitude
+									},
+									sig: "AY2W9KYUZtqHzoiEzLRs70lnqVrA3IWl",
+									success: (res) => {
+										val.addressText = res.result.address
+									},
+								})
+							},
+						});
+						val.loginShow = false
+						val.usernameText = res.userInfo.nickName
+          },
+          fail: (error) => {
+						console.log("用户拒绝开放用户信息");
+          },
+        });
       } else {
         // wx.authorize({});
-        // 或者跳转至授权页使用button的open-type进行授权
+				// 或者跳转至授权页使用button的open-type进行授权
       }
     },
   });
@@ -54,24 +80,7 @@ function getUserDistrict(val) {
   });
 }
 
-// mine 需要此方法跳转到 author 获取用户信息
-function getUserInfo() {
-  console.log("getUserInfo")
-  // 已经授权，可以直接调用 getUserInfo 获取用户信息
-  wx.getUserInfo({
-    success: (res) => {
-      wx.switchTab({
-        url: "mine"
-      });
-    },
-    fail: (error) => {
-      console.log("用户拒绝开放用户信息");
-    },
-  });
-}
-
 export {
   authorCheck,
-  getUserDistrict,
-  getUserInfo
+  getUserDistrict
 }
