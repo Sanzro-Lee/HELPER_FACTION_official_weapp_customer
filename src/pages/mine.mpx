@@ -1,8 +1,8 @@
 <template>
   <view class="mine">
     <van-card
-      title="{{usernameText}}"
-      thumb="some"
+      title="{{ usernameText }}"
+      thumb="{{ userThumb }}"
       custom-class="vancard"
       title-class="vantitle"
       thumb-class="vanthumb"
@@ -22,14 +22,17 @@
       size="2em"
       custom-class="setting"
       bindtap="clickSetting"
+      custom-style="display: none"
     />
-		 <van-cell
-      title="设置手机号码"
-      is-link
+    <!-- 暂不启用，因无企业微信小程序appid -->
+    <!-- <button
       custom-class="vancell"
-			open-type="getPhoneNumber"
-			bind:click="getPhoneNumber"
-    />
+      open-type="getPhoneNumber"
+      bindgetphonenumber="getPhoneNumber"
+      style="margin-top: 20px; display: none"
+    >
+      点击此处设置手机号码
+    </button> -->
     <van-cell
       title="分享 叫到帮"
       is-link
@@ -44,22 +47,39 @@
 </template>
 
 <script>
-import { createPage } from "@mpxjs/core";
+import mpx, { createPage } from "@mpxjs/core";
+import mpxFetch from "@mpxjs/fetch";
 import { authorCheck } from "../utils/authorFun.js";
 
 createPage({
   data: {
+    // requrl: "https://www.kolint.xyz/api",
+    requrl: "http://127.0.0.1:8000/api",
     show: false,
     usernameText: "",
     addressText: "",
-    phoneNumText: "",
+    district: "",
+    pnoneNumText: "",
+    userThumb: "",
     loginShow: true,
   },
   onLoad() {
     wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "我的",
-		});
+    });
+    wx.checkSession({
+      success: (res) => {
+        // console.log(res)
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail: (res) => {
+        // session_key 已经失效，需要重新执行登录流程
+        this.login(); //重新登录
+      },
+    });
+    authorCheck(this);
+    this.login();
   },
   // 触顶刷新
   onPullDownRefresh() {
@@ -84,14 +104,91 @@ createPage({
     clickSetting() {
       wx.navigateTo({ url: "setprofile" });
     },
-    bindGetUserInfo() {
+    bindGetUserInfo(e) {
       // 获取授权
-			authorCheck(this);
-		},
-		getPhoneNumber(e) {
-			console.log("setPhoneNum")
-			console.log(e)
-		}
+      authorCheck(this);
+      this.login();
+    },
+    login() {
+      wx.login({
+        success: (res) => {
+          let code = res.code;
+          if (code) {
+            wx.getUserInfo({
+              success: (res) => {
+                mpx.use(mpxFetch);
+                mpx.xfetch
+                  .fetch({
+                    url: "https://www.kolint.xyz/api/code",
+                    method: "POST",
+                    params: {
+                      appid: "wx4835e4e9749f1502",
+                      secret: "a1fa80fcec48ffcdbe7e90074ce4701e",
+                      code: code,
+                    },
+                    emulateJSON: true,
+                  })
+                  .then((res) => {
+                    // console.log(res)
+                    // console.log(res.data.openid);
+                    let openid = res.data.openid;
+                    wx.getStorage({
+                      key: "openid",
+                      success: (res) => {
+                        console.log(res.data);
+                      },
+                      fail: (res) => {
+                        wx.setStorage({
+                          key: "openid",
+                          data: openid,
+                        });
+                        this.createUser(openid);
+                      },
+                    });
+                  })
+                  .catch((err) => {
+                    // console.log(err);
+                  });
+              },
+            });
+          }
+        },
+      });
+    },
+    // 暂不启用，因无企业微信开发ID
+    // getPhoneNumber(e) {
+    //   console.log(e);
+    //   console.log(e.detail.errMsg);
+    //   console.log(e.detail.iv);
+    //   console.log(e.detail.encryptedData);
+    // },
+    createUser(id) {
+      console.log("createUser");
+      let username = this.usernameText;
+      let address = this.addressText;
+      let region = this.district;
+      mpx.use(mpxFetch);
+      mpx.xfetch
+        .fetch({
+          url: this.requrl + "/user/create",
+          method: "POST",
+          data: {
+            openid: id,
+            username: username,
+            region: region,
+            address: address,
+          },
+          header: {
+            "content-type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 });
 </script>
@@ -119,7 +216,7 @@ createPage({
   color: #fff;
   font-size: 24px;
   font-weight: 400 !important;
-  margin: 80rpx 0 0 -20rpx;
+  margin: 100rpx 0 0 20rpx;
 }
 
 .address {
@@ -127,8 +224,8 @@ createPage({
   color: #fff;
   font-size: 16px;
   font-weight: 400;
-  margin-top: -150rpx;
-  left: 210rpx;
+  margin-top: -110rpx;
+  left: 250rpx;
   width: 240px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -136,8 +233,10 @@ createPage({
 }
 
 .vanthumb {
-  background: url("../material/mineuserhead.svg") no-repeat;
+  /* 如果没有头像则默认下面这张图 */
+  /* background: url("../material/mineuserhead.svg") no-repeat; */
   background-size: 150rpx;
+  border-radius: 50px;
   margin-top: 70rpx;
 }
 
@@ -147,17 +246,17 @@ createPage({
   font-size: 16px;
   font-weight: 400;
   margin-top: -100rpx;
-  left: 210rpx;
+  left: 230rpx;
 }
 
 .loginBtn {
   position: absolute;
-	margin-top: -200rpx;
-	color: rgb(40, 40, 40);
+  margin-top: -200rpx;
+  color: rgb(40, 40, 40);
   font-size: 22px;
-  left: 210rpx;
-	border-radius: 50px;
-	background: linear-gradient(to right, #fff,#cdfafa);
+  left: 80rpx;
+  border-radius: 50px;
+  background: linear-gradient(to right, #fff, #cdfafa);
 }
 
 .setting {

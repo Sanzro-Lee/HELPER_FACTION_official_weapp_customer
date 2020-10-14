@@ -10,14 +10,11 @@
           bindtap="viewmessageinfo"
         />
         <view slot="right" class="vancellleft" bindtap="clickDialog">
-          <van-icon
-            size="2.4em"
-            name="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/src/material/delicon.svg"
-          />
+          <image src="{{delicon}}" style="width: 2.5em; height: 2.5em" />
         </view>
       </van-swipe-cell>
     </view>
-		<van-dialog id="van-dialog" />
+    <van-dialog id="van-dialog" />
     <tabbar></tabbar>
   </view>
 </template>
@@ -26,12 +23,14 @@
 import mpx from "@mpxjs/core";
 import { createPage } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
-import Dialog from 'vant-weapp/dist/dialog/dialog.js'
+import Dialog from "vant-weapp/dist/dialog/dialog.js";
+import delicon from "../material/delicon.svg";
 
 createPage({
   data: {
-		list: [],
-	},
+    list: [],
+    delicon: delicon,
+  },
   onLoad() {
     wx.setNavigationBarTitle({
       title: "消息",
@@ -59,20 +58,20 @@ createPage({
   methods: {
     viewmessageinfo() {
       wx.navigateTo({ url: "messageinfo" });
-		},
-		clickDialog() {
-			Dialog.confirm({
-				message: '确定要删除？！',
-				theme: 'round-button',
-			})
-				.then(() => {
-					// on confirm
-				})
-				.catch(() => {
-					// on cancel
-				});
-		}
-	},
+    },
+    clickDialog() {
+      Dialog.confirm({
+        message: "确定要删除？！",
+        theme: "round-button",
+      })
+        .then(() => {
+          // on confirm
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+  },
 });
 </script>
 

@@ -7,12 +7,12 @@
       thumb-class="vancardthumb"
       title-class="vancardtitle"
       desc-class="vancarddesc"
-      thumb="{{thumb}}"
+      thumb="{{thumbPic}}"
     />
     <text class="price">¥{{ price }}</text>
     <text class="contact">联系人：{{ name }}</text>
     <view class="distance">
-    	<van-icon name="location" color="#9f9f9f" />
+      <van-icon name="location" color="#9f9f9f" />
       {{ dist }}
     </view>
     <view
@@ -24,27 +24,45 @@
 </template>
 
 <script>
-import mpx, { createComponent } from '@mpxjs/core';
+import mpx, { createComponent } from "@mpxjs/core";
+import classifyPic1 from "../material/分类标示图-01.svg";
+import classifyPic2 from "../material/分类标示图-02.svg";
+import classifyPic3 from "../material/分类标示图-03.svg";
+import classifyPic4 from "../material/分类标示图-04.svg";
 
 createComponent({
+  data: {
+    thumbPic: "",
+  },
   properties: {
     title: { type: String },
     desc: { type: String },
     name: { type: String },
     dist: { type: String },
     price: { type: Number },
-    thumb: { type: String },
+    thumb: { type: Number },
     show: { type: Boolean },
     statustagstyle: { type: Object },
   },
+  ready() {
+    if (this.thumb == 1) {
+      this.setData({ thumbPic: classifyPic1 });
+    } else if (this.thumb == 2) {
+			this.setData({ thumbPic: classifyPic2 });
+		} else if (this.thumb == 3) {
+			this.setData({ thumbPic: classifyPic3 });
+		} else if (this.thumb == 4) {
+			this.setData({ thumbPic: classifyPic4 });
+		}
+  },
   methods: {
     handletap() {
-			let pages = getCurrentPages()
-			let currentPage = pages[pages.length - 1]
-			const url = `/${currentPage.route}`
-			if (url != '/pages/taskcardinfo') {
-				wx.navigateTo({ url: 'taskcardinfo' });
-			}
+      let pages = getCurrentPages();
+      let currentPage = pages[pages.length - 1];
+      const url = `/${currentPage.route}`;
+      if (url != "/pages/taskcardinfo") {
+        wx.navigateTo({ url: "taskcardinfo" });
+      }
     },
   },
 });

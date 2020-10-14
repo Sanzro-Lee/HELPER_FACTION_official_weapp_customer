@@ -169,6 +169,11 @@ import { getUserDistrict } from "../utils/authorFun.js";
 
 createComponent({
   data: {
+		// 本地请求 URL
+		requrl: "http://helperfaction.com",
+		// 服务器请求 URL
+		// requrl: "https://www.kolint.xyz/api/"
+
     // 右上角地区
     district: "未设置",
     // 需求 data list
@@ -234,7 +239,7 @@ createComponent({
       getUserDistrict(_this);
       // 初始化首页 全部 的
       mpx.use(mpxFetch);
-      this.fetchFun("http://helperfaction.com/toptab/all", "all");
+      this.fetchFun(this.requrl+"/toptab/all", "all");
     },
     // 触底，获取新数据
     onBottom() {
@@ -247,35 +252,35 @@ createComponent({
           allLoadMoreTip: "加载中",
           status: false,
         });
-        fetchUrl = "http://helperfaction.com/toptab/all?" + 5;
+        fetchUrl = this.requrl+"/toptab/all?" + 5;
       } else if (this.tabsIndex == 1) {
         this.setData({
           hrLoadMore: true,
           hrLoadMoreTip: "加载中",
           status: false,
         });
-        fetchUrl = "http://helperfaction.com/toptab/homerepair?" + 5;
+        fetchUrl = this.requrl+"/toptab/homerepair?" + 5;
       } else if (this.tabsIndex == 2) {
         this.setData({
           arLoadMore: true,
           arLoadMoreTip: "加载中",
           status: false,
         });
-        fetchUrl = "http://helperfaction.com/toptab/appliancerepair?" + 5;
+        fetchUrl = this.requrl+"/toptab/appliancerepair?" + 5;
       } else if (this.tabsIndex == 3) {
         this.setData({
           gmLoadMore: true,
           gmLoadMoreTip: "加载中",
           status: false,
         });
-        fetchUrl = "http://helperfaction.com/toptab/goodsmove?" + 5;
+        fetchUrl = this.requrl+"/toptab/goodsmove?" + 5;
       } else if (this.tabsIndex == 4) {
         this.setData({
           otLoadMore: true,
           otLoadMoreTip: "加载中",
           status: false,
         });
-        fetchUrl = "http://helperfaction.com/toptab/others?" + 5;
+        fetchUrl = this.requrl+"/toptab/others?" + 5;
       }
       mpx.use(mpxFetch);
 
@@ -321,7 +326,7 @@ createComponent({
                 status: false,
               });
             }
-          }, 3000);
+          }, 1000);
         })
         .catch(() => {
           if (this.tabsIndex == 0) {
@@ -363,15 +368,15 @@ createComponent({
       let index = event.detail.index;
       this.setData({ tabsIndex: index });
       if (index == 0) {
-        this.fetchFun("http://helperfaction.com/toptab/all", "all");
+        this.fetchFun(this.requrl+"/toptab/all", "all");
       } else if (index == 1) {
-        this.fetchFun("http://helperfaction.com/toptab/homerepair", "HR");
+        this.fetchFun(this.requrl+"/toptab/homerepair", "HR");
       } else if (index == 2) {
-        this.fetchFun("http://helperfaction.com/toptab/appliancerepair", "AR");
+        this.fetchFun(this.requrl+"/toptab/appliancerepair", "AR");
       } else if (index == 3) {
-        this.fetchFun("http://helperfaction.com/toptab/goodsmove", "GM");
+        this.fetchFun(this.requrl+"/toptab/goodsmove", "GM");
       } else if (index == 4) {
-        this.fetchFun("http://helperfaction.com/toptab/others", "OT");
+        this.fetchFun(this.requrl+"/toptab/others", "OT");
       }
     },
     // 整合了不同页面的骨架图、数据获取、数据出错的方法
@@ -384,8 +389,9 @@ createComponent({
         })
         // Push 数据到 this 里面的变量
         .then((res) => {
+					console.log(res)
           if (type == "all") {
-            this.all = res.data.all;
+						this.all = res.data.all;
           } else if (type == "HR") {
             this.homerepair = res.data.homerepair;
           } else if (type == "AR") {
@@ -397,7 +403,8 @@ createComponent({
           }
         })
         // 骨架图取消显示
-        .then(() => {
+        .then((res) => {
+					console.log(res)
           if (type == "all") {
             this.setData({ allLoading: false });
           } else if (type == "HR") {

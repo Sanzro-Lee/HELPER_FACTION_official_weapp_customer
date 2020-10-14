@@ -1,12 +1,13 @@
 import mock from '@mpxjs/mock';
-import classifyPic1 from "../material/分类标示图-01.svg";
-import classifyPic2 from "../material/分类标示图-02.svg";
-import classifyPic3 from "../material/分类标示图-03.svg";
-import classifyPic4 from "../material/分类标示图-04.svg";
+
+// 本地请求 URL
+let requrl = "http://helperfaction.com";
+// 服务器请求 URL
+// let requrl = "https://www.kolint.xyz/api/";
 
 export default () =>
 mock([{
-    url: 'http://helperfaction.com/toptab/all',
+    url: requrl + '/toptab/all',
     rule: {
       all: [{
           title: '家电维修',
@@ -14,7 +15,7 @@ mock([{
           name: '林小姐',
           dist: '1 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '其它',
@@ -22,7 +23,7 @@ mock([{
           name: '王先生',
           dist: '5 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '居家维修',
@@ -30,7 +31,7 @@ mock([{
           name: '刘先生',
           dist: '10 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '货物搬迁',
@@ -38,7 +39,7 @@ mock([{
           name: '张先生',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '家电维修',
@@ -46,7 +47,7 @@ mock([{
           name: '林小姐',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '其它',
@@ -54,7 +55,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '居家维修',
@@ -62,7 +63,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '家电维修',
@@ -70,13 +71,13 @@ mock([{
           name: '林小姐',
           dist: '2.5 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
       ],
     },
   },
   {
-    url: 'http://helperfaction.com/toptab/homerepair',
+    url: requrl + '/toptab/homerepair',
     rule: {
       homerepair: [{
           title: '居家维修',
@@ -84,7 +85,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '居家维修',
@@ -92,7 +93,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '居家维修',
@@ -100,7 +101,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '居家维修',
@@ -108,7 +109,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '居家维修',
@@ -116,7 +117,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
         {
           title: '居家维修',
@@ -124,13 +125,13 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
         },
       ],
     },
   },
   {
-    url: 'http://helperfaction.com/toptab/appliancerepair',
+    url: requrl + '/toptab/appliancerepair',
     rule: {
       appliancerepair: [{
           title: '家电维修',
@@ -138,7 +139,7 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '家电维修',
@@ -146,7 +147,7 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '家电维修',
@@ -154,7 +155,7 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '家电维修',
@@ -162,7 +163,7 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '家电维修',
@@ -170,7 +171,7 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
         {
           title: '家电维修',
@@ -178,13 +179,13 @@ mock([{
           name: '林小姐',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
         },
       ],
     },
   },
   {
-    url: 'http://helperfaction.com/toptab/goodsmove',
+    url: requrl + '/toptab/goodsmove',
     rule: {
       goodsmove: [{
           title: '货物搬迁',
@@ -192,7 +193,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -200,7 +201,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -208,7 +209,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -216,7 +217,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -224,7 +225,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -232,7 +233,7 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
         {
           title: '货物搬迁',
@@ -240,13 +241,13 @@ mock([{
           name: '张先生',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
         },
       ],
     },
   },
   {
-    url: 'http://helperfaction.com/toptab/others',
+    url: requrl + '/toptab/others',
     rule: {
       others: [{
           title: '其它',
@@ -254,7 +255,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '其它',
@@ -262,7 +263,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '其它',
@@ -270,7 +271,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '其它',
@@ -278,7 +279,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '其它',
@@ -286,7 +287,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
         {
           title: '其它',
@@ -294,13 +295,13 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
         },
       ],
     },
   },
   {
-    url: 'http://helperfaction.com/demand/list',
+    url: requrl + '/demand/list',
     rule: {
       list: [{
           title: '家电维修',
@@ -308,7 +309,7 @@ mock([{
           name: '林小姐',
           dist: '1 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)',
@@ -320,7 +321,7 @@ mock([{
           name: '王先生',
           dist: '5 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #F8E255, #EBC354)',
@@ -332,7 +333,7 @@ mock([{
           name: '刘先生',
           dist: '10 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)',
@@ -344,7 +345,7 @@ mock([{
           name: '张先生',
           dist: '4 km',
           price: 1000,
-          thumb: classifyPic3,
+          thumb: 3,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #D94650, #DD9BA2)',
@@ -356,7 +357,7 @@ mock([{
           name: '林小姐',
           dist: '3 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 4,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)',
@@ -368,7 +369,7 @@ mock([{
           name: '王先生',
           dist: '2 km',
           price: 500,
-          thumb: classifyPic4,
+          thumb: 4,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #F8E255, #EBC354)',
@@ -380,7 +381,7 @@ mock([{
           name: '刘先生',
           dist: '0.5 km',
           price: 2000,
-          thumb: classifyPic2,
+          thumb: 2,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #5FD8A6, #A9DFA6)',
@@ -392,7 +393,7 @@ mock([{
           name: '林小姐',
           dist: '2.5 km',
           price: 1000,
-          thumb: classifyPic1,
+          thumb: 1,
           show: true,
           statustagstyle: {
             background: 'linear-gradient(to right, #D94650, #DD9BA2)',
@@ -402,7 +403,7 @@ mock([{
     },
   },
   {
-    url: 'http://helperfaction.com/message/list',
+    url: requrl + '/message/list',
     rule: {
       list: [{
           title: '俞师傅',

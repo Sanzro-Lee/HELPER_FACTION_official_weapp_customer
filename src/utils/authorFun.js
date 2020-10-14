@@ -14,7 +14,6 @@ function authorCheck(val) {
         // 已经授权，可以直接调用 getUserInfo 获取用户信息
         wx.getUserInfo({
           success: (res) => {
-						console.log(res)
 						wx.getLocation({
 							type: "gcj02",
 							success(res) {
@@ -27,12 +26,14 @@ function authorCheck(val) {
 									sig: "AY2W9KYUZtqHzoiEzLRs70lnqVrA3IWl",
 									success: (res) => {
 										val.addressText = res.result.address
+          					val.district = res.result.address_component.district
 									},
 								})
 							},
 						});
 						val.loginShow = false
 						val.usernameText = res.userInfo.nickName
+						val.userThumb = res.userInfo.avatarUrl
           },
           fail: (error) => {
 						console.log("用户拒绝开放用户信息");
