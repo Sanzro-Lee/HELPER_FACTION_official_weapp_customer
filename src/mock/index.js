@@ -1,9 +1,16 @@
 import mock from '@mpxjs/mock';
+import {
+  localUrl,
+  serverUrl,
+  mockUrl
+} from "../utils/requestUrl.js";
 
-// 本地请求 URL
-let requrl = "http://helperfaction.com";
+// mock 请求 URL
+let requrl = mockUrl;
+// 本地服务器请求 URL
+// let requrl = localUrl;
 // 服务器请求 URL
-// let requrl = "https://www.kolint.xyz/api/";
+// let requrl = serverUrl;
 
 export default () =>
 mock([{

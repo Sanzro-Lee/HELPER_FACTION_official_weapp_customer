@@ -51,6 +51,7 @@ import mpxFetch from "@mpxjs/fetch";
 import Dialog from "vant-weapp/dist/dialog/dialog.js";
 import delicon from "../material/delicon.svg";
 import editicon from "../material/editicon.svg";
+import { mockUrl } from "../utils/requestUrl.js";
 
 createPage({
   data: {
@@ -64,11 +65,6 @@ createPage({
     loadMoreTip: "到底了",
   },
   onLoad() {
-    // 本地请求 URL
-    let requrl = "http://helperfaction.com";
-    // 服务器请求 URL
-    // let requrl = "https://www.kolint.xyz/api/"
-
     wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "需求",
@@ -77,7 +73,7 @@ createPage({
     mpx.use(mpxFetch);
     mpx.xfetch
       .fetch({
-        url: requrl + "/demand/list",
+        url: mockUrl + "/demand/list",
       })
       .then((res) => {
         this.list = res.data.list;
@@ -105,7 +101,7 @@ createPage({
     mpx.use(mpxFetch);
     mpx.xfetch
       .fetch({
-        url: requrl + "/demand/list" + 5,
+        url: mockUrl + "/demand/list" + 5,
       })
       .then((res) => {
         // 将新获取的数据推进原有数组有 bug，暂时注释

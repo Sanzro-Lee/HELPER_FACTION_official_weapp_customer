@@ -14,34 +14,45 @@ function authorCheck(val) {
         // 已经授权，可以直接调用 getUserInfo 获取用户信息
         wx.getUserInfo({
           success: (res) => {
-						wx.getLocation({
-							type: "gcj02",
-							success(res) {
-								// 获取的信息后，设置首页用户所在的区域
-								qqmapsdk.reverseGeocoder({
-									location: {
-										latitude: res.latitude,
-										longitude: res.longitude
-									},
-									sig: "AY2W9KYUZtqHzoiEzLRs70lnqVrA3IWl",
-									success: (res) => {
-										val.addressText = res.result.address
-          					val.district = res.result.address_component.district
-									},
-								})
-							},
-						});
-						val.loginShow = false
-						val.usernameText = res.userInfo.nickName
-						val.userThumb = res.userInfo.avatarUrl
+            let username = res.userInfo.nickName
+            wx.getLocation({
+              type: "gcj02",
+              success(res) {
+                // 获取的信息后，设置首页用户所在的区域
+                qqmapsdk.reverseGeocoder({
+                  location: {
+                    latitude: res.latitude,
+                    longitude: res.longitude
+                  },
+                  sig: "AY2W9KYUZtqHzoiEzLRs70lnqVrA3IWl",
+                  success: (res) => {
+                    let region = res.result.address_component.district
+                    let address = res.result.address
+                    val.addressText = address
+                    val.district = region
+                    // 如果存在 openid 的 key 则不改变 loginStatus
+                    wx.getStorage({
+                      'key': 'openid',
+                      fail: () => {
+                        // 让 mine.mpx 的 loginStataus 值改变
+                        val.loginStatus = true
+                      }
+                    })
+                  },
+                })
+              },
+            });
+            val.loginShow = false
+            val.usernameText = username
+            val.userThumb = res.userInfo.avatarUrl
           },
           fail: (error) => {
-						console.log("用户拒绝开放用户信息");
+            console.log("用户拒绝开放用户信息");
           },
         });
       } else {
         // wx.authorize({});
-				// 或者跳转至授权页使用button的open-type进行授权
+        // 或者跳转至授权页使用button的open-type进行授权
       }
     },
   });

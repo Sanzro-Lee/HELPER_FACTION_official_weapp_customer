@@ -8,7 +8,7 @@
       thumb-class="vanthumb"
     />
     <text class="address">{{ addressText }}</text>
-    <text class="conact">{{ pnoneNumText }}</text>
+    <!-- <text class="conact">{{ pnoneNumText }}</text> -->
     <button
       wx:if="{{ loginShow }}"
       class="loginBtn"
@@ -50,36 +50,49 @@
 import mpx, { createPage } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
 import { authorCheck } from "../utils/authorFun.js";
+import { localUrl, serverUrl } from "../utils/requestUrl.js";
 
 createPage({
   data: {
-    // requrl: "https://www.kolint.xyz/api",
-    requrl: "http://127.0.0.1:8000/api",
-    show: false,
+		show: false,
+		// userinfo
+    openid: "",
     usernameText: "",
     addressText: "",
     district: "",
-    pnoneNumText: "",
-    userThumb: "",
-    loginShow: true,
+    // pnoneNumText: "", // 因appid问题，暂时无法获取
+		userThumb: "",
+		// 登录按钮是否显示
+		loginShow: true,
+		// 受监测的参数
+    loginStatus: false,
+  },
+  watch: {
+    // authorFun() 会改变 loginStatus 的值
+    loginStatus() {
+      if (this.loginStatus) {
+        this.setData({ loginStatus: false });
+        this.login();
+      }
+    },
   },
   onLoad() {
     wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
     wx.setNavigationBarTitle({
       title: "我的",
     });
-    wx.checkSession({
+    wx.getStorage({
+      key: "openid",
       success: (res) => {
-        // console.log(res)
-        //session_key 未过期，并且在本生命周期一直有效
+        this.setData({ openid: res.data });
+        // 获取授权
+        authorCheck(this);
       },
       fail: (res) => {
-        // session_key 已经失效，需要重新执行登录流程
-        this.login(); //重新登录
+        // 获取授权
+        authorCheck(this);
       },
     });
-    authorCheck(this);
-    this.login();
   },
   // 触顶刷新
   onPullDownRefresh() {
@@ -105,9 +118,17 @@ createPage({
       wx.navigateTo({ url: "setprofile" });
     },
     bindGetUserInfo(e) {
-      // 获取授权
-      authorCheck(this);
-      this.login();
+      wx.getStorage({
+        key: "openid",
+        success: (res) => {
+          // 获取授权
+          authorCheck(this);
+        },
+        fail: (res) => {
+          // 获取授权
+          authorCheck(this);
+        },
+      });
     },
     login() {
       wx.login({
@@ -119,7 +140,7 @@ createPage({
                 mpx.use(mpxFetch);
                 mpx.xfetch
                   .fetch({
-                    url: "https://www.kolint.xyz/api/code",
+                    url: serverUrl + "/api/code",
                     method: "POST",
                     params: {
                       appid: "wx4835e4e9749f1502",
@@ -129,29 +150,34 @@ createPage({
                     emulateJSON: true,
                   })
                   .then((res) => {
-                    // console.log(res)
-                    // console.log(res.data.openid);
-                    let openid = res.data.openid;
-                    wx.getStorage({
+                    let reqOpenid = res.data.openid;
+                    wx.setStorage({
                       key: "openid",
-                      success: (res) => {
-                        console.log(res.data);
-                      },
-                      fail: (res) => {
-                        wx.setStorage({
-                          key: "openid",
-                          data: openid,
-                        });
-                        this.createUser(openid);
-                      },
+                      data: reqOpenid,
                     });
-                  })
-                  .catch((err) => {
-                    // console.log(err);
+                    this.setData({ openid: reqOpenid });
+                    this.createUser();
                   });
               },
             });
           }
+        },
+      });
+    },
+    // 发送 user 信息到后端
+    createUser() {
+      mpx.use(mpxFetch);
+      mpx.xfetch.fetch({
+        url: serverUrl + "/api/user/create",
+        method: "POST",
+        data: {
+          openid: this.openid,
+          username: this.usernameText,
+          region: this.district,
+          address: this.addressText,
+        },
+        header: {
+          "content-type": "application/json",
         },
       });
     },
@@ -162,33 +188,6 @@ createPage({
     //   console.log(e.detail.iv);
     //   console.log(e.detail.encryptedData);
     // },
-    createUser(id) {
-      console.log("createUser");
-      let username = this.usernameText;
-      let address = this.addressText;
-      let region = this.district;
-      mpx.use(mpxFetch);
-      mpx.xfetch
-        .fetch({
-          url: this.requrl + "/user/create",
-          method: "POST",
-          data: {
-            openid: id,
-            username: username,
-            region: region,
-            address: address,
-          },
-          header: {
-            "content-type": "application/json",
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
 });
 </script>
