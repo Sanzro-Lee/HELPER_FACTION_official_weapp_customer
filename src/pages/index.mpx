@@ -54,6 +54,25 @@ createPage({
   -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
 }
+
+/* 删除需求alert遮罩 */
+.van-fade-enter-active {
+  z-index: 10000 !important;
+}
+
+/* alert弹出框 */
+.van-popup--center {
+  z-index: 10001 !important;
+  color: black !important;
+  border-radius: 16px !important;
+  font-weight: 400 !important;
+}
+
+/* 确认字体style */
+.van-button__text {
+  color: #ee0a24 !important;
+  font-size: 16px !important;
+}
 </style>
 
 <script type="application/json">

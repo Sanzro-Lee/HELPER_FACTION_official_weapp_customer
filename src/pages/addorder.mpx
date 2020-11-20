@@ -4,23 +4,13 @@
       <image class="headericon" src="{{ typepic }}" />
     </view>
     <text class="inputtitle">选择类型：</text>
-    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">{{
-      typetext
-    }}</text>
-    <i-modal
-      title="请选择类型"
-      visible="{{ visible }}"
-      actions="{{ actions }}"
-      action-mode="{{ vertical }}"
-      bind:click="handleClick"
-    >
-    </i-modal>
+    <text class="orderinput" bindtap="handleOpen" style="line-height: 45px">{{ typetext }}</text>
     <text class="inputtitle">具体内容：</text>
     <input class="orderinput" placeholder="请输入具体维护内容" />
     <text class="inputtitle">修改手机号码：</text>
-    <input class="orderinput" placeholder="方便联系师傅的手机号码" />
+    <input class="orderinput" type="number" placeholder="方便联系师傅的手机号码" />
     <text class="inputtitle">输入价格：</text>
-    <input class="orderinput" placeholder="请输入你能承担的服务费" />
+    <input class="orderinput" type="number" placeholder="请输入你能承担的服务费" />
     <text class="inputtitle">输入地址：</text>
     <text
       class="orderinput"
@@ -101,22 +91,32 @@
         custom-class="confirmbtn"
         type="default"
         round="true"
-        bindtap="btnclick()"
+        bindtap="btnConfirmClick()"
         >确定</van-button
       >
       <van-button
         custom-class="cancelbtn"
         type="default"
         round="true"
-        bindtap="btnclick()"
+        bindtap="btnCanelClick()"
         >取消</van-button
       >
     </view>
+    <van-dialog id="van-dialog" />
+    <van-action-sheet
+      show="{{ actionShow }}"
+      actions="{{ actionsSheet }}"
+      bind:close="actionsOnClose"
+      bind:select="actionsOnSelect"
+    />
   </view>
 </template>
 
 <script>
-import { createPage } from "@mpxjs/core";
+import mpx, { createPage } from "@mpxjs/core";
+import mpxFetch from "@mpxjs/fetch";
+// 弹出层
+import Dialog from "vant-weapp/dist/dialog/dialog.js";
 // 维护类型图片
 import repairSvg from "../material/repair.svg";
 import electrepairSvg from "../material/electrepair.svg";
@@ -124,6 +124,12 @@ import moveSvg from "../material/move.svg";
 import othersSvg from "../material/others.svg";
 // 时间戳格式化
 import formatTimeTwo from "../utils/dateFilter.js";
+// request url 开始部分
+import { localUrl, serverUrl, mockUrl } from "../utils/requestUrl.js";
+// 上传图片
+import {selectFiles} from "../utils/uploadFiles.js";
+// 生成 订单号 方法
+import {randomNumber} from "../utils/orderIdFun.js";
 
 createPage({
   data: {
@@ -144,25 +150,22 @@ createPage({
     currentDate: new Date().getTime(),
     startDate: "",
     endDate: "",
-    // 类型文字 & 颜色
-    actions: [
+    // 上拉菜单的 类型 & 字体颜色
+    actionShow: false,
+    actionsSheet: [
       {
         name: "居家维修",
-        color: "#A9DFA6",
       },
       {
         name: "家电维修",
-        color: "#41C5E9",
       },
       {
         name: "货物搬迁",
-        color: "#FC6481",
       },
       {
         name: "其它",
-        color: "#EA705C",
       },
-    ],
+    ]
   },
   onLoad() {
 		wx.stopPullDownRefresh(); //刷新完成后停止下拉刷新动效
@@ -176,6 +179,24 @@ createPage({
     // 设置初始化日期时间
     this.startDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
     this.endDate = formatTimeTwo(this.currentDate, "Y/M/D h:m");
+    // 检测登录状态
+    wx.getStorage({
+      'key': 'userName',
+      success: (res) => {
+        console.log(res)
+        this.setData({ createUserText: res.data })
+      },
+      fail: () => {
+        // 弹出弹窗
+        Dialog.alert({
+          message: "你未登录，请先到 我的 页面登录！"
+        }).then(() => {
+          wx.navigateBack({
+            delta: 2,
+          });
+        })
+      }
+    })
 	},
 	// 触顶刷新
   onPullDownRefresh() {
@@ -184,25 +205,25 @@ createPage({
   methods: {
     // 打开选择类型弹窗
     handleOpen() {
-      this.setData({ visible: true });
+      this.setData({ actionShow: true });
     },
-    // 点击选择类型文本框
-    handleClick({ detail }) {
-      const index = detail.index;
-      if (index == 0) {
-        this.typetext = "居家维修";
-        this.typepic = repairSvg;
-      } else if (index == 1) {
-        this.typetext = "家电维修";
-        this.typepic = electrepairSvg;
-      } else if (index == 2) {
-        this.typetext = "货物搬迁";
-        this.typepic = moveSvg;
-      } else if (index == 3) {
-        this.typetext = "其它";
-        this.typepic = othersSvg;
+    // 选择类型
+    actionsOnSelect(event) {
+      let typeWord = event.detail.name
+      if (typeWord == "居家维修") {
+        this.setData({ typetext: typeWord, typepic: repairSvg })
+      } else if (typeWord == "家电维修") {
+        this.setData({ typetext: typeWord, typepic: electrepairSvg })
+      } else if (typeWord == "货物搬迁") {
+        this.setData({ typetext: typeWord, typepic: moveSvg })
+      } else if (typeWord == "其它") {
+        this.setData({ typetext: typeWord, typepic: othersSvg })
       }
-      this.setData({ visible: false });
+      this.setData({ actionShow: false });
+    },
+    // 点击遮罩层关闭上拉菜单
+    actionsOnClose() {
+      this.setData({ actionShow: false })
     },
     // 设置地址
     inputAddress() {
@@ -262,7 +283,6 @@ createPage({
     // 读取图片数据并发送到后端
     afterRead(event) {
       const { file } = event.detail;
-      console.log({ file });
       // wx.uploadFile({
       //   url: 'https://img.yzcdn.cn/vant/leaf.jpg',
       //   filePath: file.path,
@@ -283,13 +303,72 @@ createPage({
       fileList.splice(delIndex, 1);
       this.setData({ fileList });
 		},
-		// 待修改，目前 确定 & 取消 按钮都是这个方法
-    btnclick() {
-			// 返回到上一层
+    // 确定按钮方法
+    btnConfirmClick() {
+      console.log(this.fileList)
+      // let fileList = this.fileList
+      // let form = new FormData();
+      // form.append("files", fileInput.files[0], "宝宝乐婴儿水育馆-02-01.jpg");
+
+      // mpx.use(mpxFetch);
+      // mpx.xfetch
+      //   .fetch({
+      //     url: "http://127.0.0.1:8000/api/pictures/uplod",
+      //     method: "POST",
+      //     timeout: 0,
+      //     mimeType: "multipart/form-data",
+      //     data: form,
+      //     success: () => {
+      //       wx.getStorage({
+      //         'key': 'userName',
+      //         success: (res) => {
+      //           console.log(res)
+      //           this.setData({ createUserText: res.data })
+      //           mpx.xfetch.fetch({
+      //             url: localUrl + "/api/oerder/creat",
+                  //   data: {
+                  //     orderid: randomNumber(),
+                  //     createuser: createUserText,
+                  //     latitude: "",
+                  //     longitude: "",
+                  //     orderaddress: "",
+                  //     orderphonenum: "",
+                  //     taskmaster: "",
+                  //     masterphonenum: "",
+                  //     createdate: "",
+                  //     starttime: "",
+                  //     endtime: "",
+                  //     ordertype: "",
+                  //     orderdesc: "",
+                  //     orderprice: "",
+                  //     orderrate: "",
+                  //     orderpic: "",
+                  //   }
+        //         })
+        //       },
+        //       fail: () => {
+        //         // 弹出弹窗
+        //         Dialog.alert({
+        //           message: "你未登录，请先到 我的 页面登录！",
+        //           theme: "round-button",
+        //         })
+        //       }
+        //     })
+        //   }
+        // })
+        // .then(() => {
+        //   // 返回到上一层
+        //   wx.navigateBack({
+        //     delta: 2,
+        //   });
+        // });
+    },
+    btnCanelClick() {
+      // 返回到上一层
       wx.navigateBack({
         delta: 2,
       });
-    },
+    }
   },
 });
 </script>
@@ -376,10 +455,12 @@ page {
 {
   "usingComponents": {
 		"van-button": "vant-weapp/dist/button/index",
-		"i-modal": "iview-weapp/dist/modal/index",
 		"van-popup": "@vant/weapp/dist/popup/index",
 		"van-datetime-picker": "@vant/weapp/dist/datetime-picker/index",
-		"van-uploader": "@vant/weapp/dist/uploader/index"
+    "van-uploader": "@vant/weapp/dist/uploader/index",
+    "van-dialog": "@vant/weapp/dist/dialog/index",
+    "van-action-sheet": "@vant/weapp/dist/action-sheet/index",
+    "i-modal": "iview-weapp/dist/modal/index"
   }
 }
 </script>

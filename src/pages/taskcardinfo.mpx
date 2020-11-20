@@ -2,12 +2,13 @@
   <view class="taskcardinfo">
     <view class="ordernumber">订单号：EF0719883RD34YR0</view>
     <taskcard
+      class="taskcardstyle"
       title="其它"
       desc="清洁房子。"
       name="王先生"
       dist="5 km"
       price="500"
-      thumb="{{ thumb }}"
+      thumb="{{ thumbNum }}"
       show="{{ show }}"
       statustagstyle="{{ statustagstyle }}"
     />
@@ -55,12 +56,11 @@
 
 <script>
 import mpx, { createPage } from "@mpxjs/core";
-import classifyPic4 from "../material/分类标示图-04.svg";
 import locationIcon from "../material/location.png";
 
 createPage({
   data: {
-    thumb: classifyPic4,
+    thumbNum: 4,
     show: true,
     statustagstyle: {
       background: "linear-gradient(to right, #F8E255, #EBC354)",

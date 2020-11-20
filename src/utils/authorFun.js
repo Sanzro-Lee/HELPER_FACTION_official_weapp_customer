@@ -15,6 +15,10 @@ function authorCheck(val) {
         wx.getUserInfo({
           success: (res) => {
             let username = res.userInfo.nickName
+            wx.setStorage({
+              key: "userName",
+              data: username
+            })
             wx.getLocation({
               type: "gcj02",
               success(res) {

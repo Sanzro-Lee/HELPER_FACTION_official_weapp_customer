@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import mpx from "@mpxjs/core";
-import { createPage } from "@mpxjs/core";
+import mpx, { createPage } from "@mpxjs/core";
 import mpxFetch from "@mpxjs/fetch";
 import Dialog from "vant-weapp/dist/dialog/dialog.js";
 import delicon from "../material/delicon.svg";
