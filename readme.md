@@ -1,6 +1,6 @@
 <p align="center">
     <a href="#">
-        <img alt="叫到帮" src="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/images/%E5%8F%AB%E5%88%B0%E5%B8%AE_logo_customer.jpg" width="300">
+        <img alt="叫到帮" src="https://raw.githubusercontent.com/Sanzro-Lee/HELPER_FACTION_official_weapp_customer/master/images/%E5%8F%AB%E5%88%B0%E5%B8%AELOGO%20-%2001.png" width="300">
     </a>
 </p>
 
