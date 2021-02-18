@@ -448,7 +448,7 @@ createComponent({
 
 .vantab {
   min-height: 1000rpx;
-  padding-bottom: 4rem;
+  padding-bottom: 190rpx;
 }
 
 .demand {
