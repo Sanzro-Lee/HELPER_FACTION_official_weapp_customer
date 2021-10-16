@@ -26,6 +26,7 @@
 ## 安装使用
 
 ```bash
+# 请先自行安装 node
 # 安装mpx脚手架工具
 npm i -g @mpxjs/cli
 
