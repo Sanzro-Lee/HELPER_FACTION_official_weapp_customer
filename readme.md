@@ -45,13 +45,9 @@ npm run build
 # 依赖更新：
 npm outdate
 
-ncu -u [package name]
+npm-check -u
 
-# 需要使用
-npm i # 重新安装依赖
-
-# npm i 无效则需要 --force
-npm i --force
+# 此代码更新依赖将出现无法运行的问题，故暂停所有维护。
 ```
 
 ```
