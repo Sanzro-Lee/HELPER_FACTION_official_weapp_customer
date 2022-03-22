@@ -27,8 +27,10 @@
     "@mpxjs/fetch": "^2.7.16",
     "@mpxjs/mock": "^2.6.76",
     "@vant/weapp": "^1.10.2",
+    "ajv": "^8.10.0",
     "iview-weapp": "^2.0.0",
     "Minimist": "npm:minimist@^1.2.6",
+    "postcss": "^8.4.12",
     "vant-weapp": "^0.5.29",
     "vue": "^3.2.31",
     "vue-i18n": "^9.1.9"
